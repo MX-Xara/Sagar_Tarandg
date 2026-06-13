@@ -53,13 +53,62 @@ window.addEventListener('scroll', checkScroll);
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* hero text animation */
-gsap.from(".hero-text", {
-  y: 100,
-  opacity: 0,
-  duration: 1.5,
-  ease: "power3.out"
-});
+/* scroll down text animation and click scroll */
+const scrollText = document.querySelector(".scroll-text");
+const scrollArrow = document.querySelector(".scroll-arrow");
+const scrollBtn = document.getElementById("heroScroll");
+
+if (scrollText) {
+  const letters = scrollText.textContent
+    .split("")
+    .map(char => char === " " ? "<span>&nbsp;</span>" : `<span>${char}</span>`)
+    .join("");
+  scrollText.innerHTML = letters;
+
+  // Animate the text letters and then arrow in a timeline
+  const heroTimeline = gsap.timeline();
+  
+  heroTimeline.from(".hero-text", {
+    y: 100,
+    opacity: 0,
+    duration: 1.5,
+    ease: "power3.out"
+  });
+
+  heroTimeline.to(".scroll-text span", {
+    y: 0,
+    opacity: 1,
+    stagger: 0.02,
+    duration: 0.6,
+    ease: "power2.out"
+  }, "-=0.6"); // Start slightly before hero-text animation finishes
+
+  heroTimeline.to(scrollArrow, {
+    opacity: 1,
+    duration: 0.5,
+    onComplete: () => {
+      scrollArrow.classList.add("animate");
+    }
+  }, "-=0.2");
+} else {
+  /* fallback hero text animation if scroll down element is missing */
+  gsap.from(".hero-text", {
+    y: 100,
+    opacity: 0,
+    duration: 1.5,
+    ease: "power3.out"
+  });
+}
+
+if (scrollBtn) {
+  scrollBtn.addEventListener("click", () => {
+    const target = document.getElementById("page-2");
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+}
+
 
 /* PAGE 3 TIMELINE — only on desktop */
 if (window.matchMedia("(min-width: 769px)").matches) {
@@ -129,81 +178,90 @@ tl.to(".food-image", {
 
 //aminities fade in
 
+//aminities fade in
+
 const title = document.querySelector(".title-amenities");
 
-const text = title.textContent;
+if (title) {
+  const text = title.textContent;
 
-title.innerHTML = text
-  .split("")
-  .map(letter =>
-    letter === " "
-      ? " "
-      : `<span>${letter}</span>`
-  )
-  .join("");
+  title.innerHTML = text
+    .split("")
+    .map(letter =>
+      letter === " "
+        ? " "
+        : `<span>${letter}</span>`
+    )
+    .join("");
 
-gsap.to(".title-amenities span", {
-  y: 0,
-  opacity: 1,
+  gsap.to(".title-amenities span", {
+    y: 0,
+    opacity: 1,
 
-  stagger: 0.04,
+    stagger: 0.04,
 
-  duration: 1,
+    duration: 1,
 
-  ease: "power3.out",
+    ease: "power3.out",
 
-  scrollTrigger: {
-    trigger: ".title-amenities",
-    start: "top 80%"
-  }
-});
+    scrollTrigger: {
+      trigger: ".title-amenities",
+      start: "top 80%"
+    }
+  });
+}
 
 
 // Popular Attractions title animation
 
 const attractionTitle = document.querySelector(".title-popular-attractions");
 
-const attractionText = attractionTitle.textContent;
+if (attractionTitle) {
+  const attractionText = attractionTitle.textContent;
 
-attractionTitle.innerHTML = attractionText
-  .split("")
-  .map(letter =>
-    letter === " "
-      ? " "
-      : `<span>${letter}</span>`
-  )
-  .join("");
+  attractionTitle.innerHTML = attractionText
+    .split("")
+    .map(letter =>
+      letter === " "
+        ? " "
+        : `<span>${letter}</span>`
+    )
+    .join("");
 
-gsap.to(".title-popular-attractions span", {
-  y: 0,
-  opacity: 1,
+  gsap.to(".title-popular-attractions span", {
+    y: 0,
+    opacity: 1,
 
-  stagger: 0.04,
+    stagger: 0.04,
 
-  duration: 1,
+    duration: 1,
 
-  ease: "power3.out",
+    ease: "power3.out",
 
-  scrollTrigger: {
-    trigger: ".title-popular-attractions",
-    start: "top 80%"
-  }
-});
+    scrollTrigger: {
+      trigger: ".title-popular-attractions",
+      start: "top 80%"
+    }
+  });
+}
 
 // Attractions cards animation
 
-gsap.to(".attraction-card", {
-  y: 0,
-  opacity: 1,
+if (document.querySelector(".attraction-card")) {
+  gsap.to(".attraction-card", {
+    y: 0,
+    opacity: 1,
 
-  stagger: 0.08,
+    stagger: 0.08,
 
-  duration: 1,
+    duration: 1,
 
-  ease: "power3.out",
+    ease: "power3.out",
 
-  scrollTrigger: {
-    trigger: ".attractions-container",
-    start: "top 80%"
-  }
-});
+    scrollTrigger: {
+      trigger: ".attractions-container",
+      start: "top 80%"
+    }
+  });
+}
+
