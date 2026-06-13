@@ -7,17 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroMedia = document.querySelector('.hero-media');
   const heroVideo = document.querySelector('.hero-video');
 
-  // Hide fallback image once the video has enough data to play smoothly
-  if (heroVideo) {
-    heroVideo.addEventListener('canplay', () => {
-      heroMedia.classList.add('video-ready');
-    });
 
-    // If the video source fails to load, keep the fallback image visible
-    heroVideo.addEventListener('error', () => {
-      heroMedia.classList.remove('video-ready');
-    });
-  }
 
   // Navbar background on scroll
   const handleScroll = () => {
@@ -71,7 +61,9 @@ gsap.from(".hero-text", {
   ease: "power3.out"
 });
 
-/* PAGE 3 TIMELINE */
+/* PAGE 3 TIMELINE — only on desktop */
+if (window.matchMedia("(min-width: 769px)").matches) {
+
 const tl = gsap.timeline({
   scrollTrigger: {
     trigger: ".page-3",
@@ -131,6 +123,9 @@ tl.to(".food-image", {
 
   duration: 1
 });
+
+} // end desktop-only block
+
 
 //aminities fade in
 

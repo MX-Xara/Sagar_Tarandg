@@ -214,12 +214,17 @@ img {
   z-index: 0;
 }
 
-.hero-video,
-
-
+/* Style for hero video */
 .hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   z-index: 1;
 }
+
+
 
 .page-2{
   position: relative;
@@ -1333,6 +1338,671 @@ img {
 }
 
 
+/* =========================================
+   RESPONSIVE — TABLET (≤ 1024px)
+   ========================================= */
+@media (max-width: 1024px) {
+
+  /* --- Navbar --- */
+  .nav-container {
+    padding: 0 32px;
+    padding-left: 32px;
+    padding-top: 16px;
+  }
+
+  .nav-links {
+    gap: 24px;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+  }
+
+  /* --- Hero --- */
+  .img {
+    width: 320px;
+    height: 320px;
+  }
+
+  /* --- Page 2 --- */
+  .page-2 {
+    height: auto;
+    min-height: 700px;
+  }
+
+  .we-make {
+    font-size: 8rem;
+  }
+
+  .the-best {
+    font-size: 3rem;
+    top: 22%;
+    left: 35%;
+  }
+
+  .side-video {
+    width: 48%;
+    height: 120px;
+  }
+
+  .side-photo {
+    width: 55%;
+    height: 130px;
+    top: 40%;
+  }
+
+  .for-all {
+    font-size: 3rem;
+    top: 48%;
+  }
+
+  .since {
+    font-size: 7rem;
+    top: 56%;
+  }
+
+  /* --- Page 3 horizontal panels --- */
+  .resort-title {
+    font-size: 5rem;
+  }
+
+  .resort-subtitle {
+    font-size: 1.5rem;
+  }
+
+  .resort-image-wrapper {
+    width: 75%;
+    height: 280px;
+  }
+
+  .pool-title1,
+  .beach-title1,
+  .food-title1 {
+    font-size: 8rem;
+  }
+
+  /* --- Page 4 amenities --- */
+  .page-4 {
+    padding: 80px 40px;
+  }
+
+  .title-amenities {
+    font-size: 3.5rem;
+    margin-bottom: 50px;
+  }
+
+  .amenities-container {
+    gap: 30px;
+  }
+
+  .amenities-column {
+    width: 48%;
+  }
+
+  .amenity-card span {
+    font-size: 1.1rem;
+  }
+
+  /* --- Page 5 attractions --- */
+  .page-5 {
+    padding: 80px 40px;
+  }
+
+  .title-popular-attractions {
+    font-size: 3.5rem;
+    margin-bottom: 50px;
+  }
+
+  .attractions-column {
+    width: 48%;
+  }
+
+  .attraction-card span {
+    font-size: 1.1rem;
+  }
+
+  /* --- Page 6 end --- */
+  .end {
+    width: 220px;
+    left: 18%;
+  }
+
+  .end-contact {
+    font-size: 1.1rem;
+  }
+
+  /* --- Sub pages --- */
+  .pool-page,
+  .beach-page,
+  .food-page {
+    padding: 30px 40px;
+  }
+
+  .pool-header h1,
+  .beach-header h1,
+  .food-header h1 {
+    font-size: 3.5rem;
+  }
+
+  .pool-gallery,
+  .beach-gallery,
+  .food-gallery {
+    height: 60vh;
+    gap: 12px;
+  }
+}
+
+
+/* =========================================
+   RESPONSIVE — MOBILE (≤ 768px)
+   ========================================= */
+@media (max-width: 768px) {
+
+  /* --- Navbar (hamburger already activates at 900px) --- */
+  .nav-container {
+    padding: 0 20px;
+    padding-left: 20px;
+    padding-top: 12px;
+  }
+
+  .logo-img {
+    width: 60px;
+    height: 60px;
+  }
+
+  /* --- Hero --- */
+  .hero {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+
+  .img {
+    width: 240px;
+    height: 240px;
+  }
+
+  .hero-text {
+    top: 40%;
+  }
+
+  /* --- Page 2 --- */
+  .page-2 {
+    height: auto;
+    min-height: auto;
+    padding: 60px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: relative;
+  }
+
+  .we-make {
+    position: relative;
+    top: auto;
+    left: auto;
+    font-size: 4rem;
+    margin-bottom: 10px;
+  }
+
+  .the-best {
+    position: relative;
+    top: auto;
+    left: auto;
+    font-size: 2.2rem;
+    margin-bottom: 16px;
+    align-self: flex-end;
+  }
+
+  .side-video {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    height: 140px;
+    margin-bottom: 14px;
+  }
+
+  .side-photo {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    height: 140px;
+    margin-bottom: 14px;
+  }
+
+  .for-all {
+    position: relative;
+    top: auto;
+    left: auto;
+    font-size: 2rem;
+    align-self: flex-end;
+    margin-bottom: 10px;
+  }
+
+  .since {
+    position: relative;
+    top: auto;
+    left: auto;
+    font-size: 4.5rem;
+    margin-bottom: 30px;
+  }
+
+  .bottom-text {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    align-self: center;
+    margin-top: 10px;
+  }
+
+  /* --- Page 3 — DISABLE HORIZONTAL SCROLL, STACK VERTICALLY --- */
+  .page-3 {
+    height: auto;
+    overflow: visible;
+  }
+
+  .horizontal-wrapper {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+  }
+
+  .panel {
+    width: 100%;
+    height: auto;
+    min-height: 70vh;
+  }
+
+  /* Resort panel */
+  .resort-panel {
+    padding: 60px 20px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 60vh;
+  }
+
+  .resort-title {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    font-size: 4rem;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .resort-subtitle {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    font-size: 1.3rem;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .resort-image-wrapper {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    height: 250px;
+  }
+
+  /* Pool panel */
+  .pool-panel {
+    min-height: 50vh;
+  }
+
+  .pool-image {
+    width: 100%;
+    height: 50vh;
+  }
+
+  .pool-title1 {
+    font-size: 5rem;
+    top: auto;
+    bottom: 5%;
+    right: 5%;
+  }
+
+  /* Beach panel */
+  .beach-panel {
+    min-height: 50vh;
+  }
+
+  .beach-image {
+    width: 100%;
+    height: 50vh;
+  }
+
+  .beach-title1 {
+    font-size: 5rem;
+    top: auto;
+    bottom: 5%;
+    right: 5%;
+  }
+
+  /* Food panel */
+  .food-panel {
+    min-height: 50vh;
+  }
+
+  .food-image {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    top: auto;
+    left: auto;
+  }
+
+  .food-title1 {
+    font-size: 5rem;
+    top: auto;
+    bottom: 5%;
+    right: 5%;
+  }
+
+  /* --- Page 4 amenities --- */
+  .page-4 {
+    padding: 60px 20px;
+  }
+
+  .title-amenities {
+    font-size: 2.2rem;
+    margin-bottom: 40px;
+    padding: 12px 8px;
+  }
+
+  .amenities-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .amenities-column {
+    width: 100%;
+    gap: 14px;
+  }
+
+  .amenity-card {
+    padding: 10px 12px 10px 24px;
+  }
+
+  .amenity-card span {
+    font-size: 1rem;
+  }
+
+  /* --- Page 5 attractions --- */
+  .page-5 {
+    padding: 60px 20px;
+  }
+
+  .title-popular-attractions {
+    font-size: 2.2rem;
+    margin-bottom: 40px;
+    padding: 12px 8px;
+  }
+
+  .attractions-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .attractions-column {
+    width: 100%;
+    gap: 14px;
+  }
+
+  .attraction-card {
+    padding: 10px 12px 10px 24px;
+  }
+
+  .attraction-card span {
+    font-size: 1rem;
+  }
+
+  /* --- Page 6 end --- */
+  .page-6 {
+    min-height: auto;
+  }
+
+  .end-img {
+    height: 60vh;
+  }
+
+  .end {
+    width: 180px;
+    left: 50%;
+    top: auto;
+    bottom: 2%;
+    transform: translate(-50%, 0);
+    max-width: 50%;
+  }
+
+  .end-contact {
+    font-size: 1rem;
+    left: 5%;
+    bottom: 30%;
+  }
+
+  .copyright {
+    left: 5%;
+    font-size: 0.7rem;
+  }
+
+  .book-btn {
+    left: 50%;
+    bottom: 22%;
+    width: 130px;
+    height: 44px;
+    font-size: 1rem;
+  }
+
+  /* --- Sub pages gallery --- */
+  .pool-page,
+  .beach-page,
+  .food-page {
+    height: auto;
+    min-height: 100vh;
+    padding: 30px 16px;
+  }
+
+  .pool-header h1,
+  .beach-header h1,
+  .food-header h1 {
+    font-size: 2.5rem;
+    letter-spacing: 4px;
+  }
+
+  .pool-gallery,
+  .beach-gallery,
+  .food-gallery {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    height: auto;
+    gap: 12px;
+  }
+
+  .pool-gallery img,
+  .beach-gallery img,
+  .food-gallery img {
+    height: 200px;
+    border-radius: 12px;
+  }
+
+  /* Pool sub-page title fix */
+  .pool-title {
+    position: relative;
+    top: auto;
+    right: auto;
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .beach-title {
+    position: relative;
+    top: auto;
+    right: auto;
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .food-title {
+    position: relative;
+    top: auto;
+    right: auto;
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+}
+
+
+/* =========================================
+   RESPONSIVE — SMALL MOBILE (≤ 480px)
+   ========================================= */
+@media (max-width: 480px) {
+
+  /* --- Hero --- */
+  .img {
+    width: 180px;
+    height: 180px;
+  }
+
+  .hero-text {
+    top: 38%;
+  }
+
+  /* --- Page 2 --- */
+  .we-make {
+    font-size: 2.8rem;
+  }
+
+  .the-best {
+    font-size: 1.6rem;
+  }
+
+  .since {
+    font-size: 3rem;
+  }
+
+  .for-all {
+    font-size: 1.5rem;
+  }
+
+  .bottom-text {
+    font-size: 0.95rem;
+  }
+
+  .side-video,
+  .side-photo {
+    height: 110px;
+  }
+
+  /* --- Page 3 --- */
+  .resort-title {
+    font-size: 2.8rem;
+  }
+
+  .resort-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .resort-image-wrapper {
+    height: 180px;
+  }
+
+  .pool-title1,
+  .beach-title1,
+  .food-title1 {
+    font-size: 3.5rem;
+  }
+
+  .pool-image,
+  .beach-image,
+  .food-image {
+    height: 40vh;
+  }
+
+  /* --- Page 4 --- */
+  .title-amenities {
+    font-size: 1.6rem;
+    margin-bottom: 28px;
+  }
+
+  .amenity-card span {
+    font-size: 0.9rem;
+  }
+
+  /* --- Page 5 --- */
+  .title-popular-attractions {
+    font-size: 1.6rem;
+    margin-bottom: 28px;
+  }
+
+  .attraction-card span {
+    font-size: 0.9rem;
+  }
+
+  /* --- Page 6 --- */
+  .end-img {
+    height: 50vh;
+  }
+
+  .end {
+    width: 140px;
+  }
+
+  .end-contact {
+    font-size: 0.85rem;
+    bottom: 28%;
+    line-height: 1.6;
+  }
+
+  .end-contact p {
+    margin-bottom: 12px;
+  }
+
+  .book-btn {
+    width: 110px;
+    height: 38px;
+    font-size: 0.9rem;
+    bottom: 18%;
+  }
+
+  .copyright {
+    font-size: 0.6rem;
+  }
+
+  /* --- Sub pages --- */
+  .pool-header h1,
+  .beach-header h1,
+  .food-header h1 {
+    font-size: 2rem;
+    letter-spacing: 3px;
+  }
+
+  .pool-gallery img,
+  .beach-gallery img,
+  .food-gallery img {
+    height: 160px;
+  }
+
+  .pool-title,
+  .beach-title,
+  .food-title {
+    font-size: 2.2rem;
+  }
+}
 
 
 
