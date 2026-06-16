@@ -394,8 +394,29 @@ document
 .addEventListener(
   "click",
   function () {
+    // Get selected dates
+const checkIn = new Date(document.getElementById('bookCheckIn').value);
+const checkOut = new Date(document.getElementById('bookCheckOut').value);
 
-    const amount = 5000;
+// Calculate nights
+const nights = Math.round((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+
+// Room prices
+const roomPrices = {
+  "Super Deluxe Rooms": 6000,
+  "Deluxe Sea Side Rooms": 6000,
+  "Executive Deluxe Rooms": 5500,
+  "Deluxe Garden View Rooms": 4500
+};
+
+// Get selected room
+const roomType = document.getElementById('bookRoomType').value;
+
+// Calculate total
+const pricePerNight = roomPrices[roomType] || 5000;
+const amount = nights * pricePerNight;
+
+    
 
     const options = {
 
