@@ -458,7 +458,7 @@ document.getElementById("booking-modal-submit-btn").addEventListener("click", fu
       contact: phone
     },
     theme: {
-      color: "#9b8f85"
+      color: "#8B0000"
     }
   };
 
