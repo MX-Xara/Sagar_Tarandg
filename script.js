@@ -409,7 +409,7 @@ document.getElementById("booking-modal-submit-btn").addEventListener("click", fu
   const nights = Math.round((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
 
   const roomPrices = {
-    "Super Deluxe Rooms": 6000,
+    "Super Deluxe Rooms": 1,
     "Deluxe Sea Side Rooms": 6000,
     "Executive Deluxe Rooms": 5500,
     "Deluxe Garden View Rooms": 4500
