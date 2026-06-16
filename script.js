@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Handle form submission
-   /* if (bookingForm) {
+    /*if (bookingForm) {
       bookingForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
@@ -114,9 +114,9 @@ document.addEventListener('DOMContentLoaded', () => {
         closeModal();
         bookingForm.reset();
       });
-    }
+    }*/
   }
-});*/
+});
 
 
 const fadeElements = document.querySelectorAll('.fade-up');
