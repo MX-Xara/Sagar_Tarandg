@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Handle form submission
-    if (bookingForm) {
+    /*if (bookingForm) {
       bookingForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         closeModal();
         bookingForm.reset();
       });
-    }
+    }*/
   }
 });
 
@@ -384,6 +384,8 @@ async function initCalendar() {
     dateFormat: "Y-m-d"
   });
 }
+
+
 
 document
 .getElementById(
