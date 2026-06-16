@@ -387,104 +387,81 @@ async function initCalendar() {
 
 
 
-document
-.getElementById(
-  "booking-modal-submit-btn"
-)
-.addEventListener(
-  "click",
-  function () {
-    // Get selected dates
-const checkIn = new Date(document.getElementById('bookCheckIn').value);
-const checkOut = new Date(document.getElementById('bookCheckOut').value);
+document.getElementById("booking-modal-submit-btn").addEventListener("click", function () {
 
-// Calculate nights
-const nights = Math.round((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+  // Grab form values up front, before Razorpay opens
+  const name = document.getElementById('bookName').value;
+  const phone = document.getElementById('bookPhone').value;
+  const email = document.getElementById('bookEmail').value;
+  const checkInStr = document.getElementById('bookCheckIn').value;
+  const checkOutStr = document.getElementById('bookCheckOut').value;
+  const adults = document.getElementById('bookAdults').value;
+  const children = document.getElementById('bookChildren').value;
+  const roomType = document.getElementById('bookRoomType').value;
 
-// Room prices
-const roomPrices = {
-  "Super Deluxe Rooms": 6000,
-  "Deluxe Sea Side Rooms": 6000,
-  "Executive Deluxe Rooms": 5500,
-  "Deluxe Garden View Rooms": 4500
-};
+  if (!checkInStr || !checkOutStr) {
+    alert("Please select your check-in and check-out dates first.");
+    return;
+  }
 
-// Get selected room
-const roomType = document.getElementById('bookRoomType').value;
+  const checkInDate = new Date(checkInStr);
+  const checkOutDate = new Date(checkOutStr);
+  const nights = Math.round((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
 
-// Calculate total
-const pricePerNight = roomPrices[roomType] || 5000;
-const amount = nights * pricePerNight;
+  const roomPrices = {
+    "Super Deluxe Rooms": 6000,
+    "Deluxe Sea Side Rooms": 6000,
+    "Executive Deluxe Rooms": 5500,
+    "Deluxe Garden View Rooms": 4500
+  };
+  const pricePerNight = roomPrices[roomType] || 5000;
+  const amount = nights * pricePerNight;
 
-    
+  const options = {
+    key: "rzp_test_T2KlsbDebXkyv9",
+    amount: amount * 100,
+    currency: "INR",
+    name: "Sagar Taranga",
+    description: "Room Booking",
 
-    const options = {
+    handler: function (response) {
+      // Payment confirmed — now save the booking
+      db.collection("bookings").add({
+        roomType: roomType,
+        name: name,
+        phone: phone,
+        email: email,
+        checkIn: checkInStr,
+        checkOut: checkOutStr,
+        adults: Number(adults),
+        children: Number(children),
+        nights: nights,
+        amount: amount,
+        paymentId: response.razorpay_payment_id,
+        bookedAt: new Date().toISOString()
+      })
+      .then(() => {
+        alert("Payment successful! Your booking is confirmed.");
+        document.getElementById('bookingModal').classList.remove('active');
+        document.body.style.overflow = '';
+        document.getElementById('bookingForm').reset();
+      })
+      .catch((error) => {
+        console.error("Booking save failed:", error);
+        alert("Payment went through, but we couldn't save your booking automatically. Please save this Payment ID and contact us: " + response.razorpay_payment_id);
+      });
+    },
 
-      key:
-        "rzp_test_T2KlsbDebXkyv9",
+    prefill: {
+      name: name,
+      email: email,
+      contact: phone
+    },
+    theme: {
+      color: "#9b8f85"
+    }
+  };
 
-      amount:
-        amount * 100,
-
-      currency:
-        "INR",
-
-      name:
-        "Sagar Taranga",
-
-      description:
-        "Room Booking",
-
-      handler:
-        function (
-          response
-        ) {
-
-          console.log(
-            response
-          );
-
-          alert(
-            "Payment Successful!"
-          );
-
-          console.log(
-            response
-            .razorpay_payment_id
-          );
-        },
-
-      prefill: {
-
-        name:
-          document
-          .getElementById(
-            "bookName"
-          ).value,
-
-        email:
-          document
-          .getElementById(
-            "bookEmail"
-          ).value,
-
-        contact:
-          document
-          .getElementById(
-            "bookPhone"
-          ).value
-      },
-
-      theme: {
-        color:
-          "#8B0000"
-      }
-    };
-
-    const rzp =
-      new Razorpay(
-        options
-      );
-
-    rzp.open();
+  const rzp = new Razorpay(options);
+  rzp.open();
 });
