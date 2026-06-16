@@ -33,6 +33,89 @@ document.addEventListener('DOMContentLoaded', () => {
       navLinks.classList.remove('open');
     });
   });
+
+  // Booking Modal Logic
+  const bookingModal = document.getElementById('bookingModal');
+  if (bookingModal) {
+    const closeBookingModal = document.getElementById('closeBookingModal');
+    const bookRoomTypeInput = document.getElementById('bookRoomType');
+    const modalRoomSubtitle = document.getElementById('modalRoomSubtitle');
+    const bookingForm = document.getElementById('bookingForm');
+    const bookNowTriggers = document.querySelectorAll('.book-now-trigger');
+    const checkInInput = document.getElementById('bookCheckIn');
+    const checkOutInput = document.getElementById('bookCheckOut');
+
+    // Open Modal
+    bookNowTriggers.forEach(button => {
+      button.addEventListener('click', () => {
+        const roomName = button.getAttribute('data-room');
+        if (bookRoomTypeInput) {
+          bookRoomTypeInput.value = roomName || '';
+        }
+        if (modalRoomSubtitle) {
+          modalRoomSubtitle.textContent = roomName ? `Room: ${roomName}` : '';
+        }
+        bookingModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        initCalendar(); // Prevent background scrolling
+      });
+    });
+
+    // Close Modal
+    const closeModal = () => {
+      bookingModal.classList.remove('active');
+      document.body.style.overflow = ''; // Restore background scrolling
+    };
+
+    if (closeBookingModal) {
+      closeBookingModal.addEventListener('click', closeModal);
+    }
+
+    // Close Modal on clicking outside content area
+    bookingModal.addEventListener('click', (e) => {
+      if (e.target === bookingModal) {
+        closeModal();
+      }
+    });
+
+    // Set min date for Check-in to today
+    if (checkInInput && checkOutInput) {
+      const today = new Date().toISOString().split('T')[0];
+      checkInInput.min = today;
+      
+      checkInInput.addEventListener('change', () => {
+        checkOutInput.min = checkInInput.value;
+        if (checkOutInput.value && checkOutInput.value < checkInInput.value) {
+          checkOutInput.value = checkInInput.value;
+        }
+      });
+    }
+
+    // Handle form submission
+    if (bookingForm) {
+      bookingForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Extract form values
+        const roomType = bookRoomTypeInput ? bookRoomTypeInput.value : '';
+        const name = document.getElementById('bookName').value;
+        const phone = document.getElementById('bookPhone').value;
+        const email = document.getElementById('bookEmail').value;
+        const checkIn = checkInInput ? checkInInput.value : '';
+        const checkOut = checkOutInput ? checkOutInput.value : '';
+        const adults = document.getElementById('bookAdults').value;
+        const children = document.getElementById('bookChildren').value;
+
+        // Perform validation/submit action (e.g. log or show message)
+        console.log('Booking submitted:', { roomType, name, phone, email, checkIn, checkOut, adults, children });
+        
+        alert(`Thank you, ${name}! Your booking request for the "${roomType}" room from ${checkIn} to ${checkOut} has been received. Proceeding to payment...`);
+        
+        closeModal();
+        bookingForm.reset();
+      });
+    }
+  }
 });
 
 
@@ -265,3 +348,120 @@ if (document.querySelector(".attraction-card")) {
   });
 }
 
+
+/*initializing firebase*/
+
+async function getBookedDates() {
+  const bookedDates = [];
+  const snapshot = await db.collection("bookings").get();
+  snapshot.forEach(doc => {
+    const data = doc.data();
+    let current = new Date(data.checkIn);
+    const end = new Date(data.checkOut);
+    while (current < end) {
+      bookedDates.push(current.toISOString().split("T")[0]);
+      current.setDate(current.getDate() + 1);
+    }
+  });
+  return bookedDates;
+}
+
+async function initCalendar() {
+  const bookedDates = await getBookedDates();
+
+  flatpickr("#bookCheckIn", {
+    minDate: "today",
+    disable: bookedDates,
+    dateFormat: "Y-m-d",
+    onChange: function(selectedDates) {
+      checkOutPicker.set("minDate", selectedDates[0]);
+    }
+  });
+
+  const checkOutPicker = flatpickr("#bookCheckOut", {
+    minDate: "today",
+    disable: bookedDates,
+    dateFormat: "Y-m-d"
+  });
+}
+
+document
+.getElementById(
+  "booking-modal-submit-btn"
+)
+.addEventListener(
+  "click",
+  function () {
+
+    const amount = 5000;
+
+    const options = {
+
+      key:
+        "rzp_test_T2KlsbDebXkyv9",
+
+      amount:
+        amount * 100,
+
+      currency:
+        "INR",
+
+      name:
+        "Sagar Taranga",
+
+      description:
+        "Room Booking",
+
+      handler:
+        function (
+          response
+        ) {
+
+          console.log(
+            response
+          );
+
+          alert(
+            "Payment Successful!"
+          );
+
+          console.log(
+            response
+            .razorpay_payment_id
+          );
+        },
+
+      prefill: {
+
+        name:
+          document
+          .getElementById(
+            "bookName"
+          ).value,
+
+        email:
+          document
+          .getElementById(
+            "bookEmail"
+          ).value,
+
+        contact:
+          document
+          .getElementById(
+            "bookPhone"
+          ).value
+      },
+
+      theme: {
+        color:
+          "#8B0000"
+      }
+    };
+
+    const rzp =
+      new Razorpay(
+        options
+      );
+
+    rzp.open();
+});

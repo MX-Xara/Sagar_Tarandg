@@ -1,0 +1,25 @@
+config keys
+
+
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBBLjsYQ9NfEbwHsAfgGyFoXaU3bx6UBC0",
+  authDomain: "sagar-tarang-booking.firebaseapp.com",
+  projectId: "sagar-tarang-booking",
+  storageBucket: "sagar-tarang-booking.firebasestorage.app",
+  messagingSenderId: "42559384671",
+  appId: "1:42559384671:web:dd676af15913b10b9f7fea",
+  measurementId: "G-NR3Z4BX09M"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);

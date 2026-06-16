@@ -8,6 +8,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=1.2">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
 </head>
 <body class="book-body">
 
@@ -25,7 +30,7 @@
         <a href="index.html#dining">Dining</a>
         <a href="index.html#gallery">Gallery</a>
         <a href="index.html#attractions">Alibag</a>
-        <a href="book.html">Book Now</a>
+        <a href="book.html">Enquire Now</a>
       </nav>
 
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
@@ -70,7 +75,7 @@
               </div>
               <div class="inclusion-badge">Breakfast Included</div>
             </div>
-            <button class="room-book-btn" onclick="window.location.href='index.html#contact'">Book Now</button>
+            <button class="room-book-btn book-now-trigger" data-room="Super Deluxe Rooms">Enquire Now</button>
           </div>
         </div>
       </div>
@@ -101,7 +106,7 @@
               </div>
               <div class="inclusion-badge">Breakfast Included</div>
             </div>
-            <button class="room-book-btn" onclick="window.location.href='index.html#contact'">Book Now</button>
+            <button class="room-book-btn book-now-trigger" data-room="Deluxe Sea Side Rooms">Enquire Now</button>
           </div>
         </div>
       </div>
@@ -132,7 +137,7 @@
               </div>
               <div class="inclusion-badge">Breakfast Included</div>
             </div>
-            <button class="room-book-btn" onclick="window.location.href='index.html#contact'">Book Now</button>
+            <button class="room-book-btn book-now-trigger" data-room="Executive Deluxe Rooms">Enquire Now</button>
           </div>
         </div>
       </div>
@@ -163,7 +168,7 @@
               </div>
               <div class="inclusion-badge">Breakfast Included</div>
             </div>
-            <button class="room-book-btn" onclick="window.location.href='index.html#contact'">Book Now</button>
+            <button class="room-book-btn book-now-trigger" data-room="Deluxe Garden View Rooms">Enquire Now</button>
           </div>
         </div>
       </div>
@@ -171,6 +176,110 @@
 
   </main>
 
+  <!-- Booking Modal -->
+  <div class="booking-modal-overlay" id="bookingModal">
+    <div class="booking-modal-content">
+      <button class="booking-modal-close" id="closeBookingModal" aria-label="Close booking modal">&times;</button>
+      <h2 class="booking-modal-title">Check Availability Now!</h2>
+      <div class="booking-modal-room-subtitle" id="modalRoomSubtitle"></div>
+      <form class="booking-modal-form" id="bookingForm">
+        <input type="hidden" id="bookRoomType">
+        
+        <div class="form-group">
+          <label for="bookName">Full Name</label>
+          <input type="text" id="bookName" placeholder="Enter your full name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="bookPhone">Phone Number</label>
+          <input type="tel" id="bookPhone" placeholder="Enter your phone number" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="bookEmail">Email</label>
+          <input type="email" id="bookEmail" placeholder="Enter your email address" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="bookCheckIn">Check In Date</label>
+          <input type="text" id="bookCheckIn" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="bookCheckOut">Check Out Date</label>
+          <input type="text" id="bookCheckOut" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="bookAdults">No. Of Adults</label>
+          <input type="number" id="bookAdults" placeholder="Enter number of adults" min="1" max="10" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="bookChildren">No. Of Children</label>
+          <input type="number" id="bookChildren" placeholder="Enter number of children" min="0" max="10" required>
+        </div>
+        
+        <button type="submit" class="booking-modal-submit-btn" id="booking-modal-submit-btn">Pay Now</button>
+      </form>
+    </div>
+  </div>
+
   <script src="script.js?v=1.2"></script>
+  <script>
+  // Firebase init
+  const firebaseConfig = {
+    apiKey: "AIzaSyBBLjsYQ9NfEbwHsAfgGyFoXaU3bx6UBC0",
+    authDomain: "sagar-tarang-booking.firebaseapp.com",
+    projectId: "sagar-tarang-booking",
+    storageBucket: "sagar-tarang-booking.firebasestorage.app",
+    messagingSenderId: "42559384671",
+    appId: "1:42559384671:web:dd676af15913b10b9f7fea"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  // Get booked dates from Firestore
+  async function getBookedDates() {
+    const bookedDates = [];
+    const snapshot = await db.collection("bookings").get();
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      let current = new Date(data.checkIn);
+      const end = new Date(data.checkOut);
+      while (current < end) {
+        bookedDates.push(current.toISOString().split("T")[0]);
+        current.setDate(current.getDate() + 1);
+      }
+    });
+    return bookedDates;
+  }
+
+  // Init calendar when popup opens
+  async function initCalendar() {
+    const bookedDates = await getBookedDates();
+
+    flatpickr("#bookCheckIn", {
+      minDate: "today",
+      disable: bookedDates,
+      dateFormat: "Y-m-d",
+      onChange: function(selectedDates) {
+        checkOutPicker.set("minDate", selectedDates[0]);
+      }
+    });
+
+    const checkOutPicker = flatpickr("#bookCheckOut", {
+      minDate: "today",
+      disable: bookedDates,
+      dateFormat: "Y-m-d"
+    });
+  }
+
+  
+  
+</script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
 </body>
 </html>
