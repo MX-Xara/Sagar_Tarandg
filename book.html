@@ -241,42 +241,9 @@
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
 
-  // Get booked dates from Firestore
-  async function getBookedDates() {
-    const bookedDates = [];
-    const snapshot = await db.collection("bookings").get();
-    snapshot.forEach(doc => {
-      const data = doc.data();
-      let current = new Date(data.checkIn);
-      const end = new Date(data.checkOut);
-      while (current < end) {
-        bookedDates.push(current.toISOString().split("T")[0]);
-        current.setDate(current.getDate() + 1);
-      }
-    });
-    return bookedDates;
-  }
+  
 
-  // Init calendar when popup opens
-  async function initCalendar() {
-    const bookedDates = await getBookedDates();
-
-    flatpickr("#bookCheckIn", {
-      minDate: "today",
-      disable: bookedDates,
-      dateFormat: "Y-m-d",
-      onChange: function(selectedDates) {
-        checkOutPicker.set("minDate", selectedDates[0]);
-      }
-    });
-
-    const checkOutPicker = flatpickr("#bookCheckOut", {
-      minDate: "today",
-      disable: bookedDates,
-      dateFormat: "Y-m-d"
-    });
-  }
-
+  
   
   
 </script>

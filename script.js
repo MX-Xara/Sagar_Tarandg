@@ -366,19 +366,28 @@ async function getBookedDates() {
   return bookedDates;
 }
 
+// Track flatpickr instances so we can destroy & reinit cleanly
+let checkInPicker = null;
+let checkOutPicker = null;
+
 async function initCalendar() {
+  if (checkInPicker) { checkInPicker.destroy(); checkInPicker = null; }
+  if (checkOutPicker) { checkOutPicker.destroy(); checkOutPicker = null; }
+
   const bookedDates = await getBookedDates();
 
-  flatpickr("#bookCheckIn", {
+  checkInPicker = flatpickr("#bookCheckIn", {
     minDate: "today",
     disable: bookedDates,
     dateFormat: "Y-m-d",
     onChange: function(selectedDates) {
-      checkOutPicker.set("minDate", selectedDates[0]);
+      if (selectedDates[0]) {
+        checkOutPicker.set("minDate", selectedDates[0]);
+      }
     }
   });
 
-  const checkOutPicker = flatpickr("#bookCheckOut", {
+  checkOutPicker = flatpickr("#bookCheckOut", {
     minDate: "today",
     disable: bookedDates,
     dateFormat: "Y-m-d"
