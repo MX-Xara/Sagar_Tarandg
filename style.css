@@ -1,3 +1,4 @@
+
 /* =========================================
    Sagartarang Beach Resort — Design Tokens
    ========================================= */
@@ -414,7 +415,7 @@ img {
   font-size: 13rem;
   font-weight: 350;
 
-  color: rgba(123, 110, 96, 0.226);
+  color: rgba(21, 130, 176, 0.226);
 
   letter-spacing: 8px;
   text-transform: uppercase;
@@ -432,7 +433,7 @@ img {
   font-size: 4rem;
   font-weight: 300;
 
-  color: #E24826;
+  color: #FECB38;
 
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -444,36 +445,97 @@ img {
   transition-delay: 0.4s;
 }
 
-.side-video{
-    position: absolute;
-
-    top: 20%;
-    right: 2%;
-
-    width: 42%;
-    height: 145px;
-
-    overflow: hidden;
-}
-
-.side-video video{
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-}
-
-
-.side-photo{
+.side-video-wrapper {
   position: absolute;
+  top: 20%;
+  right: 2%;
+  width: 42%;
+  height: 145px;
+}
 
-    top: 45%;
-    right: 50%;
+.side-video {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
 
-    width: 60%;
-    height: 160px;
+.side-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-    overflow: hidden;
+.video-corner-frame {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  width: 32px;
+  height: 32px;
+  border-top: 3.5px solid #FECB38;
+  border-left: 3.5px solid #FECB38;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.video-wave-decor {
+  position: absolute;
+  bottom: -15px;
+  right: -20px;
+  width: 80px;
+  height: 15px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.side-photo-wrapper {
+  position: absolute;
+  top: 45%;
+  right: 50%;
+  width: 60%;
+  height: 160px;
+}
+
+.side-photo {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.photo-dots-decor {
+  position: absolute;
+  left: -32px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 110px;
+  background-image: radial-gradient(#FECB38 2px, transparent 2px);
+  background-size: 8px 16px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.text-wave-blue {
+  width: 130px;
+  height: 12px;
+  margin-top: 8px;
+  display: block;
+}
+
+.text-wave-yellow {
+  width: 170px;
+  height: 12px;
+  margin-top: 12px;
+  display: block;
+}
+
+.video-wave-decor svg,
+.text-wave-blue svg,
+.text-wave-yellow svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .for-all{
@@ -485,7 +547,7 @@ img {
   font-size: 4rem;
   font-weight: 400;
 
-  color: rgba(123, 110, 96, 0.226);
+  color: #FECB38;
 
   letter-spacing: 4px;
   
@@ -504,7 +566,7 @@ img {
   font-size: 11rem;
   font-weight: 400;
 
-  color: #E24826;
+  color: #1582B0;
 
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -522,7 +584,7 @@ img {
   transform: translateX(-50%);
 
   font-size: 1.2rem;
-  color: #411e09;
+  color: #1582B0;
 
   letter-spacing: 1px;
   text-align: center;
@@ -538,7 +600,7 @@ img {
   transform: translateX(-50%);
 
   font-size: 1.2rem;
-  color: #411e09;
+  color: #1582B0;
 
   letter-spacing: 1px;
   text-align: center;
@@ -587,7 +649,7 @@ img {
     font-size: 8rem;
     font-weight: 300;
 
-    color: #9b8f85;
+    color: #1582B0;
 
     z-index: 10;
 }
@@ -603,7 +665,7 @@ img {
     font-size: 2rem;
     font-weight: 300;
 
-    color: #E24826;
+    color: #FECB38;
 
     z-index: 10;
 }
@@ -658,7 +720,7 @@ img {
     font-size: 5rem;
     font-weight: 300;
 
-    color: #8f8178;
+    color: #1582B0;
 
     letter-spacing: 10px;
 
@@ -666,7 +728,7 @@ img {
 }
 
 .pool-header p{
-    color: #6b625b;
+    color: #FECB38;
 
     font-size: 1rem;
 
@@ -711,7 +773,7 @@ img {
     font-size: 14rem;
     font-weight: 300;
 
-    color: #8f8178;
+    color: #1582B0;
 
     letter-spacing: 8px;
     text-transform: uppercase;
@@ -746,7 +808,7 @@ img {
     font-size: 14rem;
     font-weight: 300;
 
-    color: #E24826;
+    color: #31b1e8;
 
     letter-spacing: 8px;
     text-transform: uppercase;
@@ -784,7 +846,7 @@ img {
     font-size: 5rem;
     font-weight: 300;
 
-    color: #8f8178;
+    color: #1582B0;
 
     letter-spacing: 10px;
 
@@ -792,7 +854,7 @@ img {
 }
 
 .beach-header p{
-    color: #6b625b;
+    color: #FECB38;
 
     font-size: 1rem;
 
@@ -836,7 +898,7 @@ img {
     font-size: 14rem;
     font-weight: 300;
 
-    color: #8f8178;
+    color: #1582B0;
 
     letter-spacing: 8px;
     text-transform: uppercase;
@@ -872,7 +934,7 @@ img {
     font-size: 14rem;
     font-weight: 300;
 
-    color: #E24826;
+    color: #FECB38;
 
     letter-spacing: 8px;
     text-transform: uppercase;
@@ -909,7 +971,7 @@ img {
     font-size: 5rem;
     font-weight: 300;
 
-    color: #8f8178;
+    color: #1582B0;
 
     letter-spacing: 10px;
 
@@ -917,7 +979,7 @@ img {
 }
 
 .food-header p{
-    color: #6b625b;
+    color: #FECB38;
 
     font-size: 1rem;
 
@@ -961,7 +1023,7 @@ img {
     font-size: 14rem;
     font-weight: 300;
 
-    color: #8f8178;
+    color: #1582B0;
 
     letter-spacing: 8px;
     text-transform: uppercase;
@@ -982,7 +1044,7 @@ img {
     font-size: 14rem;
     font-weight: 300;
 
-    color: #E24826;
+    color: #1582B0;
 
     letter-spacing: 8px;
     text-transform: uppercase;
@@ -1038,7 +1100,7 @@ img {
     font-size: 5rem;
     font-weight: 300;
 
-    color: #9b8f85;
+    color: #1582B0;
 
     text-align: center;
 
@@ -1129,7 +1191,7 @@ img {
     width: 0%;
     height: 100%;
 
-    background: #E24826;
+    background: #fecb38;
 
     transform: skewX(-20deg);
 
@@ -1142,7 +1204,7 @@ img {
     position: relative;
     z-index: 2;
 
-    color: #9b8f85;
+    color: #1582B0;
 
     transition: color 0.4s ease;
 }
@@ -1159,7 +1221,7 @@ img {
 .amenity-card span{
   
     font-size: 1.3rem;
-    color: #9b8f85;
+    color: #1582B0;
 
     letter-spacing: 1px;
 }
@@ -1249,7 +1311,7 @@ img {
     width: 0%;
     height: 100%;
 
-    background: #E24826;
+    background: #1582b0;
 
     transform: skewX(-20deg);
 
@@ -1270,7 +1332,7 @@ img {
 
     font-size: 1.3rem;
 
-    color: #9b8f85;
+    color: #1582B0;
 
     letter-spacing: 1px;
 
@@ -1400,14 +1462,14 @@ img {
    Booking Page Styles (book.html)
    ========================================= */
 .book-body {
-  background-color: #f6f5f4;
+  background-color: #FAF6EF; /* Matches resort-cream base */
   color: var(--color-charcoal);
   padding-top: 100px; /* Offset fixed header */
 }
 
 /* Custom header adjustment for booking page */
 .book-navbar {
-  background: #f6f5f4 !important;
+  background: #FAF6EF !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   padding: 12px 0 !important;
 }
@@ -1450,18 +1512,18 @@ img {
 
 .book-main-subtitle {
   font-size: 1.1rem;
-  color: #8f8178;
+  color: #FECB38;
   letter-spacing: 1px;
 }
 
 /* Room Card Layout */
 .room-card {
   display: flex;
-  background-color: #9b8f85;
-  color: #ffffff;
+  background-color: #FAF6EF; /* Matches background exactly */
+  color: #1B3A4B;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06); /* Soft shadow separates card from background */
   transition: transform 0.4s var(--transition-base), box-shadow 0.4s var(--transition-base);
 }
 
@@ -1529,7 +1591,7 @@ img {
   font-family: var(--font-display);
   font-size: 2.2rem;
   font-weight: 400;
-  color: #ffffff;
+  color: #1582B0; /* Brand Blue */
   margin-bottom: 12px;
   letter-spacing: 0.5px;
 }
@@ -1537,7 +1599,8 @@ img {
 .guest-badge {
   display: inline-flex;
   align-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.45);
+  border: 1px solid #FECB38; /* Thin yellow border */
+  color: #1582B0; /* Blue text */
   padding: 4px 14px;
   border-radius: 20px;
   font-size: 0.8rem;
@@ -1545,15 +1608,15 @@ img {
   text-transform: uppercase;
   margin-bottom: 20px;
   align-self: flex-start;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .room-description {
   font-size: 0.95rem;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.9);
+  color: #284555; /* Soft dark slate for high legibility */
   margin-bottom: 24px;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .room-price {
@@ -1561,14 +1624,14 @@ img {
   font-size: 1.8rem;
   font-weight: 500;
   margin-bottom: 20px;
-  color: #ffffff;
+  color: #1582B0; /* Brand Blue */
 }
 
 .room-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1.5px solid #FECB38; /* Thin yellow line separating price and info */
   padding-top: 24px;
 }
 
@@ -1584,40 +1647,42 @@ img {
   gap: 6px;
   font-size: 1rem;
   font-weight: 500;
+  color: #1582B0; /* Blue text */
 }
 
 .rating-star {
-  color: #ffc107; /* Golden star */
+  color: #FECB38; /* Yellow star */
   font-size: 1.1rem;
 }
 
 .inclusion-badge {
-  border: 1px solid rgba(255, 255, 255, 0.45);
+  border: 1px solid #FECB38; /* Thin yellow border */
+  color: #1582B0; /* Blue text */
   padding: 4px 14px;
   border-radius: 20px;
   font-size: 0.8rem;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0.05em;
 }
 
 .room-book-btn {
-  background-color: #f6f5f4;
-  color: #9b8f85;
+  background-color: #1582B0; /* Solid Blue Button */
+  color: #ffffff; /* White text */
   border: none;
   padding: 12px 28px;
-  border-radius: 4px;
+  border-radius: 6px;
   font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .room-book-btn:hover {
-  background-color: #ffffff;
-  color: #8c7e73;
+  background-color: #12729a; /* Slightly darker blue on hover */
+  color: #ffffff;
   transform: translateY(-1px);
 }
 
@@ -1788,7 +1853,7 @@ img {
 
 .booking-modal-submit-btn:hover {
   background-color: #ffffff;
-  color: #9b8f85;
+  color: #1582B0;
 }
 
 /* Mobile responsive details for rooms */

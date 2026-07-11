@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery | Sagar Tarang Beach Resort Alibaug</title>
+  <meta name="description"
+    content="Take a virtual tour of Sagar Tarang Beach Resort. Breathtaking views of Nagaon Beach, swimming pool, luxury rooms, and coastal culinary delights.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Jost:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="style.css?v=1.2">
+  <link rel="stylesheet" href="gallery.css?v=1.2">
+</head>
+
+<body class="gallery-body-page">
+
+  <!-- Navbar -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <img class="logo-img" src="assets/ST-LOGO-1.webp" alt="Sagartarang Beach Resort logo">
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="about.html">About</a>
+        <a href="book.html">Rooms</a>
+
+        <a href="food.html">Dining</a>
+        <a href="gallery.html" class="active">Gallery</a>
+        <a href="index.html#attractions">Events</a>
+        <a href="index.html#hotel">Restaurant</a>
+        <a href="book.html" target="_blank">Book Now</a>
+      </nav>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Gallery Main Section -->
+  <main class="gallery-container">
+    <div class="gallery-split-layout">
+      <!-- Left Panel: Text & Quotes -->
+      <div class="gallery-text-panel">
+        <div class="gallery-text-content">
+          <h1 class="gallery-main-title">Our Gallery</h1>
+          <div class="title-line"></div>
+          <p class="gallery-quote">"A glimpse into the beauty, comfort, and moments that make Sagar Taranga special."
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Panel: Vertical Marquee Columns -->
+      <div class="gallery-grid-panel">
+        <!-- Column 1: Up to Down (scrolling downwards) -->
+        <div class="gallery-col" id="col1">
+          <div class="gallery-track-vertical scroll-up-down">
+            <!-- Populated dynamically by gallery.js -->
+          </div>
+        </div>
+        <!-- Column 2: Down to Up (scrolling upwards) -->
+        <div class="gallery-col" id="col2">
+          <div class="gallery-track-vertical scroll-down-up">
+            <!-- Populated dynamically by gallery.js -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- JS Scripts -->
+  <script src="gallery.js"></script>
+</body>
+
+</html>

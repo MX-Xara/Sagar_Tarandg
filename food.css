@@ -1,0 +1,845 @@
+/* =========================================
+   Sagar Tarang Beach Resort — Food Page (food.html)
+   ========================================= */
+
+/* Body override for Dining page */
+.food-body-page {
+  background-color: #f6f5f4;
+  color: #284555;
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  /* Bolder body text like about page */
+  line-height: 1.7;
+}
+
+/* =========================================
+   Dining Hero Section
+   ========================================= */
+.food-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 500px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.food-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.food-hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 45%;
+}
+
+
+
+.food-hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #ffffff;
+  /* White font on dark background */
+}
+
+.food-hero-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  color: #fecb38;
+  /* Brand Yellow */
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.food-hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.5rem, 7vw, 7rem);
+  font-weight: 300;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+/* =========================================
+   Menu Container and Sections
+   ========================================= */
+.menu-container {
+  max-width: 1480px;
+  margin: 100px auto;
+  padding: 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+}
+
+.menu-section {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.menu-header {
+  text-align: center;
+}
+
+.menu-subtitle {
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fecb38;
+  /* Brand Yellow */
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.menu-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
+  font-weight: 300;
+  color: #1583b0;
+  /* Brand Blue on light background */
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+/* =========================================
+   Menu Grid Layout
+   ========================================= */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 80px;
+  row-gap: 40px;
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.menu-item-top::before {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  right: 0;
+  border-bottom: 1.5px dotted rgba(21, 131, 176, 0.25);
+  z-index: 1;
+}
+
+.menu-item-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.45rem;
+  font-weight: 500;
+  color: #1583b0;
+  /* Brand Blue */
+  background-color: #f6f5f4;
+  /* Masks dot line */
+  padding-right: 12px;
+  z-index: 2;
+  position: relative;
+}
+
+.menu-item-price {
+  font-family: 'Jost', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #e64723;
+  /* Brand Orange */
+  background-color: #f6f5f4;
+  /* Masks dot line */
+  padding-left: 12px;
+  z-index: 2;
+  position: relative;
+}
+
+.menu-item-description {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.95rem;
+  color: #284555;
+  font-weight: 400;
+  /* Bolder body text */
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* =========================================
+   Wide Image Showcase with abstract shapes
+   ========================================= */
+.menu-image-showcase {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.showcase-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 380px;
+  padding: 0 16px 16px 16px;
+  /* Space for decor bleed */
+  overflow: visible;
+}
+
+.showcase-image {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+.showcase-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.showcase-image-wrapper:hover .showcase-image img {
+  transform: scale(1.03);
+}
+
+/* Abstract Decors */
+.decor-corner-frame {
+  position: absolute;
+  top: -12px;
+  left: -4px;
+  width: 36px;
+  height: 36px;
+  border-top: 3.5px solid #fecb38;
+  /* Brand Yellow */
+  border-left: 3.5px solid #fecb38;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.decor-wave-line {
+  position: absolute;
+  bottom: -12px;
+  right: -8px;
+  width: 80px;
+  height: 15px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.decor-dots-grid {
+  position: absolute;
+  left: -24px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 110px;
+  background-image: radial-gradient(#fecb38 2px, transparent 2px);
+  background-size: 8px 16px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* =========================================
+   Page Scroll Reveal System
+   ========================================= */
+.reveal-parent {
+  overflow: visible;
+}
+
+.reveal-child {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.revealed .reveal-child {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delay modifiers */
+.reveal-parent.revealed .reveal-child:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.reveal-parent.revealed .reveal-child:nth-child(2) {
+  transition-delay: 0.25s;
+}
+
+.reveal-parent.revealed .reveal-child:nth-child(3) {
+  transition-delay: 0.4s;
+}
+
+/* =========================================
+   Our Special Section (Thali Showcase)
+   ========================================= */
+.special-section {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.special-header {
+  text-align: center;
+}
+
+.special-subtitle {
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #e64723;
+  /* Brand Red */
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.special-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
+  font-weight: 300;
+  color: #1582b0;
+  /* Brand Blue */
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.special-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.thali-card {
+  background-color: #ffffff;
+  border: 1px solid rgba(40, 69, 85, 0.08);
+  border-radius: 0;
+  /* Sharp corners */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+  transition: box-shadow 0.3s ease;
+}
+
+.thali-card:hover {
+  box-shadow: 0 15px 35px rgba(20, 94, 160, 0.06);
+}
+
+.thali-img-wrapper {
+  aspect-ratio: 16 / 11;
+  overflow: hidden;
+  width: 100%;
+}
+
+.thali-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thali-info {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.thali-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #1582b0;
+  /* Brand Blue */
+  margin: 0 0 10px 0;
+}
+
+.thali-desc {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #284555;
+  margin: 0 0 20px 0;
+  flex-grow: 1;
+}
+
+.thali-price {
+  font-family: 'Jost', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #e64723;
+  /* Brand Red */
+  border-top: 1px dashed rgba(21, 131, 176, 0.15);
+  padding-top: 15px;
+}
+
+/* =========================================
+   Category Section & Navbar
+   ========================================= */
+.category-section {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 60px;
+}
+
+.category-header {
+  text-align: center;
+}
+
+.category-subtitle {
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fecb38;
+  /* Brand Yellow */
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.category-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
+  font-weight: 300;
+  color: #1582b0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.category-nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 10px auto;
+}
+
+.category-tab {
+  background: transparent;
+  border: 1px solid rgba(21, 131, 176, 0.3);
+  color: #284555;
+  padding: 10px 20px;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 0;
+  /* Sharp corners */
+}
+
+.category-tab:hover,
+.category-tab.active {
+  background-color: #1582b0;
+  color: #fecb38;
+  /* Brand Yellow text */
+  border-color: #e64723;
+  /* Brand Red border */
+}
+
+/* =========================================
+   Marquee Showcase & Infinite Scroller
+   ========================================= */
+.showcase-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  overflow: hidden;
+  padding: 30px 0;
+  background-color: rgba(21, 131, 176, 0.02);
+  border-top: 1px solid rgba(21, 131, 176, 0.06);
+  border-bottom: 1px solid rgba(21, 131, 176, 0.06);
+}
+
+/* Smooth edge masking */
+.showcase-container::before,
+.showcase-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 150px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.showcase-container::before {
+  left: 0;
+  background: linear-gradient(to right, #f6f5f4 15%, transparent);
+}
+
+.showcase-container::after {
+  right: 0;
+  background: linear-gradient(to left, #f6f5f4 15%, transparent);
+}
+
+.marquee-row {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+}
+
+.marquee-track {
+  display: flex;
+  gap: 30px;
+  width: max-content;
+  will-change: transform;
+}
+
+/* Row 1 LTR animation */
+.ltr-track {
+  animation: marquee-ltr 45s linear infinite;
+}
+
+/* Row 2 RTL animation */
+.rtl-track {
+  animation: marquee-rtl 45s linear infinite;
+}
+
+@keyframes marquee-ltr {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes marquee-rtl {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Marquee Card Styles */
+.marquee-card {
+  width: 320px;
+  background-color: #ffffff;
+  border: 1px solid rgba(40, 69, 85, 0.06);
+  border-radius: 0;
+  /* Sharp corners */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.01);
+}
+
+.marquee-img-wrapper {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  width: 100%;
+}
+
+.marquee-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.marquee-info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.marquee-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #1582b0;
+  margin: 0 0 6px 0;
+}
+
+.marquee-desc {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: rgba(40, 69, 85, 0.8);
+  margin: 0 0 15px 0;
+  flex-grow: 1;
+}
+
+.marquee-price {
+  font-family: 'Jost', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #e64723;
+  border-top: 1px dashed rgba(21, 131, 176, 0.1);
+  padding-top: 10px;
+}
+
+/* =========================================
+   Laughter / Quote Section
+   ========================================= */
+.quote-section {
+  position: relative;
+  padding: 120px 48px;
+  text-align: center;
+  background-color: transparent;
+  overflow: visible;
+  /* Allows stickers to float slightly outside */
+  margin: 40px auto;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.quote-container {
+  max-width: 860px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+}
+
+.quote-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 300;
+  line-height: 1.4;
+  color: #e64723;
+  /* Brand Orange */
+  margin: 0;
+  padding: 0 40px;
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+.quote-decorator {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 6rem;
+  color: rgba(230, 71, 35, 0.15);
+  /* Semi-transparent orange quote mark */
+  line-height: 0;
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+}
+
+.quote-decorator:first-of-type {
+  top: 15px;
+  left: -20px;
+}
+
+.quote-decorator:last-of-type {
+  bottom: -25px;
+  right: -20px;
+}
+
+/* Sticker Overlays */
+.sticker {
+  position: absolute;
+  pointer-events: none;
+  /* Make click-through */
+  z-index: 1;
+  filter: drop-shadow(0 6px 15px rgba(0, 0, 0, 0.08));
+  user-select: none;
+  opacity: 0.95;
+  transition: transform 0.3s ease;
+}
+
+/* Float Animations with variations */
+@keyframes float-sticker-1 {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-12px) rotate(4deg);
+  }
+
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+@keyframes float-sticker-2 {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-8px) rotate(-3deg);
+  }
+
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+@keyframes float-sticker-3 {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+/* Individual Sticker Positions and animation configs */
+.sticker.starfish {
+  top: -15px;
+  left: 5%;
+  height: 100px;
+  width: 100px;
+  animation: float-sticker-1 7s ease-in-out infinite;
+}
+
+.sticker.shell {
+  bottom: 0px;
+  right: 8%;
+  height: 100px;
+  width: 100px;
+  animation: float-sticker-2 8s ease-in-out infinite 0.5s;
+}
+
+.sticker.prawns {
+  top: 10px;
+  right: 6%;
+  height: 100px;
+  width: 100px;
+  animation: float-sticker-3 6.5s ease-in-out infinite 1s;
+}
+
+.sticker.juice {
+  bottom: -100px;
+  left: 50%;
+  height: 179px;
+  width: 100px;
+  animation: float-sticker-1 9s ease-in-out infinite 1.5s;
+}
+
+.sticker.chair {
+  bottom: -100px;
+  left: 29%;
+  height: 100px;
+  width: 100px;
+  animation: float-sticker-2 11s ease-in-out infinite 2s;
+}
+
+.sticker.flower {
+  top: -35px;
+  right: 25%;
+  height: 100px;
+  width: 100px;
+  animation: float-sticker-3 8.5s ease-in-out infinite 0.8s;
+}
+
+.sticker.berries {
+  top: 45%;
+  left: 3%;
+  height: 120px;
+  width: 170px;
+  animation: float-sticker-1 7.5s ease-in-out infinite 1.2s;
+}
+
+/* =========================================
+   Mobile Responsiveness
+   ========================================= */
+@media (max-width: 1024px) {
+  .special-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 900px) {
+  .menu-container {
+    margin: 60px auto;
+    padding: 0 24px;
+    gap: 80px;
+  }
+
+  /* Quote and sticker overrides */
+  .sticker {
+    width: 65px !important;
+  }
+
+  .sticker.chair,
+  .sticker.berries {
+    display: none;
+  }
+
+  .quote-section {
+    padding: 70px 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .special-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-nav {
+    gap: 8px;
+  }
+
+  .category-tab {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+
+  .showcase-container::before,
+  .showcase-container::after {
+    width: 60px;
+  }
+
+  .ltr-track,
+  .rtl-track {
+    animation-duration: 30s;
+  }
+
+  /* Extra mobile sticker hide rules */
+  .sticker.flower,
+  .sticker.juice {
+    display: none;
+  }
+}

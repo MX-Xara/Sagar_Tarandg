@@ -1,0 +1,1185 @@
+/* =========================================
+   Sagar Tarang Beach Resort — About Page Styling
+   ========================================= */
+
+/* Body Overrides */
+body.about-page {
+  background-color: #f6f5f4;
+  color: #284555;
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  /* Bolder general font weight */
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* Ensure all body text paragraphs are regular weight (Jost 400) */
+body.about-page p,
+.about-page p,
+.intro-body,
+.story-para,
+.experience-para,
+.alibaug-text-columns p,
+.highlight-text-wrapper p {
+  font-weight: 400;
+}
+
+/* Typography Defaults for About Page */
+.about-page h1,
+.about-page h2,
+.about-page h3,
+.about-page h4 {
+  font-family: 'Cormorant Garamond', serif;
+  color: #284555;
+  font-weight: 400;
+}
+
+/* Navbar Scrolled Adaptation for Light Page */
+.about-page .navbar.scrolled {
+  background-color: transparent !important;
+
+
+}
+
+.about-page .navbar.scrolled .nav-links a {
+  color: #284555 !important;
+}
+
+.about-page .navbar.scrolled .nav-toggle span {
+  background-color: #284555 !important;
+}
+
+/* Main Content Wrapper Constraints */
+.about-content-wrapper {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Container for introduction and story sections, holding the background texture */
+.about-upper-content {
+  position: relative;
+  z-index: 1;
+}
+
+.about-upper-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('assets/about/fent.webp');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover; /* Stretches and fills full width and height */
+  
+  /* Mask/Clip reveal animation: keeps image 100% width and crops height by 40% top/bottom with sharp corners, expanding on scroll */
+  clip-path: inset(
+    calc(40% * (1 - var(--scroll-progress, 0)))
+    0%
+    calc(40% * (1 - var(--scroll-progress, 0)))
+    0%
+  );
+  
+  /* ====================================================
+     ADJUST TEXTURE VISIBILITY / OPACITY HERE
+     Value can range from 0.0 (fully transparent) to 1.0 (fully opaque)
+     Current setting is 0.22 (22% visibility) for a clear, elegant look.
+     ==================================================== */
+  opacity: 0.70s;
+
+  pointer-events: none;
+  z-index: -1;
+  transition: clip-path 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* =========================================
+   Layout: Section & Vertical Heading Sidebar
+   ========================================= */
+.about-section {
+  display: flex;
+  padding: 140px 48px;
+  margin: 0 auto;
+  max-width: 1360px;
+  gap: 80px;
+  align-items: stretch;
+}
+
+/* The vertical sidebar block for section headings */
+.vertical-heading-col {
+  width: 110px;
+  background-color: #E64723;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  padding: 50px 0;
+  box-shadow: 0 8px 30px rgba(230, 71, 35, 0.08);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.vertical-heading-col h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #ffffff !important;
+  /* Strict constraint: White on #E64723 background */
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  white-space: nowrap;
+  margin: 0;
+}
+
+.section-content-col {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* =========================================
+   SECTION 1 — HERO
+   ========================================= */
+.about-hero {
+  position: relative;
+  height: 100vh;
+  /* Increased from 50vh to show more of the vertical height of the painting (zoomed out) */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.about-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  transform: none;
+}
+
+.about-hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 38%;
+  /* position to show the best part of the artwork vertically */
+}
+
+.about-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(16, 37, 49, 0.25);
+  /* lighter overlay for high clarity of background artwork */
+  z-index: 1;
+}
+
+.about-hero-content {
+  position: absolute;
+  left: 8%;
+  bottom: 12%;
+  z-index: 2;
+  color: #ffffff;
+  max-width: 800px;
+}
+
+.about-hero-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  color: rgba(255, 255, 255, 0.85);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.about-hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 6.5vw, 6rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: #ffffff !important;
+  margin: 0 0 16px 0;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.about-hero-subtitle {
+  font-family: 'Jost', sans-serif;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+/* =========================================
+   SECTION 2 — INTRODUCTION
+   ========================================= */
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.intro-image-wrapper {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+}
+
+.intro-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.intro-text-wrapper {
+  padding-right: 20px;
+}
+
+.intro-lead {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  line-height: 1.35;
+  color: #000000;
+  margin-bottom: 24px;
+}
+
+.intro-body {
+  font-family: 'Jost', sans-serif;
+  font-size: 1.1rem;
+  color: rgba(0, 0, 0, 0.85);
+  margin-bottom: 30px;
+}
+
+.divider-line {
+  width: 100px;
+  height: 1.5px;
+  background-color: #fab312;
+  margin: 35px 0;
+}
+
+.signature-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.sig-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-style: italic;
+  font-weight: 400;
+  color: #000000;
+  margin-bottom: 2px;
+}
+
+.sig-title {
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #000000;
+}
+
+/* =========================================
+   SECTION 3 — STORY BLOCK
+   ========================================= */
+.story-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.story-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.story-para {
+  font-family: 'Jost', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: rgba(40, 69, 85, 0.85);
+  margin: 0;
+}
+
+.story-image-wrapper {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+}
+
+.story-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =========================================
+   SECTION 4 — HIGHLIGHT BLOCK
+   ========================================= */
+.highlight-block {
+  background-color: #145ea0;
+  /* Background color */
+  color: #ffffff;
+  /* White text */
+  width: 100%;
+  padding: 130px 48px;
+  margin: 0 0 120px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Elegant backdrop circle or waves for highlight block */
+.highlight-block::before {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 180px;
+  height: 180px;
+  border: 15px solid rgba(250, 179, 18, 0.12);
+  /* transparent yellow ring */
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.highlight-block::after {
+  content: "";
+  position: absolute;
+  bottom: 20px;
+  left: 40px;
+  width: 100px;
+  height: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 20 Q 12.5 15, 25 20 T 50 20 T 75 20 T 100 20' fill='none' stroke='rgba(250, 179, 18, 0.25)' stroke-width='3'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.highlight-container {
+  max-width: 860px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.highlight-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.6rem;
+  font-weight: 300;
+  color: #ffffff !important;
+  /* Strict constraint: White on #145ea0 */
+  letter-spacing: 0.03em;
+  margin-bottom: 30px;
+}
+
+.highlight-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.highlight-text-wrapper p {
+  font-family: 'Jost', sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0;
+}
+
+/* =========================================
+   SECTION 5 — IMAGE COLLAGE
+   ========================================= */
+.collage-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 24px;
+}
+
+.collage-item {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);
+}
+
+.collage-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1s ease;
+}
+
+.collage-item:hover img {
+  transform: scale(1.06);
+}
+
+/* Asymmetrical Layout rules */
+.collage-item.type-square {
+  grid-column: span 3;
+  aspect-ratio: 1 / 1;
+}
+
+.collage-item.type-portrait {
+  grid-column: span 3;
+  grid-row: span 2;
+  aspect-ratio: 3 / 4;
+}
+
+.collage-item.type-landscape {
+  grid-column: span 3;
+  aspect-ratio: 1.6 / 1;
+}
+
+/* Custom layout adjustment for the 3x2 collage grid spacing */
+.collage-grid .collage-item:nth-child(4) {
+  grid-column: span 2;
+  aspect-ratio: 1 / 1;
+}
+
+.collage-grid .collage-item:nth-child(5) {
+  grid-column: span 2;
+  aspect-ratio: 3 / 4;
+}
+
+.collage-grid .collage-item:nth-child(6) {
+  grid-column: span 2;
+  aspect-ratio: 1.6 / 1;
+}
+
+/* =========================================
+   SECTION 6 — EXPERIENCE
+   ========================================= */
+.experience-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.experience-image-wrapper {
+  aspect-ratio: 1.6 / 1;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+}
+
+.experience-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s ease;
+}
+
+.experience-image-wrapper:hover img {
+  transform: scale(1.05);
+}
+
+.experience-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.experience-para {
+  font-family: 'Jost', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: rgba(40, 69, 85, 0.85);
+  margin: 0;
+}
+
+/* =========================================
+   SECTION 7 — ABOUT ALIBAUG
+   ========================================= */
+.alibaug-section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: #284555;
+  margin-bottom: 40px;
+}
+
+.alibaug-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+.alibaug-text-columns {
+  column-count: 2;
+  column-gap: 48px;
+  text-align: justify;
+}
+
+.alibaug-text-columns p {
+  font-family: 'Jost', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgba(40, 69, 85, 0.85);
+  margin-bottom: 24px;
+  break-inside: avoid;
+}
+
+.alibaug-image-wrapper {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+}
+
+.alibaug-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s ease;
+}
+
+.alibaug-image-wrapper:hover img {
+  transform: scale(1.05);
+}
+
+/* =========================================
+   SECTION 8 — STATISTICS
+   ========================================= */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.stat-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0px;
+  background-color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.stat-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+  transition: transform 0.4s ease, background-color 0.4s ease;
+}
+
+.stat-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.stat-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem;
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: 10px;
+  transition: color 0.4s ease;
+}
+
+.stat-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  line-height: 1.4;
+  text-align: center;
+  transition: color 0.4s ease;
+}
+
+/* Stat card variants */
+.stat-card.type-yellow-outline {
+  border: 1.5px solid #fab312;
+}
+
+.stat-card.type-yellow-outline .stat-icon {
+  background-color: #fab312;
+  color: #ffffff;
+}
+
+.stat-card.type-yellow-outline .stat-number {
+  color: #1582B0;
+}
+
+.stat-card.type-yellow-outline .stat-label {
+  color: #284555;
+}
+
+.stat-card.type-blue-outline {
+  border: 1.5px solid #145ea0;
+}
+
+.stat-card.type-blue-outline .stat-icon {
+  background-color: #145ea0;
+  color: #ffffff;
+}
+
+.stat-card.type-blue-outline .stat-number {
+  color: #1582B0;
+}
+
+.stat-card.type-blue-outline .stat-label {
+  color: #284555;
+}
+
+.stat-card.type-blue-filled {
+  background-color: #145ea0;
+  border: 1.5px solid #145ea0;
+}
+
+.stat-card.type-blue-filled .stat-icon {
+  background-color: #fab312;
+  color: #ffffff;
+}
+
+.stat-card.type-blue-filled .stat-number {
+  color: #ffffff;
+}
+
+.stat-card.type-blue-filled .stat-label {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Wavy line decors on card hover / state */
+.stat-card::after {
+  content: "";
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 12px;
+  opacity: 0.35;
+  background-repeat: no-repeat;
+  background-size: contain;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.stat-card.type-yellow-outline::after {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 50 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 5 Q 6.25 1, 12.5 5 T 25 5 T 37.5 5 T 50 5' fill='none' stroke='%23145ea0' stroke-width='1.5'/%3E%3C/svg%3E");
+}
+
+.stat-card.type-blue-outline::after {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 50 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 5 Q 6.25 1, 12.5 5 T 25 5 T 37.5 5 T 50 5' fill='none' stroke='%23145ea0' stroke-width='1.5'/%3E%3C/svg%3E");
+}
+
+.stat-card.type-blue-filled::after {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 50 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 0 5 Q 6.25 1, 12.5 5 T 25 5 T 37.5 5 T 50 5' fill='none' stroke='white' stroke-width='1.5'/%3E%3C/svg%3E");
+}
+
+/* Hover effects */
+.stat-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(20, 94, 160, 0.12);
+}
+
+.stat-card:hover .stat-icon {
+  transform: scale(1.1);
+}
+
+.stat-card.type-blue-filled:hover {
+  background-color: #fab312;
+  border-color: #fab312;
+}
+
+.stat-card.type-blue-filled:hover .stat-icon {
+  background-color: #145ea0;
+}
+
+/* =========================================
+   Decorations: Sidebars, Waves, Dots, Shapes
+   ========================================= */
+
+/* Section headings specific overrides */
+#introduction .vertical-heading-col {
+  background-color: #fab312;
+  box-shadow: 0 8px 30px rgba(250, 179, 18, 0.1);
+}
+
+#story .vertical-heading-col {
+  background-color: #145ea0;
+  box-shadow: 0 8px 30px rgba(20, 94, 160, 0.1);
+}
+
+#collage .vertical-heading-col {
+  background-color: #fab312;
+  box-shadow: 0 8px 30px rgba(250, 179, 18, 0.1);
+}
+
+#experience .vertical-heading-col {
+  background-color: #145ea0;
+  box-shadow: 0 8px 30px rgba(20, 94, 160, 0.1);
+}
+
+#alibaug .vertical-heading-col {
+  background-color: #fab312;
+  box-shadow: 0 8px 30px rgba(250, 179, 18, 0.1);
+}
+
+#statistics .vertical-heading-col {
+  background-color: #145ea0;
+  box-shadow: 0 8px 30px rgba(20, 94, 160, 0.1);
+}
+
+/* Sidebar pattern overlays */
+.sidebar-pattern {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  pointer-events: none;
+  opacity: 0.8;
+  z-index: 1;
+}
+
+.sidebar-pattern.floral-pattern {
+  height: 110px;
+  bottom: 10px;
+}
+
+.sidebar-pattern.wave-pattern {
+  height: 60px;
+  bottom: 15px;
+}
+
+.sidebar-pattern svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Image background decors (Backdrop shapes & dot grids) */
+.decor-image-container {
+  position: relative;
+  padding: 0 24px 24px 24px;
+  /* leaves room for offsets */
+}
+
+.decor-image-inner {
+  position: relative;
+  z-index: 2;
+  border-radius: 0px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+}
+
+.decor-image-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.decor-photo-waves {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 90px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.decor-photo-wave {
+  width: 100%;
+  height: 8px;
+  display: block;
+  opacity: 0.95;
+  transition: transform 0.4s ease;
+}
+
+.decor-photo-wave.wave-yellow {
+  transform: translateX(4px);
+}
+
+.decor-photo-wave.wave-blue {
+  transform: translateX(-4px);
+}
+
+.decor-photo-wave.wave-orange {
+  transform: translateX(0px);
+}
+
+/* Subtle wave offset animation on hover */
+.decor-image-container:hover .decor-photo-wave.wave-yellow {
+  transform: translateX(8px);
+}
+
+.decor-image-container:hover .decor-photo-wave.wave-blue {
+  transform: translateX(-8px);
+}
+
+/* Minimal wave line text dividers */
+.minimal-wave-decor {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 25px;
+  width: 120px;
+}
+
+.minimal-wave-decor svg {
+  height: 8px;
+  width: 100%;
+  display: block;
+}
+
+.decor-wave-yellow {
+  transform: translateX(8px);
+}
+
+.decor-wave-blue {
+  transform: translateX(-8px);
+}
+
+/* Bottom double wave container transition */
+.bottom-double-wave {
+  width: 100%;
+  height: 90px;
+  position: relative;
+  margin-top: 80px;
+  margin-bottom: -1px;
+  /* masks scaling gaps */
+  overflow: hidden;
+}
+
+.bottom-double-wave svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* =========================================
+   SECTION 9 — FINAL FULLSCREEN BANNER
+   ========================================= */
+.final-banner {
+  position: relative;
+  height: 80vh;
+  /* Adjusted from 100vh since there is no background image to show off, keeping layout tight and premium */
+  min-height: 480px;
+  width: 100%;
+  background-color: #f6f5f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-top: 1px solid rgba(40, 69, 85, 0.05);
+  border-bottom: 1px solid rgba(40, 69, 85, 0.05);
+}
+
+.final-banner-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 32px;
+  color: #284555;
+}
+
+.decor-sharks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  /* spacing between sharks and title */
+  width: 100%;
+}
+
+.decor-sharks img {
+  width: 260px;
+  /* medium size, not too tiny, not too huge */
+  height: auto;
+  display: block;
+  opacity: 0.85;
+  /* sleek opacity */
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.decor-sharks:hover img {
+  transform: scale(1.05);
+  /* subtle interactive float */
+}
+
+.final-banner-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.5rem, 8vw, 8rem);
+  /* Matches 8rem on desktop, responsive down to 3.5rem */
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #1582B0 !important;
+  /* Exact color of resort-title */
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+.final-banner-subtitle {
+  font-family: 'Jost', sans-serif;
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  font-weight: 300;
+  letter-spacing: 0.25em;
+  color: #284555;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* =========================================
+   SECTION 10 — CTA
+   ========================================= */
+.about-cta {
+  background-color: #f6f5f4;
+  padding: 140px 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cta-container {
+  text-align: center;
+}
+
+.cta-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: #284555;
+  margin-bottom: 48px;
+}
+
+.cta-btn-wrapper {
+  display: inline-block;
+}
+
+/* Reused and adapted button style */
+.cta-book-btn {
+  position: static !important;
+  transform: none !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 220px !important;
+  height: 58px !important;
+  background-color: transparent !important;
+  color: #284555 !important;
+  border: 1.5px solid #284555 !important;
+  font-family: 'Jost', sans-serif !important;
+  font-size: 1.1rem !important;
+  font-weight: 400 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  transition: all 0.4s var(--transition-base) !important;
+  cursor: pointer;
+}
+
+.cta-book-btn:hover {
+  background-color: #284555 !important;
+  color: #ffffff !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 12px 30px rgba(40, 69, 85, 0.15);
+}
+
+/* =========================================
+   Intersection Observer Animations (Fade-Up)
+   ========================================= */
+/* Setup target initial states */
+.reveal-item,
+.reveal-child {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Target revealed states */
+.reveal-item.revealed,
+.reveal-child.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stronger dramatic animation for final banner title */
+.final-banner-content .final-banner-title {
+  transform: translateY(90px);
+  transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.final-banner-content.revealed .final-banner-title {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Ensure background is visible initially for lazy loading layout shifts */
+img[loading="lazy"] {
+  background-color: #edeae7;
+}
+
+/* =========================================
+   Responsive Adaptations (Media Queries)
+   ========================================= */
+
+@media (max-width: 1024px) {
+  .about-section {
+    gap: 40px;
+    padding: 100px 32px;
+    margin: 0 auto;
+  }
+
+  .intro-grid,
+  .story-grid,
+  .experience-grid,
+  .alibaug-grid {
+    gap: 40px;
+  }
+
+  .alibaug-text-columns {
+    column-gap: 32px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 900px) {
+  .about-section {
+    flex-direction: column;
+    margin: 0 auto;
+    gap: 32px;
+    padding: 60px 24px;
+  }
+
+  /* Transition vertical heading sidebar to horizontal block */
+  .vertical-heading-col {
+    width: 100%;
+    padding: 18px 24px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  }
+
+  .vertical-heading-col h2 {
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-size: 1.8rem;
+    white-space: normal;
+    text-align: center;
+    letter-spacing: 0.15em;
+  }
+
+  .intro-grid,
+  .story-grid,
+  .experience-grid,
+  .alibaug-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  /* Re-ordering alternating columns for stacked mobile view */
+  .story-grid .story-text-wrapper {
+    order: 2;
+  }
+
+  .story-grid .story-image-wrapper {
+    order: 1;
+    aspect-ratio: 16 / 10;
+    /* Change aspect ratio to fit screens better */
+  }
+
+  .intro-image-wrapper,
+  .alibaug-image-wrapper {
+    aspect-ratio: 16 / 10;
+  }
+
+  .alibaug-text-columns {
+    column-count: 1;
+  }
+
+  .collage-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .collage-item.type-square,
+  .collage-item.type-portrait,
+  .collage-item.type-landscape,
+  .collage-grid .collage-item:nth-child(4),
+  .collage-grid .collage-item:nth-child(5),
+  .collage-grid .collage-item:nth-child(6) {
+    grid-column: span 2;
+    aspect-ratio: 16 / 10;
+  }
+
+  .highlight-block {
+    padding: 80px 24px;
+    margin: 0 0 80px 0;
+  }
+
+  .highlight-title {
+    font-size: 2.8rem;
+  }
+
+  .about-cta {
+    padding: 100px 24px;
+  }
+
+  .cta-heading {
+    font-size: 2.8rem;
+    margin-bottom: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .stat-card {
+    padding: 32px 16px;
+  }
+
+  .about-hero-content {
+    left: 24px;
+    bottom: 24px;
+    padding-right: 24px;
+  }
+
+  .about-hero-title {
+    font-size: 2.6rem;
+  }
+
+  .highlight-title,
+  .alibaug-section-title,
+  .cta-heading {
+    font-size: 2.2rem;
+  }
+
+  .intro-lead {
+    font-size: 1.8rem;
+  }
+}

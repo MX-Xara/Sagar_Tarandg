@@ -1,32 +1,281 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dining & Menu | Sagar Tarang Beach Resort Alibaug</title>
+  <meta name="description"
+    content="Experience the finest coastal and multi-cuisine dining at Sagar Tarang Beach Resort. Savor fresh seafood and local delicacies near Nagaon Beach.">
 
-    <title>Food | Sagartarang Resort</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Jost:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css?v=1.2">
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="style.css?v=1.2">
+  <link rel="stylesheet" href="food.css?v=1.2">
 </head>
-<body>
 
-    <section class="food-page">
+<body class="food-body-page">
 
-    <div class="food-header">
-        <h1 class="food-title">FOOD</h1>
-        <p>Delight your taste buds with our culinary offerings</p>
+  <!-- Navbar -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <img class="logo-img" src="assets/ST-LOGO-1.webp" alt="Sagartarang Beach Resort logo">
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="about.html">About</a>
+        <a href="book.html">Rooms</a>
+
+        <a href="food.html" class="active">Dining</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="index.html#attractions">Events</a>
+        <a href="index.html#hotel">Restaurant</a>
+        <a href="book.html" target="_blank">Book Now</a>
+      </nav>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
+  </header>
 
-    <div class="food-gallery">
-
-        <img src="assets/food/food1.webp" alt="">
-        <img src="assets/food/food2.webp" alt="">
-        <img src="assets/food/food3.webp" alt="">
-        <img src="assets/food/food4.webp" alt="">
-
+  <!-- Hero Section -->
+  <section class="food-hero" id="hero">
+    <div class="food-hero-bg">
+      <img src="assets/food/food9.webp" alt="Sagar Tarang Dining Banner">
     </div>
+    <div class="food-hero-overlay"></div>
+    <div class="food-hero-content reveal-parent">
+      <span class="food-hero-label reveal-child">Culinary Delights</span>
+      <h1 class="food-hero-title reveal-child">Our Menu</h1>
+    </div>
+  </section>
 
-</section>
+  <!-- Menu Content Wrapper -->
+  <main class="menu-container">
 
+    <!-- =================================
+         SECTION 1 — OUR SPECIAL
+         ================================= -->
+    <section class="special-section reveal-parent">
+      <div class="special-header">
+        <span class="special-subtitle reveal-child">Chef's Signature Platters</span>
+        <h2 class="special-title reveal-child">Our Special</h2>
+      </div>
+
+      <div class="special-grid reveal-child">
+        <!-- Card 1: Konkani Special Thali -->
+        <div class="thali-card">
+          <div class="thali-img-wrapper">
+            <img src="assets/food/food9.webp" alt="Konkani Special Thali" loading="lazy">
+          </div>
+          <div class="thali-info">
+            <h3 class="thali-name">Konkani Special Thali</h3>
+            <p class="thali-desc">Authentic coastal feast featuring fresh fish fry, traditional curry, solkadhi, rice,
+              and hot bhakri.</p>
+            <span class="thali-price">₹450</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Malvani Thali -->
+        <div class="thali-card">
+          <div class="thali-img-wrapper">
+            <img src="assets/food/food7.webp" alt="Malvani Thali" loading="lazy">
+          </div>
+          <div class="thali-info">
+            <h3 class="thali-name">Malvani Thali</h3>
+            <p class="thali-desc">Fiery Malvani spiced curry with dry sukka, seasoned gravies, served with soft rice
+              bhakri.</p>
+            <span class="thali-price">₹480</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Maharashtrian Veg Thali -->
+        <div class="thali-card">
+          <div class="thali-img-wrapper">
+            <img src="assets/food/food2.webp" alt="Maharashtrian Veg Thali" loading="lazy">
+          </div>
+          <div class="thali-info">
+            <h3 class="thali-name">Maharashtrian Veg Thali</h3>
+            <p class="thali-desc">A wholesome traditional platter of seasonal vegetables, pithla, amti, chapati, rice,
+              and sweet modak.</p>
+            <span class="thali-price">₹280</span>
+          </div>
+        </div>
+
+        <!-- Card 4: Maharashtrian Special Thali -->
+        <div class="thali-card">
+          <div class="thali-img-wrapper">
+            <img src="assets/food/food3.webp" alt="Maharashtrian Special Thali" loading="lazy">
+          </div>
+          <div class="thali-info">
+            <h3 class="thali-name">Maharashtrian Special Thali</h3>
+            <p class="thali-desc">Deluxe vegetarian meal with multiple curries, starters, traditional flatbreads, kadhi,
+              and choice of dessert.</p>
+            <span class="thali-price">₹350</span>
+          </div>
+        </div>
+
+        <!-- Card 5: Konkan Coastal Thali -->
+        <div class="thali-card">
+          <div class="thali-img-wrapper">
+            <img src="assets/food/seefood.jpeg" alt="Konkan Coastal Thali" loading="lazy">
+          </div>
+          <div class="thali-info">
+            <h3 class="thali-name">Konkan Coastal Thali</h3>
+            <p class="thali-desc">A premium combination of surmai fry, crab masala, prawns gravy, steamed rice, and
+              solkadhi.</p>
+            <span class="thali-price">₹550</span>
+          </div>
+        </div>
+
+        <!-- Card 6: Alibag Special Thali -->
+        <div class="thali-card">
+          <div class="thali-img-wrapper">
+            <img src="assets/food/food6.webp" alt="Alibag Special Thali" loading="lazy">
+          </div>
+          <div class="thali-info">
+            <h3 class="thali-name">Alibag Special Thali</h3>
+            <p class="thali-desc">Local specialty featuring dry mutton sukka, chicken curry, wade, solkadhi, and
+              fragrant jeera rice.</p>
+            <span class="thali-price">₹490</span>
+          </div>
+        </div>
+
+        <!-- Card 7: Nagaon Beach Thali -->
+        <div class="thali-card">
+          <div class="thali-img-wrapper">
+            <img src="assets/food/food8.webp" alt="Nagaon Beach Thali" loading="lazy">
+          </div>
+          <div class="thali-info">
+            <h3 class="thali-name">Nagaon Beach Thali</h3>
+            <p class="thali-desc">Crispy pomfret fry, prawns masala, traditional fish curry, bhakri, rice, and Solkadhi.
+            </p>
+            <span class="thali-price">₹520</span>
+          </div>
+        </div>
+
+        <!-- Card 8: Sagar Tarang Special Thali -->
+        <div class="thali-card">
+          <div class="thali-img-wrapper">
+            <img src="assets/food/food1.webp" alt="Sagar Tarang Special Thali" loading="lazy">
+          </div>
+          <div class="thali-info">
+            <h3 class="thali-name">Sagar Tarang Special Thali</h3>
+            <p class="thali-desc">Our signature grand platter loaded with premium surmai fry, prawns curry, crab masala,
+              solkadhi, and wade.</p>
+            <span class="thali-price">₹590</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================
+         SECTION 1.5 — LAUGHTER / QUOTE SECTION
+         ================================= -->
+    <section class="quote-section reveal-parent">
+      <!-- Decorative Stickers placed randomly in empty spaces -->
+      <img src="assets/stickers/starfish.png" alt="Starfish Sticker" class="sticker starfish reveal-child"
+        loading="lazy">
+      <img src="assets/stickers/shell.png" alt="Shell Sticker" class="sticker shell reveal-child" loading="lazy">
+      <img src="assets/stickers/pronse.png" alt="Prawn Sticker" class="sticker prawns reveal-child" loading="lazy">
+      <img src="assets/stickers/juce.png" alt="Juice Sticker" class="sticker juice reveal-child" loading="lazy">
+      <img src="assets/stickers/chair.png" alt="Chair Sticker" class="sticker chair reveal-child" loading="lazy">
+      <img src="assets/stickers/flower.png" alt="Flower Sticker" class="sticker flower reveal-child" loading="lazy">
+      <img src="assets/stickers/baries.png" alt="Berries Sticker" class="sticker berries reveal-child" loading="lazy">
+
+      <div class="quote-container reveal-child">
+        <span class="quote-decorator">“</span>
+        <blockquote class="quote-text">
+          In Konkan, calories don't count. The sea breeze carries them away.
+        </blockquote>
+        <span class="quote-decorator">”</span>
+      </div>
+    </section>
+
+    <!-- =================================
+         SECTION 2 — CATEGORY NAV & SHOWCASE
+         ================================= -->
+    <section class="category-section reveal-parent">
+      <div class="category-header">
+        <span class="category-subtitle reveal-child">Browse Category-wise</span>
+        <h2 class="category-title reveal-child">Explore Our Menu</h2>
+      </div>
+
+      <nav class="category-nav reveal-child">
+        <button class="category-tab active" data-category="breakfast">Breakfast & Snacks</button>
+        <button class="category-tab" data-category="sides">Sides</button>
+        <button class="category-tab" data-category="veg-main">Veg Main Course</button>
+        <button class="category-tab" data-category="non-veg-main">Non-Veg Main Course</button>
+        <button class="category-tab" data-category="fried">Fried Delicacies</button>
+        <button class="category-tab" data-category="rice">Rice</button>
+        <button class="category-tab" data-category="desserts">Desserts</button>
+        <button class="category-tab" data-category="beverages">Beverages</button>
+      </nav>
+
+      <!-- Infinite ticker showcase -->
+      <div class="showcase-container reveal-child">
+        <!-- Row 1: Left to Right -->
+        <div class="marquee-row ltr-row">
+          <div class="marquee-track ltr-track" id="trackLtr">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+        <!-- Row 2: Right to Left -->
+        <div class="marquee-row rtl-row">
+          <div class="marquee-track rtl-track" id="trackRtl">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =================================
+       SECTION — FOOTER (Matching Index)
+       ================================= -->
+  <section class="page-6" id="page-6">
+    <div>
+      <img class="end-img" src="assets/end.webp" alt="Coastal Resort Beach">
+    </div>
+    <img class="end" src="assets/name.png" alt="Sagar Tarang Name Logo">
+
+    <div class="end-contact">
+      <p>
+        Near Nagaon Beach<br>
+        Alibag, Maharashtra<br>
+        India
+      </p>
+
+      <p>
+        ph +91 90110 87295
+      </p>
+
+      <p>
+        sagartarangbeachresort.com
+      </p>
+    </div>
+    <p class="copyright">
+      © Designed & Developed by Durga | All Rights Reserved
+    </p>
+
+    <a href="book.html" target="_blank" class="book-btn">
+      Book Now
+    </a>
+  </section>
+
+  <!-- JS Scripts -->
+  <script src="food.js"></script>
 </body>
+
 </html>
