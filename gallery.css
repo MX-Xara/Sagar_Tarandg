@@ -254,18 +254,25 @@
 }
 
 /* Hover Zoom & Outline Effects */
-.gallery-image:hover {
-  transform: scale(1.8); /* Scales wider vertical images up cleanly without screen overflow */
-  z-index: 1000; /* Elevates image to top stacking context */
-  outline: 6px solid var(--hover-color);
-  outline-offset: -6px; /* Inset outline to keep corners perfectly sharp */
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.55);
+@media (hover: hover) and (pointer: fine) {
+  .gallery-image:hover {
+    transform: scale(1.8); /* Scales wider vertical images up cleanly without screen overflow */
+    z-index: 1000; /* Elevates image to top stacking context */
+    outline: 6px solid var(--hover-color);
+    outline-offset: -6px; /* Inset outline to keep corners perfectly sharp */
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.55);
+  }
 }
 
 /* ==========================================================================
    Mobile/Tablet Responsive Adapting
    ========================================================================== */
 @media (max-width: 991px) {
+  .gallery-body-page {
+    height: auto;
+    overflow: visible;
+  }
+
   .gallery-split-layout {
     flex-direction: column;
     height: auto;
@@ -312,6 +319,7 @@
   
   .gallery-col {
     width: 42vw;
+    overflow: hidden;
   }
 }
 
@@ -320,9 +328,11 @@
     width: 44vw;
   }
   
-  .gallery-image:hover {
-    transform: scale(1.6);
-    outline-width: 4px;
-    outline-offset: -4px;
+  @media (hover: hover) and (pointer: fine) {
+    .gallery-image:hover {
+      transform: scale(1.6);
+      outline-width: 4px;
+      outline-offset: -4px;
+    }
   }
 }

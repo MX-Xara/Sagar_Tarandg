@@ -193,70 +193,83 @@ if (scrollBtn) {
 }
 
 
-/* PAGE 3 TIMELINE — only on desktop */
-if (window.matchMedia("(min-width: 769px)").matches) {
+/* PAGE 3 TIMELINE */
 
-const tl = gsap.timeline({
-  scrollTrigger: {
-    trigger: ".page-3",
-    start: "top top",
-    end: "+=3000",
-    scrub: 1.8,
-    pin: true
-  }
+let mm = gsap.matchMedia();
+
+mm.add("(min-width: 769px)", () => {
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".page-3",
+      start: "top top",
+      end: "+=3000",
+      scrub: 1.8,
+      pin: true
+    }
+  });
+
+  /* resort image comes from below */
+  tl.from(".resort-image-wrapper", {
+    y: 300,
+    opacity: 0,
+    duration: 1
+  });
+
+  /* title fades */
+  tl.to(".resort-title", {
+    opacity: 0,
+    y: -80,
+    duration: 1.2
+  });
+
+  tl.to(".resort-subtitle", {
+    opacity: 0,
+    y: -80,
+    duration: 1.2
+  });
+
+  /* image fullscreen */
+  tl.to(".resort-image-wrapper", {
+    width: "100vw",
+    height: "100vh",
+    borderRadius: "0px",
+    top: "0%",
+    duration: 1.5
+  });
+
+  /* horizontal scroll to pool */
+  tl.to(".horizontal-wrapper", {
+    x: "-300vw",
+    duration: 2
+  });
+
+  tl.to(".food-image", {
+    width: "70%",
+    height: "200px",
+    top: "28%",
+    left: "50%",
+    x: "-50%",
+    borderRadius: "0px",
+    duration: 1
+  });
 });
 
-/* resort image comes from below */
-tl.from(".resort-image-wrapper", {
-  y: 300,
-  opacity: 0,
-  duration: 1
+mm.add("(max-width: 768px)", () => {
+  const panels = [".resort-panel", ".pool-panel", ".beach-panel", ".food-panel"];
+  panels.forEach((panel) => {
+    gsap.from(panel, {
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      scrollTrigger: {
+        trigger: panel,
+        start: "top 80%",
+        toggleActions: "play none none reverse"
+      }
+    });
+  });
 });
 
-/* title fades */
-tl.to(".resort-title", {
-  opacity: 0,
-  y: -80,
-  duration: 1.2
-});
-
-tl.to(".resort-subtitle", {
-  opacity: 0,
-  y: -80,
-  duration: 1.2
-});
-
-/* image fullscreen */
-tl.to(".resort-image-wrapper", {
-  width: "100vw",
-  height: "100vh",
-  borderRadius: "0px",
-  top: "0%",
-  duration: 1.5
-});
-
-/* horizontal scroll to pool */
-tl.to(".horizontal-wrapper", {
-  x: "-300vw",
-  duration: 2
-});
-
-
-tl.to(".food-image", {
-  width: "70%",
-  height: "200px",
-
-  top: "28%",
-  left: "50%",
-
-  x: "-50%",
-
-  borderRadius: "0px",
-
-  duration: 1
-});
-
-} // end desktop-only block
 
 
 //aminities fade in
@@ -396,7 +409,9 @@ async function initCalendar() {
 
 
 
-document.getElementById("booking-modal-submit-btn").addEventListener("click", function () {
+const bookingSubmitBtn = document.getElementById("booking-modal-submit-btn");
+if (bookingSubmitBtn) {
+  bookingSubmitBtn.addEventListener("click", function () {
 
   // Grab form values up front, before Razorpay opens
   const name = document.getElementById('bookName').value;
@@ -473,4 +488,5 @@ document.getElementById("booking-modal-submit-btn").addEventListener("click", fu
 
   const rzp = new Razorpay(options);
   rzp.open();
-});
+  });
+}
