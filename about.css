@@ -6,7 +6,7 @@
 body.about-page {
   background-color: #f6f5f4;
   color: #284555;
-  font-family: 'Jost', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-weight: 400;
   /* Bolder general font weight */
   line-height: 1.7;
@@ -29,7 +29,7 @@ body.about-page p,
 .about-page h2,
 .about-page h3,
 .about-page h4 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'DM Serif Display', serif;
   color: #284555;
   font-weight: 400;
 }
@@ -71,22 +71,18 @@ body.about-page p,
   background-image: url('assets/about/fent.webp');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover; /* Stretches and fills full width and height */
-  
+  background-size: cover;
+  /* Stretches and fills full width and height */
+
   /* Mask/Clip reveal animation: keeps image 100% width and crops height by 40% top/bottom with sharp corners, expanding on scroll */
-  clip-path: inset(
-    calc(40% * (1 - var(--scroll-progress, 0)))
-    0%
-    calc(40% * (1 - var(--scroll-progress, 0)))
-    0%
-  );
-  
+  clip-path: inset(calc(40% * (1 - var(--scroll-progress, 0))) 0% calc(40% * (1 - var(--scroll-progress, 0))) 0%);
+
   /* ====================================================
      ADJUST TEXTURE VISIBILITY / OPACITY HERE
      Value can range from 0.0 (fully transparent) to 1.0 (fully opaque)
      Current setting is 0.22 (22% visibility) for a clear, elegant look.
      ==================================================== */
-  opacity: 0.70s;
+  opacity: 0.80;
 
   pointer-events: none;
   z-index: -1;
@@ -121,7 +117,7 @@ body.about-page p,
 }
 
 .vertical-heading-col h2 {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'DM Serif Display', serif;
   font-size: 2.2rem;
   font-weight: 300;
   text-transform: uppercase;
@@ -188,7 +184,7 @@ body.about-page p,
 }
 
 .about-hero-label {
-  font-family: 'Jost', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 13px;
   font-weight: 400;
   letter-spacing: 0.35em;
@@ -199,7 +195,7 @@ body.about-page p,
 }
 
 .about-hero-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'DM Serif Display', serif;
   font-size: clamp(3rem, 6.5vw, 6rem);
   font-weight: 300;
   line-height: 1.1;
@@ -209,7 +205,7 @@ body.about-page p,
 }
 
 .about-hero-subtitle {
-  font-family: 'Jost', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: clamp(1.1rem, 2vw, 1.5rem);
   font-weight: 300;
   letter-spacing: 0.05em;
@@ -244,7 +240,7 @@ body.about-page p,
 }
 
 .intro-lead {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'DM Serif Display', serif;
   font-size: 2.2rem;
   line-height: 1.35;
   color: #000000;
@@ -252,7 +248,7 @@ body.about-page p,
 }
 
 .intro-body {
-  font-family: 'Jost', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 1.1rem;
   color: rgba(0, 0, 0, 0.85);
   margin-bottom: 30px;
@@ -305,7 +301,7 @@ body.about-page p,
 }
 
 .story-para {
-  font-family: 'Jost', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 1.1rem;
   line-height: 1.8;
   color: rgba(40, 69, 85, 0.85);
@@ -377,7 +373,7 @@ body.about-page p,
 }
 
 .highlight-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'DM Serif Display', serif;
   font-size: 3.6rem;
   font-weight: 300;
   color: #ffffff !important;
@@ -393,7 +389,7 @@ body.about-page p,
 }
 
 .highlight-text-wrapper p {
-  font-family: 'Jost', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 1.2rem;
   line-height: 1.9;
   color: rgba(255, 255, 255, 0.95);
@@ -493,7 +489,7 @@ body.about-page p,
 }
 
 .experience-para {
-  font-family: 'Jost', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 1.1rem;
   line-height: 1.8;
   color: rgba(40, 69, 85, 0.85);
@@ -504,7 +500,7 @@ body.about-page p,
    SECTION 7 — ABOUT ALIBAUG
    ========================================= */
 .alibaug-section-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'DM Serif Display', serif;
   font-size: 3.5rem;
   font-weight: 300;
   color: #284555;
@@ -525,7 +521,7 @@ body.about-page p,
 }
 
 .alibaug-text-columns p {
-  font-family: 'Jost', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 1.05rem;
   line-height: 1.8;
   color: rgba(40, 69, 85, 0.85);
@@ -591,7 +587,7 @@ body.about-page p,
 }
 
 .stat-number {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'DM Serif Display', serif;
   font-size: 2.8rem;
   font-weight: 400;
   line-height: 1;
@@ -600,7 +596,7 @@ body.about-page p,
 }
 
 .stat-label {
-  font-family: 'Jost', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
   text-transform: uppercase;
@@ -926,7 +922,7 @@ body.about-page p,
 }
 
 .final-banner-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'DM Serif Display', serif;
   font-size: clamp(3.5rem, 8vw, 8rem);
   /* Matches 8rem on desktop, responsive down to 3.5rem */
   font-weight: 300;
@@ -939,7 +935,7 @@ body.about-page p,
 }
 
 .final-banner-subtitle {
-  font-family: 'Jost', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: clamp(1.1rem, 2vw, 1.6rem);
   font-weight: 300;
   letter-spacing: 0.25em;
@@ -964,7 +960,7 @@ body.about-page p,
 }
 
 .cta-heading {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'DM Serif Display', serif;
   font-size: 3.5rem;
   font-weight: 300;
   color: #284555;
@@ -987,7 +983,7 @@ body.about-page p,
   background-color: transparent !important;
   color: #284555 !important;
   border: 1.5px solid #284555 !important;
-  font-family: 'Jost', sans-serif !important;
+  font-family: 'Raleway', sans-serif !important;
   font-size: 1.1rem !important;
   font-weight: 400 !important;
   text-transform: uppercase;

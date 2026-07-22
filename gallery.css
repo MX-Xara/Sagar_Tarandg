@@ -6,7 +6,7 @@
 .gallery-body-page {
   background-color: #FAF6EF; /* brand cream background */
   color: #102531; /* brand dark blue */
-  font-family: 'Jost', sans-serif;
+  font-family: 'Raleway', sans-serif;
   margin: 0;
   padding: 0;
   height: 100vh;
@@ -120,7 +120,7 @@
 }
 
 .gallery-main-title {
-  font-family: 'Cormorant Garamond', serif; /* Cormorant Garamond */
+  font-family: 'DM Serif Display', serif; /* Cormorant Garamond */
   font-size: 64px;
   font-weight: 400;
   text-transform: uppercase;
@@ -140,7 +140,7 @@
 }
 
 .gallery-quote {
-  font-family: 'Jost', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 20px;
   font-weight: 300;
   line-height: 1.6;

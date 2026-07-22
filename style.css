@@ -11,11 +11,21 @@
   --color-charcoal: #2A2A2A;
   --color-gold: #C9A876;
 
-  --font-display: 'Cormorant Garamond', serif;
-  --font-body: 'Jost', sans-serif;
+  --font-display: 'DM Serif Display', serif;
+  --font-body: 'Raleway', sans-serif;
 
   --transition-base: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   --container-width: 1280px;
+}
+
+/* Excluded selectors to preserve original Jost font */
+.we-make, .the-best, .for-all, .since, .bottom-text {
+  font-family: 'Jost', sans-serif !important;
+}
+
+/* Apply display font to all headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
 }
 
 * {
@@ -1404,7 +1414,7 @@ img {
 
     color: rgba(255,255,255,0.9);
 
-    font-family: 'Jost', sans-serif;
+    font-family: 'Raleway', sans-serif;
 
     font-size: 1.35rem;
 
