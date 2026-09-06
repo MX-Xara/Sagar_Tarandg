@@ -8,7 +8,7 @@ body.hotel-page-body {
     min-height: 100vh;
     width: 100vw;
     overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-y: auto;
     background-color: var(--color-cream, #FAF6EF);
     position: relative;
 }
@@ -200,4 +200,495 @@ body.restaurant-active .navbar .nav-toggle span {
     transform-origin: center center;
     transform-style: preserve-3d;
     will-change: transform;
+}
+
+
+/* =========================================================
+   CUSTOM FONT IMPORT & DOOR SIDE TEXT
+   ========================================================= */
+
+@font-face {
+    font-family: "HotelFont";
+    src: url("fonts/font 1.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.door-side-text {
+    position: absolute;
+    top: 48%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 105;
+    pointer-events: none;
+    color: #8f211d;
+    font-family: "HotelFont", serif;
+    white-space: nowrap;
+}
+
+/* Symmetrical positioning relative to 50% door center axis */
+.door-side-left {
+    left: calc(50% - (min(106.96vh, 90vw) / 2 + 10vw));
+    transform: translate(-50%, -50%);
+}
+
+.door-side-right {
+    left: calc(50% + (min(106.96vh, 90vw) / 2 + 10vw));
+    transform: translate(-50%, -50%);
+}
+
+.side-text-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+}
+
+.side-text-content span {
+    font-family: "HotelFont", serif;
+    font-size: clamp(13px, 1.4vw, 20px);
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    line-height: 1.6;
+    color: #8f211d;
+}
+
+.side-text-content .word {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.side-text-content .char {
+    display: inline-block;
+    will-change: transform, opacity, filter;
+    backface-visibility: hidden;
+}
+
+.side-text-line {
+    width: 48px;
+    height: 1px;
+    background-color: #8f211d;
+    opacity: 0.65;
+    margin-top: 1.2rem;
+}
+
+.side-text-waves {
+    margin-top: 0.65rem;
+    width: 34px;
+    height: 10px;
+    opacity: 0.65;
+}
+
+@media (max-width: 1200px) {
+    .door-side-left {
+        left: calc(50% - (min(106.96vh, 90vw) / 2 + 8.5vw));
+    }
+    .door-side-right {
+        left: calc(50% + (min(106.96vh, 90vw) / 2 + 8.5vw));
+    }
+    .side-text-content span {
+        font-size: clamp(11px, 1.3vw, 16px);
+        letter-spacing: 0.2em;
+    }
+}
+
+@media (max-width: 768px) {
+    .door-side-left {
+        left: 14%;
+    }
+    .door-side-right {
+        left: 86%;
+    }
+    .side-text-content span {
+        font-size: clamp(9px, 1.8vw, 12px);
+        letter-spacing: 0.12em;
+    }
+    .side-text-line {
+        width: 32px;
+        margin-top: 0.8rem;
+    }
+    .side-text-waves {
+        width: 24px;
+        margin-top: 0.4rem;
+    }
+}
+
+
+/* =========================================================
+   POST-DOOR RESTAURANT CONTENT SECTION & PARALLAX IMAGE
+   ========================================================= */
+
+.restaurant-content-section {
+    position: relative;
+    z-index: 200;
+    width: 100%;
+    background-color: #eadcbf;
+    padding: 6rem 0 10rem 0;
+}
+
+.restaurant-content-container {
+    width: min(1180px, 90vw);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
+}
+
+/* Interior Image Container */
+.interior-image-card {
+    width: 100%;
+    height: clamp(400px, 68vh, 740px);
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.interior-image-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.interior-image {
+    width: 100%;
+    height: 135%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    filter: blur(20px);
+    opacity: 0;
+    transform: translateY(-12%);
+    will-change: transform, filter, opacity;
+}
+
+/* Reference Headline Block */
+.restaurant-headline-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    width: 100%;
+    padding-left: 0.5rem;
+}
+
+.headline-eyebrow {
+    font-family: "HotelFont", serif;
+    font-size: clamp(11px, 1.1vw, 15px);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #8f211d;
+    opacity: 0;
+    filter: blur(8px);
+    margin-bottom: 2rem;
+}
+
+.headline-title {
+    font-family: "HotelFont", serif;
+    font-size: clamp(38px, 6.2vw, 86px);
+    font-weight: normal;
+    line-height: 1.08;
+    letter-spacing: 0.04em;
+    color: #7b241c;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+}
+
+.headline-title span {
+    font-family: "HotelFont", serif;
+    color: #7b241c;
+    display: block;
+}
+
+.headline-title .word {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.headline-title .char {
+    display: inline-block;
+    will-change: transform, opacity, filter;
+    backface-visibility: hidden;
+}
+
+.headline-explore {
+    font-family: "HotelFont", serif;
+    font-size: clamp(11px, 1.1vw, 15px);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #8f211d;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    filter: blur(8px);
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.headline-explore:hover {
+    color: #102531;
+    transform: translateY(2px);
+}
+
+/* =========================================================
+   RESTAURANT INTERIOR IMAGE
+   Hidden initially — appears after door transition
+   ========================================================= */
+
+/* =========================================================
+   RESTAURANT INTERIOR — AFTER DOOR TRANSITION
+   ========================================================= */
+.restaurant-interior {
+    position: absolute;
+
+    width: 92vw;
+    height: 77vh;
+
+    left: 50%;
+    top: 16%;
+
+    transform: translate(-50%, -50%);
+
+    opacity: 0;
+
+    z-index: 150;
+
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.restaurant-interior img {
+    width: 100%;
+    height: 130%;
+    object-fit: cover;
+    display: block;
+    transform: translateY(-10%);
+    will-change: transform;
+}
+
+/* =========================================
+   RESTAURANT INTRO TEXT & LETTER ANIMATION
+   ========================================= */
+
+.restaurant-intro {
+    width: 100%;
+    min-height: 550px;
+    position: relative;
+    overflow: hidden;
+    background-color: #eadcbf;
+    padding: 6rem 0 4rem 0;
+}
+
+.restaurant-intro-content {
+    width: 92vw;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-left: 0;
+}
+
+.restaurant-intro-label {
+    font-family: "HotelFont", serif;
+    font-size: clamp(12px, 1.2vw, 15px);
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #8f211d;
+    margin-bottom: 1.5rem;
+}
+
+/* Shared word & char styles for blur-to-clear letter-by-letter drop animations */
+.restaurant-intro-label .word,
+.restaurant-intro-title .word,
+.reference-eyebrow .word,
+.reference-category .word,
+.reference-title .word,
+.reference-description .word {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.restaurant-intro-label .char,
+.restaurant-intro-title .char,
+.reference-eyebrow .char,
+.reference-category .char,
+.reference-title .char,
+.reference-description .char {
+    display: inline-block;
+    will-change: transform, opacity, filter;
+    backface-visibility: hidden;
+}
+
+.restaurant-intro-title {
+    margin: 0 0 2rem 0;
+    font-family: "HotelFont", serif;
+    font-size: clamp(55px, 5.8vw, 92px);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    color: #653d35;
+    text-transform: uppercase;
+}
+
+.restaurant-intro-explore {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "HotelFont", serif;
+    font-size: clamp(12px, 1.2vw, 15px);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #653d35;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.restaurant-intro-explore span {
+    font-size: 11px;
+}
+
+.restaurant-intro-explore:hover {
+    color: #8f211d;
+    transform: translateY(2px);
+}
+
+/* =========================================
+   REFERENCE SECTION (DESSERT SPECIALITY)
+   ========================================= */
+
+.reference-section {
+    width: 100%;
+    height: 120vh;
+    background-color: #eadcbf;
+    padding: 2rem 0 8rem 0;
+    position: relative;
+    z-index: 200;
+}
+
+.reference-container {
+    width: 92vw;
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4.5rem;
+    transform: translateY(200px);
+}
+
+@media (max-width: 992px) {
+    .reference-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3rem;
+    }
+}
+
+.reference-image-card {
+    width: clamp(350px, 34vw, 520px);
+    aspect-ratio: 2 / 3;
+    position: relative;
+    border: none;
+    border-radius: 0;
+    overflow: hidden;
+    background-color: transparent;
+    box-shadow: none;
+    flex-shrink: 0;
+    transform: translateX(-175px);
+}
+
+@media (max-width: 992px) {
+    .reference-image-card {
+        width: 100%;
+        max-width: 380px;
+    }
+}
+
+.reference-image-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reference-img {
+    width: 150%;
+    height: 66.6666%;
+    object-fit: contain;
+    transform: rotate(-90deg);
+    transform-origin: center center;
+    display: block;
+    will-change: transform;
+}
+
+.reference-text-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    max-width: 740px;
+}
+
+.reference-divider-line {
+    width: 48px;
+    height: 1.5px;
+    background-color: #8f211d;
+    margin-bottom: 1.8rem;
+    will-change: transform, opacity;
+}
+
+.reference-eyebrow {
+    font-family: "HotelFont", serif;
+    font-size: clamp(11px, 1vw, 13px);
+    font-weight: 400;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: #8f211d;
+    margin-bottom: 1.2rem;
+}
+
+.reference-category {
+    font-family: "HotelFont", serif;
+    font-size: clamp(12px, 1.1vw, 14px);
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #653d35;
+    margin-bottom: 0.6rem;
+}
+
+.reference-title {
+    margin: 0 0 1.5rem 0;
+    font-family: "HotelFont", serif;
+    font-size: clamp(26px, 3.4vw, 48px);
+    font-weight: 400;
+    line-height: 1.12;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #653d35;
+}
+
+.reference-description {
+    margin: 0;
+    font-family: "HotelFont", serif;
+    font-size: clamp(14px, 1.2vw, 17px);
+    font-weight: 400;
+    line-height: 1.7;
+    letter-spacing: 0.015em;
+    color: #653d35;
+    max-width: 680px;
 }

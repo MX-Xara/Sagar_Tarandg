@@ -16,7 +16,10 @@ const MIME_TYPES = {
   '.mp4': 'video/mp4',
   '.mp3': 'audio/mpeg',
   '.svg': 'image/svg+xml',
-  '.json': 'application/json'
+  '.json': 'application/json',
+  '.otf': 'font/otf',
+  '.woff': 'font/woff',
+  '.woff2': 'font/woff2'
 };
 
 const server = http.createServer((req, res) => {

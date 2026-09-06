@@ -53,20 +53,100 @@
 
         <!-- Decorative Split 3D Restaurant Door -->
         <div class="door-wrapper" id="doorWrapper">
+          <!-- Left side text -->
+          <div class="door-side-text door-side-left">
+            <div class="side-text-content">
+              <span>A Taste of the</span>
+              <span>Extraordinary</span>
+            </div>
+            <div class="side-text-line"></div>
+          </div>
+
           <div class="door-panel door-left" id="doorLeft">
             <img src="assets/hotel/door image.png" alt="Restaurant Door Left" class="door-img door-img-left">
           </div>
           <div class="door-panel door-right" id="doorRight">
             <img src="assets/hotel/door image.png" alt="Restaurant Door Right" class="door-img door-img-right">
           </div>
+
+          <!-- Right side text -->
+          <div class="door-side-text door-side-right">
+            <div class="side-text-content">
+              <span>Where Every Moment</span>
+              <span>is Savoured</span>
+            </div>
+            <div class="side-text-line"></div>
+            <svg class="side-text-waves" viewBox="0 0 40 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 3C6 1 10 5 14 3C18 1 22 5 26 3C30 1 34 5 38 3" stroke="#8f211d" stroke-width="1.2" stroke-linecap="round"/>
+              <path d="M2 8C6 6 10 10 14 8C18 6 22 10 26 8C30 6 34 10 38 8" stroke="#8f211d" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+          </div>
         </div>
+      </div>
+       <!-- Restaurant Interior Image -->
+      <div class="restaurant-interior" id="restaurantInterior">
+        <img src="assets/hotel/Food/interior/hotel_interior.png"
+     alt="The Sólt Project restaurant interior">
       </div>
     </div>
   </main>
 
+  <!-- Restaurant Introduction Section -->
+  <section class="restaurant-intro" id="restaurantIntro">
+
+    <div class="restaurant-intro-content">
+
+      <div class="restaurant-intro-label">
+        A LAID-BACK DINING EXPERIENCE
+      </div>
+
+      <h2 class="restaurant-intro-title">
+        GOOD FOOD<br>
+        SLOWER DAYS<br>
+        BRIGHTER<br>
+        TOMORROWS
+      </h2>
+
+      <a href="food.html" class="restaurant-intro-explore">
+        EXPLORE <span>↓</span>
+      </a>
+
+    </div>
+
+  </section>
+
+  <!-- Dessert Speciality Reference Section -->
+  <section class="reference-section" id="referenceSection">
+    <div class="reference-container">
+      
+      <!-- Left Image Column -->
+      <div class="reference-image-card" id="referenceImgCard">
+        <div class="reference-image-wrapper">
+          <img src="assets/food/desert/modal.webp" alt="Kokan's Tandalache Modak" class="reference-img" id="referenceImg">
+        </div>
+      </div>
+
+      <!-- Right Text Column -->
+      <div class="reference-text-content" id="referenceTextContent">
+        <div class="reference-divider-line" id="referenceLine"></div>
+        <div class="reference-eyebrow" id="referenceEyebrow">ALIBAUG, MAHARASHTRA</div>
+        <div class="reference-category" id="referenceCategory">Our Dessert Speciality</div>
+        <h2 class="reference-title" id="referenceTitle">Kokan’s Tandalache Modak</h2>
+        <p class="reference-description" id="referenceDesc">
+          A traditional Konkan delicacy made with a soft rice-flour covering and a rich filling of fresh coconut and jaggery. Steamed to perfection and served warm, our Tandalache Modak brings the authentic taste of the Konkan to your table.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
   <!-- GSAP Animation Library & ScrollTrigger Plugin -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <!-- Lenis Smooth Scroll -->
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.8/dist/lenis.min.js"></script>
+
 
   <!-- Restaurant Animation Script -->
   <script src="hotel.js?v=1.1"></script>
