@@ -1,0 +1,203 @@
+/* =========================================
+   Restaurant Page — The Sólt Project Styles
+   ========================================= */
+
+body.hotel-page-body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background-color: var(--color-cream, #FAF6EF);
+    position: relative;
+}
+
+body.hotel-page-body .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000;
+}
+
+/* Scroll transition section & pinned scene */
+.restaurant-transition {
+    position: relative;
+    width: 100%;
+    height: 220vh;
+}
+
+.pinned-scene {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 3D World layer */
+.restaurant-world {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    perspective: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    will-change: transform;
+    transform-origin: center center;
+}
+
+.restaurant-background {
+    position: absolute;
+    inset: 0;
+
+    background-image: url("assets/hotel/background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+    will-change: transform, opacity;
+    transform-origin: center center;
+}
+
+/* Soft milky white light glow */
+.portal-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+
+    background: radial-gradient(
+        ellipse at center,
+        rgba(255, 255, 255, 0.95) 0%,
+        rgba(255, 255, 255, 0.65) 25%,
+        rgba(255, 255, 255, 0.2) 55%,
+        rgba(255, 255, 255, 0) 75%
+    );
+
+    z-index: 50;
+    will-change: opacity;
+}
+
+/* =========================================================
+   DOOR CONTAINER & ALIGNMENT
+   
+   - HOW TO ADJUST DISTANCE FROM DOOR BOTTOM TO PAGE BOTTOM:
+     Change the 'bottom' value below (e.g. -14vh, -4.5vh, -10px, or 0)
+     to reduce/increase distance so bottom line of door artwork touches page bottom.
+
+   - HOW TO CHANGE POSITION OF THE DOOR LEFT / RIGHT:
+     Change the 'left' value below (e.g. 50% = center)
+   ========================================================= */
+.door-wrapper {
+    position: absolute;
+    bottom: -14vh;
+    left: 50%;
+    
+    z-index: 100;
+
+    width: min(106.96vh, 90vw);
+    height: calc(min(106.96vh, 90vw) / 1.0696);
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    pointer-events: none;
+    perspective: 1200px;
+    transform-style: preserve-3d;
+    will-change: transform, opacity;
+}
+
+@media (max-width: 768px) {
+    .door-wrapper {
+        bottom: -5vh;
+        width: 88vw;
+        height: calc(88vw / 1.0696);
+    }
+}
+
+.door-panel {
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    will-change: transform;
+}
+
+.door-left {
+    transform-origin: left center;
+}
+
+.door-right {
+    transform-origin: right center;
+}
+
+.door-img-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    object-fit: fill;
+    max-width: none;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.door-img-right {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    object-fit: fill;
+    max-width: none;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar text contrast on #eadcbf background */
+body.restaurant-active .navbar .nav-links a {
+    color: var(--color-ocean, #102531);
+}
+
+body.restaurant-active .navbar .nav-toggle span {
+    background-color: var(--color-ocean, #102531);
+}
+
+/* =========================================================
+   NAVBAR LOGO SIZES (SEPARATE SETTINGS FOR BOTH LOGOS)
+   ========================================================= */
+
+/* 1. Sagar Tarang Logo (Before Swap - Original Unchanged Size) */
+#navLogo {
+    width: 80px;
+    height: 80px;
+}
+
+/* 2. Restaurant Coconut Tree Logo - logo.png (After Swap) */
+#navLogo.restaurant-logo-swapped {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+/* Logo Rotation Helper */
+.logo-img {
+    transform-origin: center center;
+    transform-style: preserve-3d;
+    will-change: transform;
+}

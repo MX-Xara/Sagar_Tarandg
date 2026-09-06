@@ -1,0 +1,18 @@
+/* Remove default browser spacing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #F6F5F4;
+    min-height: 100vh;
+    font-family: "Poppins", sans-serif;
+}
+
+.events-banner {
+    width: 100%;
+    display: block;
+    height: auto;
+}

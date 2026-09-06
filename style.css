@@ -71,30 +71,26 @@ img {
   padding: 28px 0;
   transition: var(--transition-base);
   background: transparent;
+  border-bottom: none !important;
+  box-shadow: none !important;
 }
 
 .navbar.scrolled {
   padding: 8px 0;
   background: transparent;
- 
+  border-bottom: none !important;
+  box-shadow: none !important;
 }
 
 .nav-container {
-   
   height: 80px;
   max-width: 5000px;
-  margin-left: 40px;
   margin: 0 auto;
-  padding: 0 48px;
+  padding: 0 40px;
   display: flex;
   align-items: flex-start;
   padding-top: 20px;
   justify-content: space-between;
-  padding-left: 100px;
-  
-  
-  
-  
 }
 
 .logo {
@@ -103,16 +99,17 @@ img {
   gap: 12px;
   color: var(--color-cream);
   transition: color var(--transition-base);
-  
 }
 
+/* =========================================================
+   Navbar Logo (Sagar Tarang Logo)
+   ========================================================= */
 .logo-img {
   width: 80px;
   height: 80px;
   object-fit: contain;
   flex-shrink: 0;
-   transform: translateY(-20px);
-  
+  transform: translateY(-20px);
 }
 
 
@@ -1480,8 +1477,8 @@ img {
 /* Custom header adjustment for booking page */
 .book-navbar {
   background: #FAF6EF !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  padding: 12px 0 !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
 }
 
 .book-navbar .logo,

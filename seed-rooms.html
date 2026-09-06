@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sagartarang Room Setup</title>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0f4c5c, #1b7f8c);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            width: 400px;
+        }
+
+        h1 {
+            color: #0f4c5c;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #666;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 14px 25px;
+            border: none;
+            border-radius: 30px;
+            background: #0f4c5c;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #083944;
+            transform: translateY(-2px);
+        }
+
+        #status {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🏨 Sagartarang Room Setup</h1>
+
+        <p>
+            Create the 12 physical rooms in Firebase.
+        </p>
+
+        <button id="createRooms">
+            CREATE 12 ROOMS
+        </button>
+
+        <div id="status"></div>
+
+    </div>
+
+
+    <script>
+
+        // =========================================
+        // FIREBASE CONFIG
+        // =========================================
+
+        const firebaseConfig = {
+
+            apiKey: "AIzaSyBBLjsYQ9NfEbwHsAfgGyFoXaU3bx6UBC0",
+
+            authDomain: "sagar-tarang-booking.firebaseapp.com",
+
+            projectId: "sagar-tarang-booking",
+
+            storageBucket: "sagar-tarang-booking.firebasestorage.app",
+
+            messagingSenderId: "42559384671",
+
+            appId: "1:42559384671:web:dd676af15913b10b9f7fea"
+
+        };
+
+
+        // Initialize Firebase
+
+        firebase.initializeApp(firebaseConfig);
+
+
+        // Firestore database
+
+        const db = firebase.firestore();
+
+
+        // =========================================
+        // 12 PHYSICAL ROOMS
+        // =========================================
+
+        const rooms = [
+
+            // ---------- GARDEN FACING ----------
+
+            {
+                id: "G-01",
+                roomNumber: "G-01",
+                roomType: "Garden Facing",
+                variant: "Standard Garden Facing"
+            },
+
+            {
+                id: "G-02",
+                roomNumber: "G-02",
+                roomType: "Garden Facing",
+                variant: "Standard Garden Facing"
+            },
+
+            {
+                id: "G-03",
+                roomNumber: "G-03",
+                roomType: "Garden Facing",
+                variant: "Standard Garden Facing"
+            },
+
+            {
+                id: "G-04",
+                roomNumber: "G-04",
+                roomType: "Garden Facing",
+                variant: "AC Double Bed Garden Facing"
+            },
+
+
+            // ---------- EXECUTIVE DELUXE ----------
+
+            {
+                id: "ED-01",
+                roomNumber: "ED-01",
+                roomType: "Executive Deluxe",
+                variant: "Standard"
+            },
+
+            {
+                id: "ED-02",
+                roomNumber: "ED-02",
+                roomType: "Executive Deluxe",
+                variant: "Standard"
+            },
+
+            {
+                id: "ED-03",
+                roomNumber: "ED-03",
+                roomType: "Executive Deluxe",
+                variant: "Standard"
+            },
+
+            {
+                id: "ED-04",
+                roomNumber: "ED-04",
+                roomType: "Executive Deluxe",
+                variant: "Standard"
+            },
+
+
+            // ---------- SUPER DELUXE ----------
+
+            {
+                id: "SD-01",
+                roomNumber: "SD-01",
+                roomType: "Super Deluxe",
+                variant: "Standard"
+            },
+
+            {
+                id: "SD-02",
+                roomNumber: "SD-02",
+                roomType: "Super Deluxe",
+                variant: "Standard"
+            },
+
+
+            // ---------- SEA SIDE DELUXE ----------
+
+            {
+                id: "SS-01",
+                roomNumber: "SS-01",
+                roomType: "Sea Side Deluxe",
+                variant: "Standard"
+            },
+
+            {
+                id: "SS-02",
+                roomNumber: "SS-02",
+                roomType: "Sea Side Deluxe",
+                variant: "Standard"
+            }
+
+        ];
+
+
+        // =========================================
+        // CREATE ROOMS
+        // =========================================
+
+        document
+            .getElementById("createRooms")
+            .addEventListener("click", async () => {
+
+                const status =
+                    document.getElementById("status");
+
+                status.textContent =
+                    "⏳ Checking existing rooms...";
+
+
+                try {
+
+                    const batch = db.batch();
+
+                    let created = 0;
+
+                    let skipped = 0;
+
+
+                    for (const room of rooms) {
+
+                        const roomRef =
+                            db.collection("rooms")
+                                .doc(room.id);
+
+
+                        const existingRoom =
+                            await roomRef.get();
+
+
+                        // Room already exists
+
+                        if (existingRoom.exists) {
+
+                            console.log(
+                                `${room.id} already exists`
+                            );
+
+                            skipped++;
+
+                            continue;
+                        }
+
+
+                        // Create new room
+
+                        batch.set(roomRef, {
+
+                            roomNumber:
+                                room.roomNumber,
+
+                            roomType:
+                                room.roomType,
+
+                            variant:
+                                room.variant,
+
+                            active: true
+
+                        });
+
+
+                        created++;
+
+                    }
+
+
+                    // Commit new rooms
+
+                    if (created > 0) {
+
+                        await batch.commit();
+
+                    }
+
+
+                    status.textContent =
+                        `✅ Done! Created: ${created} | Already existed: ${skipped}`;
+
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    status.textContent =
+                        "❌ Error: " + error.message;
+
+                }
+
+            });
+
+    </script>
+
+</body>
+
+</html>

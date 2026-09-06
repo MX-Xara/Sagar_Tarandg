@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Sólt Project | Sagar Tarang Beach Resort Alibaug</title>
+  <meta name="description" content="Experience premium dining at The Sólt Project, Sagar Tarang Beach Resort Alibaug.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Serif+Display:ital@0;1&family=Jost:wght@300;400;500&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css?v=1.5">
+  <link rel="stylesheet" href="hotel.css?v=1.0">
+</head>
+
+<body class="hotel-page-body" id="hotelBody">
+
+  <!-- Navbar -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo" id="logoLink">
+        <img class="logo-img" id="navLogo" src="assets/ST-LOGO-1.webp" alt="Sagartarang Beach Resort logo">
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="food.html">Dining</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="events.html">Events</a>
+        <a href="hotel.html" class="active" id="restaurantNavBtn">Restaurant</a>
+        <a href="booking.html" target="_blank">Book Now</a>
+      </nav>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Restaurant Pinned Scroll Transition Section -->
+  <main class="restaurant-transition" id="restaurantTransition">
+    <div class="pinned-scene" id="pinnedScene">
+      <div class="restaurant-world" id="restaurantWorld">
+        <div class="restaurant-background"></div>
+        <div class="portal-glow" id="portalGlow"></div>
+
+        <!-- Decorative Split 3D Restaurant Door -->
+        <div class="door-wrapper" id="doorWrapper">
+          <div class="door-panel door-left" id="doorLeft">
+            <img src="assets/hotel/door image.png" alt="Restaurant Door Left" class="door-img door-img-left">
+          </div>
+          <div class="door-panel door-right" id="doorRight">
+            <img src="assets/hotel/door image.png" alt="Restaurant Door Right" class="door-img door-img-right">
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- GSAP Animation Library & ScrollTrigger Plugin -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <!-- Restaurant Animation Script -->
+  <script src="hotel.js?v=1.1"></script>
+</body>
+
+</html>

@@ -46,9 +46,9 @@
 .gallery-body-page .navbar.scrolled {
   background-color: rgba(16, 37, 49, 0.92); /* Translucent brand ocean deep on scroll */
   backdrop-filter: blur(10px);
-  padding: 12px 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  border-bottom: none;
+  padding: 8px 0;
+  box-shadow: none !important;
+  border-bottom: none !important;
 }
 
 /* Logo is kept at default style.css positioning and brand colors, no brightness override here! */
