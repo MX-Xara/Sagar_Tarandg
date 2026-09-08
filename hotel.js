@@ -56,6 +56,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!restaurantNavBtn || !navLogo || !doorWrapper || !restaurantBackground || !restaurantInterior) return;
 
+    // =========================================
+  // FULL SCREEN INTERIOR IMAGE REVEAL
+  // =========================================
+
+  const interiorRevealSection =
+    document.getElementById("interiorRevealSection");
+
+  const interiorRevealImage =
+    document.getElementById("interiorRevealImage");
+
+  if (interiorRevealSection && interiorRevealImage) {
+
+  gsap.fromTo(
+    interiorRevealImage,
+    {
+      clipPath: "inset(15% 15% 15% 15%)"
+    },
+    {
+      clipPath: "inset(0% 0% 0% 0%)",
+      ease: "none",
+
+      scrollTrigger: {
+        trigger: interiorRevealSection,
+        start: "top top",
+        end: "+=20%",
+        scrub: true,
+        pin: true,
+        anticipatePin: 1
+      }
+    }
+  );
+
+}
+
   // Helper function to split text in .door-side-text into individual .word and .char spans
   function prepareLetterAnimation() {
     const lineSpans = document.querySelectorAll(".door-side-text .side-text-content span");
@@ -336,6 +370,132 @@ document.addEventListener("DOMContentLoaded", () => {
         stagger: 0.012,
         ease: "power2.out"
       }, 0.3);
+    }
+
+    // 3. Philosophy Reference Section Animations
+    const philLabel = document.getElementById("philosophyLabel");
+    const philTitle = document.getElementById("philosophyTitle");
+    const philDesc = document.getElementById("philosophyDesc");
+    const philImgCard = document.getElementById("philosophyImgCard");
+
+    if (philLabel) splitTextIntoChars(philLabel);
+    if (philTitle) splitTextIntoChars(philTitle);
+    if (philDesc) splitTextIntoChars(philDesc);
+
+    const philChars = document.querySelectorAll("#philosophyTextContent .char");
+
+    if (philChars.length > 0) {
+      gsap.set(philChars, {
+        opacity: 0,
+        filter: "blur(14px)",
+        y: -24
+      });
+    }
+
+    if (philImgCard) {
+      gsap.set(philImgCard, {
+        opacity: 0,
+        y: 50,
+        filter: "blur(8px)"
+      });
+    }
+
+    const philTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#philosophySection",
+        start: "top 78%",
+        toggleActions: "play none none reverse"
+      }
+    });
+
+    if (philImgCard) {
+      philTl.to(philImgCard, {
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        duration: 0.9,
+        ease: "power2.out"
+      }, 0);
+    }
+
+    if (philChars.length > 0) {
+      philTl.to(philChars, {
+        opacity: 1,
+        filter: "blur(0px)",
+        y: 0,
+        duration: 0.65,
+        stagger: 0.012,
+        ease: "power2.out"
+      }, 0.2);
+    }
+
+    // 4. From The Kitchen (Coastal On A Plate) Section Animations
+    const kitLabel = document.getElementById("kitchenLabel");
+    const kitTitle = document.getElementById("kitchenTitle");
+    const kitSubtitle = document.getElementById("kitchenSubtitle");
+    const kitItem1Title = document.getElementById("kitchenItem1Title");
+    const kitItem1Desc = document.getElementById("kitchenItem1Desc");
+    const kitItem2Title = document.getElementById("kitchenItem2Title");
+    const kitItem2Desc = document.getElementById("kitchenItem2Desc");
+    const kitItem3Title = document.getElementById("kitchenItem3Title");
+    const kitItem3Desc = document.getElementById("kitchenItem3Desc");
+
+    const kitCards = [
+      document.getElementById("kitchenBigCard"),
+      document.getElementById("kitchenCardTop"),
+      document.getElementById("kitchenCardBottom")
+    ].filter(Boolean);
+
+    [kitLabel, kitTitle, kitSubtitle, kitItem1Title, kitItem1Desc, kitItem2Title, kitItem2Desc, kitItem3Title, kitItem3Desc].forEach((el) => {
+      if (el) splitTextIntoChars(el);
+    });
+
+    const kitChars = document.querySelectorAll("#kitchenSection .char");
+
+    if (kitChars.length > 0) {
+      gsap.set(kitChars, {
+        opacity: 0,
+        filter: "blur(14px)",
+        y: -24
+      });
+    }
+
+    if (kitCards.length > 0) {
+      gsap.set(kitCards, {
+        opacity: 0,
+        y: 40,
+        filter: "blur(8px)"
+      });
+    }
+
+    const kitTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#kitchenSection",
+        start: "top 78%",
+        toggleActions: "play none none reverse"
+      }
+    });
+
+    if (kitCards.length > 0) {
+      kitTl.to(kitCards, {
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        duration: 0.85,
+        stagger: 0.15,
+        ease: "power2.out"
+      }, 0);
+    }
+
+    if (kitChars.length > 0) {
+      kitTl.to(kitChars, {
+        opacity: 1,
+        filter: "blur(0px)",
+        y: 0,
+        duration: 0.6,
+        stagger: 0.008,
+        ease: "power2.out"
+      }, 0.15);
     }
   }
 
