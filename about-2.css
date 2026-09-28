@@ -1,0 +1,733 @@
+/* =========================================
+   ABOUT-2 PAGE
+   ========================================= */
+
+body.about-2-page {
+    background-color: #f6f5f4;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+/* =========================================
+   MAIN 100VH SECTION
+   ========================================= */
+
+.about-2-blank {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    background-color: #f6f5f4;
+    overflow: hidden;
+}
+
+
+/* =========================================
+   IMAGE
+   ========================================= */
+
+.about-2-image {
+    position: absolute;
+
+    /* -----------------------------------------
+       IMAGE SIZE
+       Change these values later to adjust size
+       ----------------------------------------- */
+    width: 1800px;
+    height: 500px;
+
+
+    /* -----------------------------------------
+       IMAGE LOCATION
+       These keep the image exactly centered
+       ----------------------------------------- */
+    left: 50%;
+    top: 41%;
+
+    transform: translate(-50%, 100vh);
+
+
+    /* -----------------------------------------
+       ENTRANCE ANIMATION
+       Image comes from below and stops at center
+       ----------------------------------------- */
+    animation: imageComeUp 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+
+
+/* =========================================
+   IMAGE ANIMATION
+   ========================================= */
+
+@keyframes imageComeUp {
+
+    from {
+        transform: translate(-50%, 100vh);
+    }
+
+    to {
+        transform: translate(-50%, -50%);
+    }
+
+}
+
+.about-2-page .nav-links a {
+    color: #284555;
+}
+
+/* =========================================
+   SECTION 2 — TYPOGRAPHY
+   ========================================= */
+
+.about-2-text-section {
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+
+    background-color: #f6f5f4;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   TEXT POSITION
+   ========================================= */
+
+.about-2-text-content {
+    width: 96%;
+    max-width: 1800px;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   BIG TYPOGRAPHY
+   ========================================= */
+
+.about-2-title {
+    font-family: 'DM Serif Display', serif;
+
+    font-size: clamp(2.5rem, 4vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.05;
+
+    color: #1582b0;
+
+    margin: 0 auto 28px;
+
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   SMALL BODY TEXT
+   ========================================= */
+
+.about-2-subtitle {
+    font-family: 'Raleway', sans-serif;
+
+    font-size: clamp(0.9rem, 1.3vw, 1.25rem);
+    font-weight: 400;
+    line-height: 1.7;
+
+    color: #e64723;
+
+    max-width: 1000px;
+    margin: 0 auto;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   LETTER ANIMATION
+   ========================================= */
+
+.about-2-title .letter,
+.about-2-subtitle .letter {
+
+    display: inline-block;
+
+    opacity: 0;
+
+    filter: blur(10px);
+
+    transform: translateY(25px);
+
+    transition:
+        opacity 0.7s ease,
+        filter 0.7s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* When animation starts */
+
+.about-2-title.animate .letter,
+.about-2-subtitle.animate .letter {
+
+    opacity: 1;
+
+    filter: blur(0);
+
+    transform: translateY(0);
+}
+
+/* =========================================
+   ABOUT US TEXT — BELOW IMAGE
+   ========================================= */
+
+.section-1-text-content {
+    position: absolute;
+
+    top: calc(41% + 250px + 40px);
+
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 96%;
+    max-width: 1800px;
+
+    text-align: center;
+
+}
+
+.about-2-subtitle .subtitle-line {
+    white-space: nowrap;
+}
+
+.about-2-label {
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #284555;
+
+    margin-bottom: 14px;
+    letter-spacing: 0.02em;
+}
+
+/* =========================================
+   ABOUT US LABEL ANIMATION
+   ========================================= */
+
+.about-2-label .letter {
+    display: inline-block;
+
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(20px);
+
+    transition:
+        opacity 0.7s ease,
+        filter 0.7s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.about-2-label.animate .letter {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   SECTION 3 — ASYMMETRIC FEATURE
+   ========================================= */
+
+.about-2-asymmetric-section {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #f6f5f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 4vw;
+    overflow: hidden;
+}
+
+.about-2-asymmetric-container {
+    width: 100%;
+    max-width: 1800px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6vw;
+}
+
+.about-2-asymmetric-image-wrapper {
+    flex: 0 0 38%;
+    max-width: 520px;
+    height: 72vh;
+    min-height: 480px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.about-2-asymmetric-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.about-2-asymmetric-content {
+    flex: 1;
+    max-width: 900px;
+    text-align: left;
+}
+
+.about-2-asymmetric-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 3.2vw, 3.8rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: #1582b0;
+    margin-bottom: 24px;
+    letter-spacing: 0.01em;
+}
+
+.about-2-asymmetric-subtitle {
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(1rem, 1.4vw, 1.3rem);
+    font-weight: 400;
+    line-height: 1.7;
+    color: #e64723;
+    margin-bottom: 20px;
+}
+
+.about-2-asymmetric-owner {
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(0.9rem, 1.1vw, 1.1rem);
+    font-weight: 500;
+    line-height: 1.6;
+    color: #284555;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+/* Letter animations for Section 3 */
+.about-2-asymmetric-title .letter,
+.about-2-asymmetric-subtitle .letter,
+.about-2-asymmetric-owner .letter {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(25px);
+    transition:
+        opacity 0.7s ease,
+        filter 0.7s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.about-2-asymmetric-title.animate .letter,
+.about-2-asymmetric-subtitle.animate .letter,
+.about-2-asymmetric-owner.animate .letter {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .about-2-asymmetric-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 40px;
+    }
+
+    .about-2-asymmetric-image-wrapper {
+        flex: none;
+        width: 100%;
+        max-width: 100%;
+        height: 50vh;
+        min-height: 320px;
+    }
+
+    .about-2-asymmetric-content {
+        max-width: 100%;
+    }
+}
+
+
+/* =========================================
+   SECTION 4 — ASYMMETRIC FEATURE (TEXT LEFT, IMAGE RIGHT)
+   ========================================= */
+
+.about-2-asymmetric-section-4 {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #fff3d6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 4vw;
+    overflow: hidden;
+}
+
+.about-2-asymmetric-container-4 {
+    width: 100%;
+    max-width: 1800px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6vw;
+}
+
+/* Left text content: controlled compact width like reference design */
+.about-2-asymmetric-content-4 {
+    flex: 0 0 45%;
+    max-width: 580px;
+    text-align: left;
+    margin-left: 300px;
+}
+
+.about-2-para-4 {
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(1rem, 1.35vw, 1.25rem);
+    font-weight: 400;
+    line-height: 1.8;
+    color: #e64723;
+    margin-bottom: 28px;
+    letter-spacing: 0.01em;
+
+    /* Whole paragraph animation (all lines together) */
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(30px);
+    transition:
+        opacity 0.8s ease,
+        filter 0.8s ease,
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.about-2-para-4:last-child {
+    margin-bottom: 0;
+}
+
+.about-2-para-4.animate {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+}
+
+/* Right image wrapper */
+.about-2-asymmetric-image-wrapper-4 {
+    flex: 0 0 38%;
+    max-width: 520px;
+    height: 75vh;
+    min-height: 480px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.about-2-asymmetric-image-4 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Responsive layout for Section 4 */
+@media (max-width: 992px) {
+    .about-2-asymmetric-container-4 {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 40px;
+    }
+
+    .about-2-asymmetric-content-4 {
+        flex: none;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .about-2-asymmetric-image-wrapper-4 {
+        flex: none;
+        width: 100%;
+        max-width: 100%;
+        height: 50vh;
+        min-height: 320px;
+    }
+}
+
+
+/* =========================================
+   SECTION 5 — 3-COLUMN FEATURE GRID
+   ========================================= */
+
+.about-2-grid-section-5 {
+    width: 100%;
+    min-height: auto;
+    background-color: #f6f5f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 4vw 20px;
+    overflow: hidden;
+}
+
+.about-2-grid-container-5 {
+    width: 100%;
+    max-width: 1800px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+.about-2-grid-card-5 {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+/* Header box above the image */
+.about-2-grid-header-5 {
+    margin-bottom: 24px;
+    min-height: 85px;
+    text-align: left;
+
+    /* Blur to clear fade-in animation (all at once) */
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(20px);
+    transition:
+        opacity 0.8s ease,
+        filter 0.8s ease,
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.about-2-grid-header-5.animate {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+}
+
+/* Blue title in DM Serif Display */
+.about-2-grid-title-5 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.4rem, 1.8vw, 2.2rem);
+    font-weight: 400;
+    line-height: 1.2;
+    color: #1582b0;
+    margin-bottom: 8px;
+    letter-spacing: 0.01em;
+}
+
+/* Orange subtitle in Raleway */
+.about-2-grid-subtitle-5 {
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(0.9rem, 1.05vw, 1.1rem);
+    font-weight: 400;
+    line-height: 1.5;
+    color: #e64723;
+}
+
+/* Image wrapper matching reference portrait aspect ratio */
+.about-2-grid-image-wrapper-5 {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* Image with no hover animation */
+.about-2-grid-image-5 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Responsive Grid layout */
+@media (max-width: 992px) {
+    .about-2-grid-container-5 {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .about-2-grid-header-5 {
+        min-height: auto;
+        margin-bottom: 16px;
+    }
+
+    .about-2-grid-image-wrapper-5 {
+        aspect-ratio: 4 / 5;
+    }
+}
+
+
+/* =========================================
+   SECTION 6 — CTA BANNER CARD
+   ========================================= */
+
+.about-2-card-section-6 {
+    width: 100%;
+    background-color: #f6f5f4;
+    padding: 18px 4vw 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.about-2-card-container-6 {
+    width: 100%;
+    max-width: 1800px;
+
+    /* -------------------------------------------------------------
+       1. HOW TO REDUCE THE HEIGHT OF THE CARD:
+       Decrease min-height, height, and max-height values below.
+       ------------------------------------------------------------- */
+    min-height: 280px;
+    height: 38vh;
+    max-height: 320px;
+
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+
+/* Background image inside rounded card */
+.about-2-card-bg-6 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* Text Content situated on top right corner */
+.about-2-card-content-6 {
+    position: relative;
+    z-index: 2;
+    padding: 30px 4vw 20px 2vw;
+
+    /* -------------------------------------------------------------
+       4. HOW TO SPREAD THE TEXT HORIZONTALLY:
+       Increase max-width below (e.g. 880px - 1000px or 65%).
+       This gives the text wide horizontal room so it stays on single/fewer lines.
+       ------------------------------------------------------------- */
+    max-width: 880px;
+    width: 62%;
+    text-align: right;
+
+    /* Entrance animation */
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(20px);
+    transition:
+        opacity 0.8s ease,
+        filter 0.8s ease,
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.about-2-card-content-6.animate {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+}
+
+/* Title: Black, DM Serif Display */
+.about-2-card-title-6 {
+    font-family: 'DM Serif Display', serif;
+
+    /* -------------------------------------------------------------
+       2. HOW TO REDUCE TITLE TEXT SIZE:
+       Decrease font-size values in clamp(min, preferred, max).
+       Current minimal size keeps title clean and horizontally spread.
+       ------------------------------------------------------------- */
+    font-size: clamp(1.3rem, 1.85vw, 2.2rem);
+    white-space: nowrap;
+
+    font-weight: 400;
+    line-height: 1.15;
+    color: #000000;
+    margin-bottom: 14px;
+    letter-spacing: 0.01em;
+}
+
+/* Subtitle text: White, Raleway */
+.about-2-card-text-6 {
+    font-family: 'Raleway', sans-serif;
+
+    /* -------------------------------------------------------------
+       2. HOW TO REDUCE BODY TEXT SIZE:
+       Decrease font-size values in clamp(min, preferred, max).
+       ------------------------------------------------------------- */
+    font-size: clamp(0.78rem, 0.92vw, 0.95rem);
+
+    font-weight: 400;
+    line-height: 1.6;
+    color: #ffffff;
+    margin-bottom: 22px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* -------------------------------------------------------------
+   3. HOW TO POSITION THE BOOK NOW BUTTON:
+   - Change text-align (left, center, right) on wrapper to move left/right.
+   - Adjust margin-top or margin-bottom to change vertical distance.
+   ------------------------------------------------------------- */
+.about-2-card-btn-wrapper-6 {
+    display: block;
+    text-align: right;
+    margin-top: 10px;
+}
+
+/* Glassmorphism translucent blurry button */
+.about-2-card-btn-6 {
+    display: inline-block;
+
+    /* Adjust padding to make button larger or smaller */
+    padding: 14px 34px;
+
+    background: rgba(255, 255, 255, 0.28);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease;
+}
+
+.about-2-card-btn-6:hover {
+    background: rgba(255, 255, 255, 0.42);
+    border: none;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* Responsive banner layout */
+@media (max-width: 992px) {
+    .about-2-card-container-6 {
+        height: auto;
+        min-height: 440px;
+        max-height: none;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .about-2-card-content-6 {
+        padding: 40px 6vw;
+        max-width: 100%;
+    }
+}

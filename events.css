@@ -8,11 +8,1152 @@
 body {
     background-color: #F6F5F4;
     min-height: 100vh;
-    font-family: "Poppins", sans-serif;
+    font-family: 'Raleway', "Poppins", sans-serif;
+}
+
+/* =========================================
+   EVENTS HERO SECTION
+   ========================================= */
+.events-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.events-hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.events-hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .events-banner {
     width: 100%;
     display: block;
     height: auto;
+}
+
+@media (max-width: 768px) {
+    .events-hero {
+        height: 100vh;
+    }
+}
+
+
+/* ================================
+   HERO TITLE
+================================ */
+
+.events-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.events-hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.events-hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+.hero-title {
+    position: absolute;
+    top: 20%;
+    left: 47%;
+
+    transform: translateX(-50%) scaleY(1.35);
+
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+
+    width: max-content;
+
+    white-space: nowrap;
+    z-index: 5;
+
+    color: #d17236;
+}
+
+/* SPECIAL S */
+.hero-s {
+    font-family: "Monsieur La Doulaise", cursive;
+    font-size: clamp(150px, 18vw, 300px);
+    font-weight: 400;
+    line-height: 0.6;
+
+    position: relative;
+    z-index: 2;
+    color: #f2b675;
+}
+
+/* AGARTARANG */
+.hero-rest {
+    font-family: "Baskervville", serif;
+    font-size: clamp(90px, 12vw, 220px);
+    font-weight: 400;
+
+    line-height: 0.8;
+
+    /* control spacing */
+    letter-spacing: -0.055em;
+
+    margin-left: -35px;
+
+    /* FORCE THE WORD TO SPAN THE SCREEN */
+    transform: scaleX(1.06);
+    transform-origin: left center;
+
+    white-space: nowrap;
+
+    text-shadow:
+        0 0 6px rgba(255, 243, 199, 0.35),
+        0 0 14px rgba(255, 243, 199, 0.18);
+}
+
+/* =========================================
+   HERO TICKET
+========================================= */
+
+
+/* =========================================
+   HERO TICKET
+========================================= */
+
+.hero-ticket {
+    position: absolute;
+
+    top: 30%;
+    left: 53%;
+
+    width: 180px;
+    height: 100px;
+
+    background: #7e5d43;
+
+    transform: translate(-50%, -50%) rotate(8deg);
+    transform-origin: center center;
+
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /*
+    ========================================
+    LEFT + RIGHT TICKET CUTOUTS
+    5 semicircles on each side
+    Middle one is larger
+    ========================================
+    */
+
+    -webkit-mask:
+        /* LEFT - small 1 */
+        radial-gradient(circle at 0 10px,
+            transparent 0 6px,
+            #000 6.5px),
+
+        /* LEFT - small 2 */
+        radial-gradient(circle at 0 29px,
+            transparent 0 6px,
+            #000 6.5px),
+
+        /* LEFT - BIG MIDDLE */
+        radial-gradient(circle at 0 50px,
+            transparent 0 9px,
+            #000 9.5px),
+
+        /* LEFT - small 4 */
+        radial-gradient(circle at 0 71px,
+            transparent 0 6px,
+            #000 6.5px),
+
+        /* LEFT - small 5 */
+        radial-gradient(circle at 0 90px,
+            transparent 0 6px,
+            #000 6.5px),
+
+        /* RIGHT - small 1 */
+        radial-gradient(circle at 100% 10px,
+            transparent 0 6px,
+            #000 6.5px),
+
+        /* RIGHT - small 2 */
+        radial-gradient(circle at 100% 29px,
+            transparent 0 6px,
+            #000 6.5px),
+
+        /* RIGHT - BIG MIDDLE */
+        radial-gradient(circle at 100% 50px,
+            transparent 0 9px,
+            #000 9.5px),
+
+        /* RIGHT - small 4 */
+        radial-gradient(circle at 100% 71px,
+            transparent 0 6px,
+            #000 6.5px),
+
+        /* RIGHT - small 5 */
+        radial-gradient(circle at 100% 90px,
+            transparent 0 6px,
+            #000 6.5px);
+
+    -webkit-mask-composite: source-in;
+
+    mask:
+        radial-gradient(circle at 0 10px,
+            transparent 0 6px,
+            #000 6.5px),
+        radial-gradient(circle at 0 29px,
+            transparent 0 6px,
+            #000 6.5px),
+        radial-gradient(circle at 0 50px,
+            transparent 0 9px,
+            #000 9.5px),
+        radial-gradient(circle at 0 71px,
+            transparent 0 6px,
+            #000 6.5px),
+        radial-gradient(circle at 0 90px,
+            transparent 0 6px,
+            #000 6.5px),
+        radial-gradient(circle at 100% 10px,
+            transparent 0 6px,
+            #000 6.5px),
+        radial-gradient(circle at 100% 29px,
+            transparent 0 6px,
+            #000 6.5px),
+        radial-gradient(circle at 100% 50px,
+            transparent 0 9px,
+            #000 9.5px),
+        radial-gradient(circle at 100% 71px,
+            transparent 0 6px,
+            #000 6.5px),
+        radial-gradient(circle at 100% 90px,
+            transparent 0 6px,
+            #000 6.5px);
+
+    mask-composite: intersect;
+}
+
+
+/* =========================================
+   TICKET SEMICIRCLES
+   5 CUTS PER SIDE
+========================================= */
+
+.hero-ticket::before,
+.hero-ticket::after {
+    content: "";
+    position: absolute;
+
+    top: 0;
+    width: 14px;
+    height: 100%;
+
+    z-index: 3;
+
+    background-repeat: no-repeat;
+
+    /*
+       5 semicircles:
+       small
+       small
+       BIG
+       small
+       small
+    */
+
+    background-size:
+        14px 14px,
+        14px 14px,
+        20px 20px,
+        14px 14px,
+        14px 14px;
+
+    background-position:
+        center 8px,
+        center 27px,
+        center 40px,
+        center 66px,
+        center 82px;
+
+    background-image:
+        radial-gradient(circle at 0% 50%,
+            transparent 0 6px,
+            #f04a23 6.5px);
+}
+
+
+/* LEFT EDGE */
+.hero-ticket::before {
+    left: 0;
+
+    background-image:
+        radial-gradient(circle at 0% 50%,
+            #f04a23 0 6px,
+            transparent 6.5px),
+        radial-gradient(circle at 0% 50%,
+            #f04a23 0 6px,
+            transparent 6.5px),
+        radial-gradient(circle at 0% 50%,
+            #f04a23 0 9px,
+            transparent 9.5px),
+        radial-gradient(circle at 0% 50%,
+            #f04a23 0 6px,
+            transparent 6.5px),
+        radial-gradient(circle at 0% 50%,
+            #f04a23 0 6px,
+            transparent 6.5px);
+
+    background-size:
+        14px 14px,
+        14px 14px,
+        20px 20px,
+        14px 14px,
+        14px 14px;
+
+    background-position:
+        0 8px,
+        0 27px,
+        0 40px,
+        0 66px,
+        0 82px;
+}
+
+
+/* RIGHT EDGE */
+.hero-ticket::after {
+    right: 0;
+
+    background-image:
+        radial-gradient(circle at 100% 50%,
+            #f04a23 0 6px,
+            transparent 6.5px),
+        radial-gradient(circle at 100% 50%,
+            #f04a23 0 6px,
+            transparent 6.5px),
+        radial-gradient(circle at 100% 50%,
+            #f04a23 0 9px,
+            transparent 9.5px),
+        radial-gradient(circle at 100% 50%,
+            #f04a23 0 6px,
+            transparent 6.5px),
+        radial-gradient(circle at 100% 50%,
+            #f04a23 0 6px,
+            transparent 6.5px);
+
+    background-size:
+        14px 14px,
+        14px 14px,
+        20px 20px,
+        14px 14px,
+        14px 14px;
+
+    background-position:
+        0 8px,
+        0 27px,
+        0 40px,
+        0 66px,
+        0 82px;
+}
+
+
+/* =========================================
+   TICKET TEXT
+========================================= */
+
+.ticket-content {
+    position: relative;
+    z-index: 5;
+
+    width: 100%;
+    text-align: center;
+
+    color: #fff3c7;
+    font-family: "Baskervville", serif;
+
+    line-height: 1;
+}
+
+/* WELCOME TO */
+.ticket-welcome {
+    font-size: 18px;
+    white-space: nowrap;
+    transform: scaleY(1.56);
+    transform-origin: center;
+    margin-bottom: 33px;
+}
+
+/* SAGAR TARANG */
+.ticket-name {
+    font-size: 13px;
+    margin-top: 3px;
+    white-space: nowrap;
+}
+
+/* SECOND LINE */
+.ticket-content span {
+    display: block;
+
+    font-size: 11px;
+    margin-top: 6px;
+}
+
+
+/* =========================================
+   HORIZONTAL DASHED DIVIDER
+========================================= */
+
+.ticket-divider {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    top: 50%;
+
+    width: 100%;
+
+    border: 0;
+    border-top: 1px dashed #fff3c7;
+
+    margin: 0;
+
+    z-index: 6;
+}
+
+/* =========================================
+   HERO INFO TEXT
+========================================= */
+
+.hero-info {
+    position: absolute;
+
+    left: 2%;
+    right: 2%;
+    bottom: 46%;
+
+    display: grid;
+    grid-template-columns: 1fr auto 1.6fr;
+    align-items: start;
+
+    column-gap: 8vw;
+
+    z-index: 5;
+
+    color: #937b60;
+
+    font-family: "Raleway", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+}
+
+/* LEFT */
+.info-left {
+    text-align: left;
+}
+
+/* CENTER */
+.info-center {
+    transform: translateX(300px);
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* RIGHT */
+.info-right {
+    transform: translateX(600px);
+
+    text-align: left;
+}
+
+/* =========================================
+   EVENTS IMAGE REVEAL
+   ========================================= */
+.events-image-reveal {
+    position: absolute;
+
+    top: 17%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+
+    /* CONTROL THE SHAPE HERE */
+    width: 26vw;
+    height: 75vh;
+
+    max-width: 900px;
+    min-width: 300px;
+
+    overflow: hidden;
+
+    z-index: 15;
+}
+
+.events-image-reveal img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .events-image-reveal {
+        width: 88vw;
+        border-radius: 0;
+    }
+
+    .events-image-reveal img {
+        border-radius: 0;
+    }
+}
+
+/* =========================================
+   REVEAL TEXT CONTAINER (BESIDE IMAGE)
+   ========================================= */
+.reveal-text-container {
+    position: absolute;
+    top: 50%;
+    left: 37%;
+    transform: translateY(-50%);
+    width: 55vw;
+    max-width: 780px;
+    z-index: 16;
+    opacity: 0;
+    /* Animated via GSAP */
+}
+
+.reveal-heading {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(38px, 4.2vw, 75px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: #24201c;
+    margin-bottom: 24px;
+    letter-spacing: -0.015em;
+}
+
+.reveal-body {
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(14px, 1.1vw, 17px);
+    font-weight: 400;
+    line-height: 1.65;
+    color: #4a443f;
+    max-width: 540px;
+    letter-spacing: 0.01em;
+}
+
+@media (max-width: 768px) {
+    .reveal-text-container {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        width: 100%;
+        padding: 20px;
+        margin-top: 20px;
+    }
+}
+
+
+/* =========================================
+   EVENTS HORIZONTAL SECTION
+========================================= */
+
+.events-showcase {
+
+    /* ================================
+       SECTION BACKGROUND
+       Change background here
+    ================================= */
+
+    background: #f3e1c8;
+
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   HORIZONTAL TRACK
+
+   DO NOT CHANGE THIS
+========================================= */
+
+.events-horizontal {
+
+    display: flex;
+
+    width: max-content;
+    height: 100%;
+
+    will-change: transform;
+}
+
+
+/* =========================================
+   EACH EVENT PANEL
+
+   Each event gets one full screen.
+========================================= */
+
+.event-panel {
+
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   =========================================================
+                  IMAGE CONTROLS
+   =========================================================
+   ========================================================= */
+
+
+/* =========================================
+   DEFAULT IMAGE
+========================================= */
+
+.event-image {
+
+    position: absolute;
+
+    overflow: hidden;
+
+    /* -------------------------------------
+       ✏️ IMAGE POSITION
+
+       Change these values to move the image.
+
+       left: 10%   → move left
+       left: 50%   → move right
+
+       top: 10%    → move upward
+       top: 50%    → move downward
+    ------------------------------------- */
+
+    left: 7%;
+    top: 15%;
+
+
+    /* -------------------------------------
+       ✏️ IMAGE SIZE
+
+       Change these to control image size.
+
+       width  = horizontal size
+       height = vertical size
+    ------------------------------------- */
+
+    width: 38vw;
+    height: 70vh;
+
+
+    /* -------------------------------------
+       ✏️ IMAGE CORNERS
+
+       0px = sharp
+       20px = rounded
+    ------------------------------------- */
+
+    border-radius: 0;
+}
+
+
+/* =========================================
+   IMAGE ITSELF
+
+   Don't change unless you want
+   different image cropping.
+========================================= */
+
+.event-image img {
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   INDIVIDUAL IMAGE POSITION CONTROLS
+   =========================================================
+
+   You can control EVERY image separately.
+
+========================================================= */
+
+
+/* WEDDING IMAGE */
+
+.wedding-image {
+
+    /* ✏️ CHANGE WEDDING IMAGE POSITION */
+    left: 7%;
+    top: 15%;
+
+    /* ✏️ CHANGE WEDDING IMAGE SIZE */
+    width: 38vw;
+    height: 70vh;
+}
+
+
+/* BIRTHDAY IMAGE */
+
+.birthday-image {
+
+    /* ✏️ CHANGE BIRTHDAY IMAGE POSITION */
+    left: 8%;
+    top: 15%;
+
+    /* ✏️ CHANGE BIRTHDAY IMAGE SIZE */
+    width: 38vw;
+    height: 70vh;
+}
+
+
+/* PRIVATE PARTY IMAGE */
+
+.private-image {
+
+    /* ✏️ CHANGE PRIVATE PARTY IMAGE POSITION */
+    left: 7%;
+    top: 15%;
+
+    /* ✏️ CHANGE PRIVATE PARTY IMAGE SIZE */
+    width: 38vw;
+    height: 70vh;
+}
+
+
+/* CORPORATE IMAGE */
+
+.corporate-image {
+
+    /* ✏️ CHANGE CORPORATE IMAGE POSITION */
+    left: 7%;
+    top: 15%;
+
+    /* ✏️ CHANGE CORPORATE IMAGE SIZE */
+    width: 38vw;
+    height: 70vh;
+}
+
+
+/* ENGAGEMENT IMAGE */
+
+.engagement-image {
+
+    /* ✏️ CHANGE ENGAGEMENT IMAGE POSITION */
+    left: 7%;
+    top: 15%;
+
+    /* ✏️ CHANGE ENGAGEMENT IMAGE SIZE */
+    width: 38vw;
+    height: 70vh;
+}
+
+
+
+/* =========================================================
+   =========================================================
+                       TEXT
+   =========================================================
+   ========================================================= */
+
+
+/* =========================================
+   DEFAULT TEXT CONTAINER
+========================================= */
+
+.event-copy {
+
+    position: absolute;
+
+
+    /* -------------------------------------
+       ✏️ TEXT POSITION
+
+       left controls left/right
+       top controls up/down
+    ------------------------------------- */
+
+    left: 52%;
+    top: 25%;
+
+
+    /* -------------------------------------
+       ✏️ TEXT WIDTH
+    ------------------------------------- */
+
+    width: 35vw;
+
+    color: #30251d;
+}
+
+
+/* =========================================
+   NUMBER
+========================================= */
+
+.event-number {
+
+    display: block;
+
+    /* ✏️ NUMBER SIZE */
+    font-size: 13px;
+
+    letter-spacing: 0.2em;
+
+    color: #8d6d4f;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.event-copy h2 {
+
+    /* ✏️ HEADING SIZE */
+    font-family: "Baskervville", serif;
+
+    font-size: clamp(60px, 6vw, 105px);
+    color: #d17236;
+
+    font-weight: 400;
+
+    /* ✏️ HEADING LINE HEIGHT */
+    line-height: 0.9;
+
+    margin: 0 0 35px;
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.event-copy p {
+
+    /* ✏️ DESCRIPTION SIZE */
+    font-family: "Raleway", sans-serif;
+
+    font-size: 16px;
+
+    /* ✏️ DESCRIPTION LINE HEIGHT */
+    line-height: 1.7;
+
+    /* ✏️ DESCRIPTION WIDTH */
+    max-width: 430px;
+
+    color: #6f5d4c;
+
+    margin-bottom: 35px;
+}
+
+
+/* =========================================
+   SMALL BOTTOM TEXT
+========================================= */
+
+.event-location {
+
+    /* ✏️ SMALL TEXT SIZE */
+    font-size: 11px;
+
+    letter-spacing: 0.18em;
+
+    color: #927456;
+}
+
+
+/* =========================================================
+   INDIVIDUAL TEXT POSITION CONTROLS
+   ========================================================= */
+
+
+/* WEDDING TEXT */
+
+.wedding-copy {
+
+    /* ✏️ MOVE WEDDING TEXT */
+    left: 52%;
+    top: 25%;
+}
+
+
+/* BIRTHDAY TEXT */
+
+.birthday-copy {
+
+    /* ✏️ MOVE BIRTHDAY TEXT */
+    left: 52%;
+    top: 25%;
+}
+
+
+/* PRIVATE PARTY TEXT */
+
+.private-copy {
+
+    /* ✏️ MOVE PRIVATE PARTY TEXT */
+    left: 52%;
+    top: 25%;
+}
+
+
+/* CORPORATE TEXT */
+
+.corporate-copy {
+
+    /* ✏️ MOVE CORPORATE TEXT */
+    left: 52%;
+    top: 25%;
+}
+
+
+/* ENGAGEMENT TEXT */
+
+.engagement-copy {
+
+    /* ✏️ MOVE ENGAGEMENT TEXT */
+    left: 52%;
+    top: 25%;
+}
+
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .events-showcase {
+        height: auto;
+        overflow: visible;
+    }
+
+    .events-horizontal {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .event-panel {
+
+        width: 100%;
+        height: auto;
+
+        min-height: 100vh;
+
+        padding: 60px 25px;
+    }
+
+    .event-image {
+
+        position: relative;
+
+        left: auto;
+        top: auto;
+
+        width: 85vw;
+        height: 60vh;
+
+        margin: 0 auto 45px;
+    }
+
+    .event-copy {
+
+        position: relative;
+
+        left: auto;
+        top: auto;
+
+        width: 85vw;
+
+        margin: 0 auto;
+    }
+
+}
+
+
+/* =========================================
+   PLAN YOUR EVENT SECTION
+========================================= */
+
+.plan-event-section {
+    width: 100%;
+    height: 100vh;
+
+    background: #f3e1c8;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.plan-event-content {
+
+    /* ✏️ CHANGE OVERALL CONTENT WIDTH HERE */
+
+    width: 800px;
+
+    /* ✏️ MOVE THE WHOLE CONTENT UP/DOWN HERE */
+
+    transform: translateY(-20px);
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.plan-event-content h2 {
+    font-family: "DM Serif Display", serif;
+    font-size: clamp(65px, 7vw, 110px);
+    font-weight: 400;
+    line-height: 0.9;
+    color: #243f49;
+    margin: 0 0 28px;
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   BODY TEXT
+========================================= */
+
+.plan-event-content p {
+
+    /* ✏️ BODY FONT */
+
+    font-family: "Raleway", sans-serif;
+
+    /* ✏️ BODY SIZE */
+
+    font-size: 14px;
+
+    font-weight: 400;
+
+    line-height: 1.6;
+
+    color: #6f6256;
+
+    /* ✏️ BODY WIDTH */
+
+    max-width: 350px;
+
+    margin: 0 auto 28px;
+}
+
+
+/* =========================================
+   PLAN EVENT BUTTONS
+========================================= */
+
+.plan-event-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 5px;
+}
+
+.plan-event-btn {
+    width: 135px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+
+    font-family: "Raleway", sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+
+    color: #fff8ef;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease;
+}
+
+/* WhatsApp */
+.whatsapp-btn {
+    background: #158a62;
+}
+
+.whatsapp-btn:hover {
+    background: #10734f;
+    transform: translateY(-2px);
+}
+
+/* Call */
+.call-btn {
+    background: #e64b2a;
+}
+
+.call-btn:hover {
+    background: #c93e24;
+    transform: translateY(-2px);
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .plan-event-buttons {
+        gap: 8px;
+    }
+
+    .plan-event-btn {
+        width: 125px;
+    }
+
 }
