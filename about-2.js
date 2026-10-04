@@ -82,47 +82,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =========================================
        SECTION 1 ANIMATION
-       STARTS AFTER IMAGE ARRIVES
+       STARTS IMMEDIATELY AS PAGE LOADS
        ========================================= */
 
     setTimeout(() => {
 
         /* ABOUT US */
+        if (label1) {
+            label1.classList.add("animate");
 
-        label1.classList.add("animate");
+            label1.querySelectorAll(".letter").forEach((letter, index) => {
 
-        label1.querySelectorAll(".letter").forEach((letter, index) => {
+                letter.style.transitionDelay =
+                    `${index * 0.035}s`;
 
-            letter.style.transitionDelay =
-                `${index * 0.05}s`;
-
-        });
+            });
+        }
 
 
         /* BIG TITLE */
+        if (title1) {
+            title1.classList.add("animate");
 
-        title1.classList.add("animate");
+            title1.querySelectorAll(".letter").forEach((letter, index) => {
 
-        title1.querySelectorAll(".letter").forEach((letter, index) => {
+                letter.style.transitionDelay =
+                    `${0.2 + index * 0.025}s`;
 
-            letter.style.transitionDelay =
-                `${0.4 + index * 0.035}s`;
-
-        });
+            });
+        }
 
 
         /* BODY TEXT */
+        if (subtitle1) {
+            subtitle1.classList.add("animate");
 
-        subtitle1.classList.add("animate");
+            subtitle1.querySelectorAll(".letter").forEach((letter, index) => {
 
-        subtitle1.querySelectorAll(".letter").forEach((letter, index) => {
+                letter.style.transitionDelay =
+                    `${0.65 + index * 0.012}s`;
 
-            letter.style.transitionDelay =
-                `${1.1 + index * 0.018}s`;
+            });
+        }
 
-        });
-
-    }, 1500);
+    }, 100);
 
 
     /* =========================================
