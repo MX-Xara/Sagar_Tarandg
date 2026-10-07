@@ -7,6 +7,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroMedia = document.querySelector('.hero-media');
   const heroVideo = document.querySelector('.hero-video');
 
+  // Handle local file:// protocol fallback for YouTube video embed if YouTube blocks file:// origin
+  if (window.location.protocol === 'file:') {
+    const container = document.getElementById('youtubeVideoContainer');
+    if (container) {
+      container.innerHTML = `
+        <video controls poster="assets/resort image.webp" style="width:100%; height:100%; object-fit:cover; display:block;">
+          <source src="assets/hero-video.mp4" type="video/mp4">
+        </video>
+      `;
+    }
+  }
+
 
 
   // Navbar background on scroll
