@@ -89,20 +89,23 @@ document.addEventListener('DOMContentLoaded', () => {
         ],
 
 
-        'Executive Deluxe': [
+        'AC Double Bed Room': [
 
-            'assets/Room Images/Executive Deluxe/IMG_8643.HEIC',
+            'assets/Room Images/Super deluxe/fd516d8c-b05a-47e8-9332-5fec5f778823.jpg',
 
-            'assets/Room Images/Executive Deluxe/IMG_8655.HEIC',
-
-            'assets/Room Images/Executive Deluxe/IMG_8674.HEIC',
-
-            'assets/Room Images/Executive Deluxe/IMG_8680.HEIC',
-
-            'assets/Room Images/Executive Deluxe/IMG_8683.HEIC',
+            'assets/Room Images/Super deluxe/95e8672d-913b-47f4-b3be-338cc99d9463.jpg',
 
             'assets/resort image.webp'
 
+        ],
+
+
+        'Executive Deluxe': [
+            'assets/Room Images/Executive Deluxe/1.webp',
+            'assets/Room Images/Executive Deluxe/2.webp',
+            'assets/Room Images/Executive Deluxe/3.webp',
+            'assets/Room Images/Executive Deluxe/4.webp',
+            'assets/Room Images/Executive Deluxe/5.webp'
         ],
 
 
@@ -125,11 +128,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         'Sea Side Deluxe': [
 
-            'assets/Room Images/Sea side Deluxe/278b48c3-d57e-4019-a305-e78c017e4b6c.jpg',
+            'assets/Room Images/Sea side Deluxe/1.webp',
 
-            'assets/Room Images/Sea side Deluxe/IMG_9341.HEIC',
+            'assets/Room Images/Sea side Deluxe/2.webp',
 
-            'assets/IMG_5835.JPG.webp'
+
 
         ]
 
@@ -436,6 +439,230 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+    // ========================================================================
+    // DYNAMIC PRICING ENGINE & PRICE BREAKDOWN
+    // ========================================================================
+
+    const PRICING_DOCUMENTS = {
+        "Garden Facing": "gardenFacing",
+        "AC Double Bed Room": "acDoubleBed",
+        "Executive Deluxe": "executiveDeluxe",
+        "Super Deluxe": "superDeluxe",
+        "Sea Side Deluxe": "seasideDeluxe"
+    };
+
+    let cachedPricing = null;
+    let cachedSpecialDates = {};
+
+    async function fetchPricingSetup() {
+        if (!db) return null;
+        try {
+            const pricingSnapshot = await db.collection('pricing').get();
+            const pricingData = {};
+            pricingSnapshot.forEach(doc => {
+                pricingData[doc.id] = doc.data();
+            });
+
+            const specialDatesSnapshot = await db.collection('specialDates').get();
+            const specialDatesData = {};
+            specialDatesSnapshot.forEach(doc => {
+                specialDatesData[doc.id] = doc.data();
+            });
+
+            cachedPricing = pricingData;
+            cachedSpecialDates = specialDatesData;
+            return { pricing: pricingData, specialDates: specialDatesData };
+        } catch (e) {
+            console.error("Failed to fetch pricing setup from Firestore:", e);
+            return null;
+        }
+    }
+
+    const DEFAULT_ROOM_PRICES = {
+        gardenFacing: { weekdays: 4500, weekends: 5500 },
+        acDoubleBed: { weekdays: 7500, weekends: 8500 },
+        seasideDeluxe: { weekdays: 6000, weekends: 7000 },
+        executiveDeluxe: { weekdays: 5500, weekends: 6500 },
+        superDeluxe: { weekdays: 8000, weekends: 9000 }
+    };
+
+    // Update room starting prices on room cards (e.g. "₹8,000 Onwards")
+    async function updateRoomCardPrices() {
+        await fetchPricingSetup();
+
+        const roomCards = document.querySelectorAll('.room-card');
+        roomCards.forEach(card => {
+            const titleEl = card.querySelector('.room-title');
+            const priceEl = card.querySelector('.room-price');
+            if (titleEl && priceEl) {
+                const roomName = titleEl.textContent.trim();
+                const normName = normalizeRoomType(roomName);
+                const docId = PRICING_DOCUMENTS[normName];
+
+                let startingPrice = (DEFAULT_ROOM_PRICES[docId] && DEFAULT_ROOM_PRICES[docId].weekdays) || 4500;
+                const doc = cachedPricing && (cachedPricing[docId] || cachedPricing['acDoublebed'] || cachedPricing['acDoubleBed']);
+                if (doc) {
+                    const priceVal = (typeof doc.weekdays === 'number') ? doc.weekdays : ((typeof doc.weekday === 'number') ? doc.weekday : null);
+                    if (priceVal && priceVal > 0) {
+                        startingPrice = priceVal;
+                    }
+                }
+                priceEl.textContent = `₹${startingPrice.toLocaleString('en-IN')} Onwards`;
+            }
+        });
+    }
+
+    // Initial call to update card starting prices
+    updateRoomCardPrices();
+
+    /**
+     * Calculates nightly stay pricing following priority:
+     * 1. SPECIAL DATE
+     * 2. WEEKEND
+     * 3. WEEKDAY
+     */
+    async function calculateStayPricing(roomType, checkInStr, checkOutStr) {
+        if (!roomType || !checkInStr || !checkOutStr) return null;
+
+        const normType = normalizeRoomType(roomType);
+        const docId = PRICING_DOCUMENTS[normType];
+        if (!docId) return null;
+
+        if (!cachedPricing) {
+            await fetchPricingSetup();
+        }
+
+        const defaults = {
+            gardenFacing: { weekdays: 4500, weekends: 5500 },
+            acDoubleBed: { weekdays: 7500, weekends: 8500 },
+            seasideDeluxe: { weekdays: 6000, weekends: 7000 },
+            executiveDeluxe: { weekdays: 5500, weekends: 6500 },
+            superDeluxe: { weekdays: 8000, weekends: 9000 }
+        };
+
+        const roomPricingDoc = (cachedPricing && (cachedPricing[docId] || cachedPricing['acDoublebed'] || cachedPricing['acDoubleBed'])) || defaults[docId] || { weekdays: 4500, weekends: 5500 };
+        const weekdayPrice = (typeof roomPricingDoc.weekdays === 'number') ? roomPricingDoc.weekdays : ((typeof roomPricingDoc.weekday === 'number') ? roomPricingDoc.weekday : 4500);
+        const weekendPrice = (typeof roomPricingDoc.weekends === 'number') ? roomPricingDoc.weekends : ((typeof roomPricingDoc.weekend === 'number') ? roomPricingDoc.weekend : 5500);
+
+        const checkIn = parseHotelDate(checkInStr);
+        const checkOut = parseHotelDate(checkOutStr);
+
+        if (isNaN(checkIn.getTime()) || isNaN(checkOut.getTime()) || checkOut <= checkIn) {
+            return null;
+        }
+
+        const monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        const breakdown = [];
+        let totalAmount = 0;
+
+        let current = new Date(checkIn.getFullYear(), checkIn.getMonth(), checkIn.getDate());
+
+        while (current < checkOut) {
+            const yyyy = current.getFullYear();
+            const mm = String(current.getMonth() + 1).padStart(2, '0');
+            const dd = String(current.getDate()).padStart(2, '0');
+            const dateKey = `${yyyy}-${mm}-${dd}`;
+            const dayOfWeek = current.getDay();
+
+            let nightPrice = 0;
+            let rateType = '';
+
+            // Priority 1: Special Date
+            if (cachedSpecialDates && cachedSpecialDates[dateKey]) {
+                const sd = cachedSpecialDates[dateKey];
+                const specialVal = sd[docId] ?? sd.acDoublebed ?? sd.acDoubleBed;
+                if (typeof specialVal === 'number' && specialVal > 0) {
+                    nightPrice = specialVal;
+                    rateType = 'Special Date';
+                }
+            }
+
+            // Priority 2: Weekend (Sat/Sun)
+            if (!nightPrice) {
+                if (dayOfWeek === 0 || dayOfWeek === 6) {
+                    nightPrice = weekendPrice;
+                    rateType = 'Weekend';
+                } else {
+                    // Priority 3: Weekday
+                    nightPrice = weekdayPrice;
+                    rateType = 'Weekday';
+                }
+            }
+
+            const dayName = current.toLocaleDateString('en-US', { weekday: 'short' });
+            const monthName = monthShortNames[current.getMonth()];
+            const formattedDate = `${current.getDate()} ${monthName} (${dayName})`;
+
+            breakdown.push({
+                dateKey,
+                formattedDate,
+                price: nightPrice,
+                rateType
+            });
+
+            totalAmount += nightPrice;
+            current.setDate(current.getDate() + 1);
+        }
+
+        return {
+            totalAmount,
+            nightsCount: breakdown.length,
+            breakdown
+        };
+    }
+
+    const priceBreakdownContainer = document.getElementById('priceBreakdownContainer');
+
+    function resetPriceBreakdown() {
+        if (!priceBreakdownContainer) return;
+        priceBreakdownContainer.innerHTML = '';
+        priceBreakdownContainer.style.display = 'none';
+    }
+
+    async function updatePriceBreakdownDisplay() {
+        if (!priceBreakdownContainer) return;
+
+        const roomType = bookRoomTypeInput?.value || '';
+        const checkIn = document.getElementById('bookCheckIn')?.value || '';
+        const checkOut = document.getElementById('bookCheckOut')?.value || '';
+
+        if (!roomType || !checkIn || !checkOut) {
+            resetPriceBreakdown();
+            return;
+        }
+
+        try {
+            const pricing = await calculateStayPricing(roomType, checkIn, checkOut);
+            if (!pricing || !pricing.breakdown || pricing.breakdown.length === 0) {
+                resetPriceBreakdown();
+                return;
+            }
+
+            priceBreakdownContainer.style.display = 'block';
+            priceBreakdownContainer.innerHTML = `
+                <div class="breakdown-card">
+                    <div class="breakdown-header">Price Breakdown</div>
+                    <ul class="breakdown-list">
+                        ${pricing.breakdown.map(item => `
+                            <li class="breakdown-item">
+                                <span class="breakdown-date">${item.formattedDate}</span>
+                                <span class="breakdown-rate-badge ${item.rateType === 'Special Date' ? 'rate-special' : (item.rateType === 'Weekend' ? 'rate-weekend' : '')}">${item.rateType}</span>
+                                <span class="breakdown-price">₹${item.price.toLocaleString('en-IN')}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                    <div class="breakdown-total-row">
+                        <span>${pricing.nightsCount} Night${pricing.nightsCount > 1 ? 's' : ''} Total:</span>
+                        <span class="breakdown-total-amount">₹${pricing.totalAmount.toLocaleString('en-IN')}</span>
+                    </div>
+                </div>
+            `;
+        } catch (e) {
+            console.error("Failed to display price breakdown:", e);
+            resetPriceBreakdown();
+        }
+    }
+
     function resetAvailabilityStatus() {
 
         if (!availabilityStatus) return;
@@ -447,6 +674,7 @@ document.addEventListener('DOMContentLoaded', () => {
         availabilityStatus.className =
             'room-availability-status';
 
+        resetPriceBreakdown();
     }
 
 
@@ -543,6 +771,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
     // BOOK NOW buttons.
 
     bookNowTriggers.forEach((button) => {
@@ -606,23 +835,83 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ========================================================================
-    // 5. PHYSICAL ROOM INVENTORY
+    // 5. PHYSICAL ROOM INVENTORY & ROOM CAPACITY CONTROL
+    // ========================================================================
+    //
+    // 💡 HOW TO CONTROL THE NUMBER OF ROOMS FOR EACH ROOM TYPE:
+    // Simply change the numbers in ROOM_CAPACITY below!
+    //
+    // EXAMPLES:
+    // - If you set 'Garden Facing': 5, then 5 customers can book Garden Facing rooms for the same date.
+    // - If you set 'Garden Facing': 2, then ONLY 2 customers can book Garden Facing rooms for the same date.
+    // - If you set 'Super Deluxe': 5, then 5 customers can book Super Deluxe rooms for the same date.
+    //
+    // The system automatically calculates room availability and room numbering
+    // (e.g. G-01, G-02, G-03...) directly from the numbers defined below.
     // ========================================================================
 
-    // This tells our availability engine how many physical rooms exist
-    // for each room TYPE.
+    const CANONICAL_ROOM_TYPES = {
+        'Garden Facing': 'Garden Facing',
+        'Deluxe Garden View Rooms': 'Garden Facing',
+        'Garden View': 'Garden Facing',
+        'AC Double Bed Room': 'AC Double Bed Room',
+        'AC Double Bed': 'AC Double Bed Room',
+        'Double Bed': 'AC Double Bed Room',
+        'Executive Deluxe': 'Executive Deluxe',
+        'Executive Deluxe Rooms': 'Executive Deluxe',
+        'Super Deluxe': 'Super Deluxe',
+        'Super Deluxe Rooms': 'Super Deluxe',
+        'Sea Side Deluxe': 'Sea Side Deluxe',
+        'Deluxe Sea Side Rooms': 'Sea Side Deluxe',
+        'Sea Side': 'Sea Side Deluxe',
+        'Seaside Deluxe': 'Sea Side Deluxe'
+    };
+
+    function normalizeRoomType(rawType) {
+        if (!rawType) return 'Garden Facing';
+        const trimmed = String(rawType).trim();
+        if (CANONICAL_ROOM_TYPES[trimmed]) {
+            return CANONICAL_ROOM_TYPES[trimmed];
+        }
+        if (trimmed.includes('Double')) return 'AC Double Bed Room';
+        if (trimmed.includes('Garden')) return 'Garden Facing';
+        if (trimmed.includes('Executive')) return 'Executive Deluxe';
+        if (trimmed.includes('Sea Side') || trimmed.includes('Seaside')) return 'Sea Side Deluxe';
+        if (trimmed.includes('Super')) return 'Super Deluxe';
+        return trimmed;
+    }
 
     const ROOM_CAPACITY = {
-
-        'Garden Facing': 4,
-
+        'Garden Facing': 3,
+        'AC Double Bed Room': 1,
         'Executive Deluxe': 4,
-
         'Super Deluxe': 2,
-
         'Sea Side Deluxe': 2
-
     };
+
+    const ROOM_PREFIXES = {
+        'Garden Facing': 'G',
+        'AC Double Bed Room': 'AC',
+        'Executive Deluxe': 'ED',
+        'Super Deluxe': 'SD',
+        'Sea Side Deluxe': 'SS'
+    };
+
+    function generateDefaultPhysicalRooms(normType) {
+        const capacity = ROOM_CAPACITY[normType] || 0;
+        const prefix = ROOM_PREFIXES[normType] || 'R';
+        const rooms = [];
+        for (let i = 1; i <= capacity; i++) {
+            const numStr = String(i).padStart(2, '0');
+            const idStr = `${prefix}-${numStr}`;
+            rooms.push({
+                id: idStr,
+                roomNumber: idStr,
+                roomType: normType
+            });
+        }
+        return rooms;
+    }
 
 
 
@@ -694,51 +983,46 @@ document.addEventListener('DOMContentLoaded', () => {
     // 8. GET PHYSICAL ROOMS FROM FIRESTORE
     // ========================================================================
 
-    async function getRoomsForType(roomType) {
+    async function getRoomsForType(rawRoomType) {
+        const normType = normalizeRoomType(rawRoomType);
 
         if (!db) {
-
-            throw new Error(
-                'Firebase database is not available.'
-            );
-
+            return generateDefaultPhysicalRooms(normType);
         }
 
+        try {
+            const snapshot =
+                await db
+                    .collection('rooms')
+                    .where(
+                        'roomType',
+                        '==',
+                        normType
+                    )
+                    .where(
+                        'active',
+                        '==',
+                        true
+                    )
+                    .get();
 
-        const snapshot =
-            await db
-                .collection('rooms')
-                .where(
-                    'roomType',
-                    '==',
-                    roomType
-                )
-                .where(
-                    'active',
-                    '==',
-                    true
-                )
-                .get();
-
-
-        const rooms = [];
-
-
-        snapshot.forEach((doc) => {
-
-            rooms.push({
-
-                id: doc.id,
-
-                ...doc.data()
-
+            const rooms = [];
+            snapshot.forEach((doc) => {
+                rooms.push({
+                    id: doc.id,
+                    ...doc.data()
+                });
             });
 
-        });
+            if (rooms.length === 0) {
+                return generateDefaultPhysicalRooms(normType);
+            }
 
-
-        return rooms;
-
+            return rooms;
+        } catch (e) {
+            console.error('Error fetching rooms from Firestore, using default physical rooms fallback:', e);
+            return generateDefaultPhysicalRooms(normType);
+        }
     }
 
 
@@ -747,46 +1031,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // 9. GET EXISTING BOOKINGS FOR THIS ROOM TYPE
     // ========================================================================
 
-    async function getBookingsForType(roomType) {
+    async function getBookingsForType(rawRoomType) {
+        const targetNorm = normalizeRoomType(rawRoomType);
 
-        if (!db) {
+        if (!db) return [];
 
-            throw new Error(
-                'Firebase database is not available.'
-            );
+        try {
+            const snapshot =
+                await db
+                    .collection('bookings')
+                    .get();
 
-        }
-
-
-        const snapshot =
-            await db
-                .collection('bookings')
-                .where(
-                    'roomType',
-                    '==',
-                    roomType
-                )
-                .get();
-
-
-        const bookings = [];
-
-
-        snapshot.forEach((doc) => {
-
-            bookings.push({
-
-                id: doc.id,
-
-                ...doc.data()
-
+            const bookings = [];
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                if (data.bookingStatus === 'cancelled') return;
+                const bNorm = normalizeRoomType(data.roomType);
+                if (bNorm === targetNorm) {
+                    bookings.push({
+                        id: doc.id,
+                        ...data
+                    });
+                }
             });
 
-        });
-
-
-        return bookings;
-
+            return bookings;
+        } catch (e) {
+            console.error('Error fetching bookings from Firestore:', e);
+            return [];
+        }
     }
 
 
@@ -796,10 +1069,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // ========================================================================
 
     async function getRoomAvailability(
-        roomType,
+        rawRoomType,
         checkInStr,
         checkOutStr
     ) {
+
+        const roomType = normalizeRoomType(rawRoomType);
 
         if (
             !roomType ||
@@ -1346,9 +1621,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
 
 
-                            // Check availability.
+                            // Check availability and update breakdown.
 
                             checkSelectedDatesAvailability();
+
+                            updatePriceBreakdownDisplay();
 
                         }
 
@@ -1381,6 +1658,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             // date has been selected.
 
                             checkSelectedDatesAvailability();
+
+                            updatePriceBreakdownDisplay();
 
                         }
 
@@ -1552,7 +1831,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-                const nights =
+                let nights =
                     Math.round(
 
                         (
@@ -1665,35 +1944,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
                 // ----------------------------------------------------------
-                // ROOM PRICES
+                // DYNAMIC ROOM PRICE CALCULATION
                 // ----------------------------------------------------------
 
-                const roomPrices = {
-
-                    'Garden Facing':
-                        1,
-
-                    'Executive Deluxe':
-                        1,
-
-                    'Super Deluxe':
-                        1,
-
-                    'Sea Side Deluxe':
-                        1
-
-                };
+                const pricingResult =
+                    await calculateStayPricing(
+                        roomType,
+                        checkInStr,
+                        checkOutStr
+                    );
 
 
+                if (
+                    !pricingResult ||
+                    pricingResult.totalAmount <= 0
+                ) {
 
-                const pricePerNight =
-                    roomPrices[roomType] ||
-                    5000;
+                    alert(
+                        'Could not calculate price for selected stay dates. Please reselect dates and try again.'
+                    );
+
+                    bookingSubmitBtn.disabled =
+                        false;
+
+                    bookingSubmitBtn.textContent =
+                        'PAY NOW';
+
+                    return;
+
+                }
 
 
                 const amount =
-                    nights *
-                    pricePerNight;
+                    pricingResult.totalAmount;
+
+
+                nights =
+                    pricingResult.nightsCount;
 
 
 
@@ -1794,21 +2081,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
                                 }
 
+                                const normRoomType = normalizeRoomType(roomType);
 
-
-                                // ------------------------------------------------
-                                // SAVE BOOKING
-                                // ------------------------------------------------
-                                //
-                                // The important fields are:
-                                //
-                                // roomType
-                                // roomId
-                                // roomNumber
-                                //
-                                // This tells Firebase exactly which physical
-                                // room was assigned.
-                                // ------------------------------------------------
+                                // Live double-check room availability right before saving (prevents overbooking race conditions)
+                                const finalCheck = await getRoomAvailability(normRoomType, checkInStr, checkOutStr);
+                                let finalAssignedRoom = assignedRoom;
+                                if (finalCheck && finalCheck.availableCount > 0 && finalCheck.freeRooms && finalCheck.freeRooms.length > 0) {
+                                    finalAssignedRoom = finalCheck.freeRooms[0];
+                                } else {
+                                    alert(
+                                        `Payment processed (Payment ID: ${response.razorpay_payment_id}), but the last remaining ${normRoomType} room was booked by another customer. Please contact resort management with your Payment ID.`
+                                    );
+                                    return;
+                                }
 
                                 await db
                                     .collection(
@@ -1817,15 +2102,15 @@ document.addEventListener('DOMContentLoaded', () => {
                                     .add({
 
                                         roomType:
-                                            roomType,
+                                            normRoomType,
 
 
                                         roomId:
-                                            assignedRoom.id,
+                                            finalAssignedRoom.id,
 
 
                                         roomNumber:
-                                            assignedRoom.roomNumber,
+                                            finalAssignedRoom.roomNumber,
 
 
                                         name:

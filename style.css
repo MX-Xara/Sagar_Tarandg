@@ -168,16 +168,72 @@ img {
   z-index: 1001;
 }
 
+/* Default (Dark background pages: index, events, gallery): hamburger lines are LIGHT */
 .nav-toggle span {
   display: block;
   width: 100%;
-  height: 1.5px;
-  background-color: var(--color-cream);
+  height: 2px;
+  background-color: var(--color-cream, #FAF6EF);
   transition: var(--transition-base);
 }
 
+/* Scrolled navbar on dark pages: lines turn DARK */
 .navbar.scrolled .nav-toggle span {
-  background-color: var(--color-ocean);
+  background-color: var(--color-ocean, #102531);
+}
+
+/* Light background pages: hamburger lines are DARK */
+body.about-2-page .nav-toggle span,
+body.book-body .nav-toggle span,
+body.hotel-page-body .nav-toggle span {
+  background-color: var(--color-ocean, #102531);
+}
+
+/* OPEN MENU DRAWER STATE (All pages): "X" close icon lines MUST BE LIGHT against dark drawer */
+.nav-toggle.open span,
+.navbar.scrolled .nav-toggle.open span,
+.book-navbar .nav-toggle.open span,
+body.about-2-page .nav-toggle.open span,
+body.book-body .nav-toggle.open span,
+body.hotel-page-body .nav-toggle.open span,
+body.events-page .nav-toggle.open span {
+  background-color: var(--color-cream, #FAF6EF) !important;
+}
+
+/* =========================================
+   NAVBAR RESPONSIVE (≤ 900px)
+   ========================================= */
+@media (max-width: 900px) {
+  .nav-toggle {
+    display: flex !important;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background-color: #102531;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding: 40px;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.4);
+  }
+
+  .nav-links.open {
+    right: 0;
+  }
+
+  .nav-links a {
+    color: #FAF6EF !important;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+  }
 }
 
 /* =========================================
@@ -419,7 +475,7 @@ img {
   top: 10%;
   left: 1%;
 
-  font-size: 13rem;
+  font-size: clamp(3.5rem, 12vw, 13rem);
   font-weight: 350;
 
   color: rgba(21, 130, 176, 0.226);
@@ -437,7 +493,7 @@ img {
   top: 28%;
   left: 39.5%;
 
-  font-size: 4rem;
+  font-size: clamp(1.8rem, 3.8vw, 4rem);
   font-weight: 300;
 
   color: #FECB38;
@@ -551,7 +607,7 @@ img {
   top: 50%;
   left: 51%;
 
-  font-size: 4rem;
+  font-size: clamp(1.8rem, 3.8vw, 4rem);
   font-weight: 400;
 
   color: #FECB38;
@@ -570,7 +626,7 @@ img {
   top: 59%;
   left: 6%;
 
-  font-size: 11rem;
+  font-size: clamp(3rem, 10vw, 11rem);
   font-weight: 400;
 
   color: #1582B0;
@@ -653,7 +709,7 @@ img {
 
     transform: translateX(-50%);
 
-    font-size: 8rem;
+    font-size: clamp(3rem, 7vw, 8rem);
     font-weight: 300;
 
     color: #1582B0;
@@ -812,7 +868,7 @@ img {
     right: 5%;
 
 
-    font-size: 14rem;
+    font-size: clamp(3.5rem, 11vw, 14rem);
     font-weight: 300;
 
     color: #31b1e8;
@@ -938,7 +994,7 @@ img {
     right: 5%;
 
 
-    font-size: 14rem;
+    font-size: clamp(3.5rem, 11vw, 14rem);
     font-weight: 300;
 
     color: #FECB38;
@@ -1048,7 +1104,7 @@ img {
     right: 5%;
 
 
-    font-size: 14rem;
+    font-size: clamp(3.5rem, 11vw, 14rem);
     font-weight: 300;
 
     color: #1582B0;
@@ -1356,110 +1412,85 @@ img {
    END PANEL
 ========================== */
 
-
-/* ==========================
-   END PANEL
-========================== */
-
-.page-6{
+.page-6 {
     position: relative;
-
     min-height: 100vh;
-
     background: #f6f5f4;
-
     overflow: hidden;
 }
 
 /* background image */
-.end-img{
+.end-img {
     width: 100%;
-
     height: 100vh;
-
     object-fit: cover;
 }
 
 /* logo on top */
-.end{
+.end {
     position: absolute;
-
     top: 90%;
     left: 15%;
-
     transform: translate(-50%, -50%);
-
     width: 300px;   /* fixed size */
     max-width: 60%;
-
     height: auto;
-
     object-fit: contain;
-
     z-index: 10;
 }
 
-
 /* Contact details over image */
-.end-contact{
+.end-contact {
     position: absolute;
-
     left: 7.5%;
     bottom: 40%;
-
     z-index: 10;
-
-    color: rgba(255,255,255,0.9);
-
+    color: rgba(255, 255, 255, 0.9);
     font-family: 'Raleway', sans-serif;
-
     font-size: 1.35rem;
-
     font-weight: 300;
-
     line-height: 1.9;
-
     letter-spacing: 0.5px;
 }
 
-.end-contact p{
+.end-contact p {
     margin-bottom: 22px;
 }
 
-
-.copyright{
+.copyright {
     position: absolute;
-
     left: 7%;
     top: 97%;
-
-     transform: translateY(-100%);
-
-    color: rgba(255,255,255,0.72);
-
+    transform: translateY(-100%);
+    color: rgba(255, 255, 255, 0.72);
     font-size: 0.85rem;
-
     z-index: 10;
-
 }
 
-.book-btn{
-  position: absolute;
-  bottom: 35%;
-  left: 11%;
-  transform: translateX(-50%);
-  z-index: 10;
-  color: white;
-  border: 1px solid white;
-  width: 150px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-
-  
+.book-btn {
+    position: absolute;
+    bottom: 35%;
+    left: 11%;
+    transform: translateX(-50%);
+    z-index: 10;
+    color: white;
+    border: 1px solid white;
+    width: 150px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-family: 'Raleway', sans-serif;
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease;
 }
+
+.book-btn:hover {
+    background: white;
+    color: #102531;
+}
+
 
 
  
@@ -1699,16 +1730,22 @@ img {
 .booking-modal-overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.65);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2000;
+  z-index: 9999;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.35s ease;
+  padding: 16px;
+  box-sizing: border-box;
 }
 
 .booking-modal-overlay.active {
@@ -1717,20 +1754,24 @@ img {
 }
 
 .booking-modal-content {
-  background-color: #9b8f85;
-  width: 90%;
-  max-width: 500px;
-  max-height: 90vh;
+  background-color: #FAF6EF;
+  width: 92vw;
+  max-width: 520px;
+  max-height: 88vh;
   overflow-y: auto;
-  border-radius: 24px;
-  padding: 40px;
+  overflow-x: hidden;
+  border-radius: 20px;
+  padding: 0;
+  margin: auto;
   position: relative;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  transform: translateY(30px);
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-  color: #ffffff;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+  transform: translateY(20px) scale(0.96);
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  color: #102531;
   font-family: var(--font-body);
-  font-weight: 300;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .booking-modal-content::-webkit-scrollbar {
@@ -1742,125 +1783,12 @@ img {
 }
 
 .booking-modal-content::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(21, 130, 176, 0.3);
   border-radius: 10px;
 }
 
 .booking-modal-overlay.active .booking-modal-content {
-  transform: translateY(0);
-}
-
-.booking-modal-close {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-  background: none;
-  border: none;
-  color: #ffffff;
-  font-size: 2.2rem;
-  line-height: 1;
-  cursor: pointer;
-  opacity: 0.8;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.booking-modal-close:hover {
-  opacity: 1;
-  transform: scale(1.1);
-}
-
-.booking-modal-title {
-  font-family: var(--font-body);
-  font-size: 2.2rem;
-  font-weight: 300;
-  margin-bottom: 6px;
-  text-align: center;
-  color: #ffffff;
-  letter-spacing: 0.02em;
-}
-
-.booking-modal-room-subtitle {
-  font-size: 1.1rem;
-  font-weight: 300;
-  margin-bottom: 28px;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.9);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.booking-modal-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.form-group label {
-  font-size: 0.9rem;
-  font-weight: 400;
-  letter-spacing: 0.05em;
-  color: #ffffff;
-  text-transform: uppercase;
-}
-
-.form-group input {
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 50px;
-  padding: 12px 20px;
-  font-family: var(--font-body);
-  font-size: 1rem;
-  font-weight: 300;
-  color: #ffffff;
-  outline: none;
-  transition: all 0.3s ease;
-}
-
-.form-group input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.form-group input:focus {
-  border-color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-}
-
-.form-group input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(1);
-  cursor: pointer;
-  opacity: 0.8;
-}
-
-.form-group input[type="date"]::-webkit-calendar-picker-indicator:hover {
-  opacity: 1;
-}
-
-.booking-modal-submit-btn {
-  background-color: transparent;
-  color: #ffffff;
-  border: 1.5px solid #ffffff;
-  border-radius: 50px;
-  padding: 14px;
-  font-family: var(--font-body);
-  font-size: 1.1rem;
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: all 0.3s ease;
-}
-
-.booking-modal-submit-btn:hover {
-  background-color: #ffffff;
-  color: #1582B0;
+  transform: translateY(0) scale(1);
 }
 
 /* Mobile responsive details for rooms */
@@ -2370,39 +2298,85 @@ img {
 
   /* --- Page 6 end --- */
   .page-6 {
-    min-height: auto;
+    min-height: 100vh;
+    min-height: 100svh;
+    height: auto;
+    padding: 85px 20px 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
 
   .end-img {
-    height: 60vh;
-  }
-
-  .end {
-    width: 180px;
-    left: 50%;
-    top: auto;
-    bottom: 2%;
-    transform: translate(-50%, 0);
-    max-width: 50%;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .end-contact {
-    font-size: 1rem;
-    left: 5%;
-    bottom: 30%;
+    position: relative;
+    left: auto;
+    top: auto;
+    bottom: auto;
+    right: auto;
+    transform: none;
+    font-size: clamp(0.95rem, 3.8vw, 1.15rem);
+    line-height: 1.6;
+    margin-bottom: 24px;
+    text-align: center;
+    width: 100%;
   }
 
-  .copyright {
-    left: 5%;
-    font-size: 0.7rem;
+  .end-contact p {
+    margin-bottom: 12px;
   }
 
   .book-btn {
-    left: 50%;
-    bottom: 22%;
-    width: 130px;
+    position: relative;
+    left: auto;
+    top: auto;
+    bottom: auto;
+    right: auto;
+    transform: none;
+    width: 135px;
     height: 44px;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    margin: 0 auto 32px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .end {
+    position: relative;
+    left: auto;
+    top: auto;
+    bottom: auto;
+    right: auto;
+    transform: none;
+    width: 160px;
+    max-width: 55%;
+    height: auto;
+    object-fit: contain;
+    margin: 0 auto 18px auto;
+  }
+
+  .copyright {
+    position: relative;
+    left: auto;
+    top: auto;
+    bottom: auto;
+    right: auto;
+    transform: none;
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: 5px;
+    text-align: center;
+    width: 100%;
   }
 
   /* --- Sub pages gallery --- */
@@ -2557,33 +2531,30 @@ img {
   }
 
   /* --- Page 6 --- */
-  .end-img {
-    height: 50vh;
-  }
-
   .end {
     width: 140px;
+    margin-bottom: 14px;
   }
 
   .end-contact {
-    font-size: 0.85rem;
-    bottom: 28%;
-    line-height: 1.6;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    margin-bottom: 20px;
   }
 
   .end-contact p {
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
 
   .book-btn {
-    width: 110px;
-    height: 38px;
+    width: 125px;
+    height: 40px;
     font-size: 0.9rem;
-    bottom: 18%;
+    margin-bottom: 24px;
   }
 
   .copyright {
-    font-size: 0.6rem;
+    font-size: 0.65rem;
   }
 
   /* --- Sub pages --- */

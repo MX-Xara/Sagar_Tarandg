@@ -8,11 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const todayCheckinsCountEl = document.getElementById('todayCheckinsCount');
   const totalRevenueAmountEl = document.getElementById('totalRevenueAmount');
   const currentDateLabelEl = document.getElementById('currentDateLabel');
-  
+
   const guestSearchInput = document.getElementById('guestSearchInput');
   const clearSearchBtn = document.getElementById('clearSearchBtn');
   const visibleEntriesLabel = document.getElementById('visibleEntriesLabel');
-  
+
   const tableLoader = document.getElementById('tableLoader');
   const emptyState = document.getElementById('emptyState');
   const tableContainer = document.getElementById('tableContainer');
@@ -21,8 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Login DOM Elements ---
   const loginGate = document.getElementById('loginGate');
   const loginForm = document.getElementById('loginForm');
-  const usernameInput = document.getElementById('usernameInput');
+  const emailInput = document.getElementById('emailInput');
   const passwordInput = document.getElementById('passwordInput');
+  const loginSubmitBtn = document.getElementById('loginSubmitBtn');
   const loginErrorMsg = document.getElementById('loginErrorMsg');
   const dashboardApp = document.getElementById('dashboardApp');
   const logoutBtn = document.getElementById('logoutBtn');
@@ -62,17 +63,17 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const d = new Date(dateStr);
       if (isNaN(d.getTime())) return dateStr;
-      
+
       const day = d.getDate();
       const month = monthNames[d.getMonth()];
       const year = d.getFullYear();
-      
+
       let hours = d.getHours();
       const minutes = d.getMinutes().toString().padStart(2, '0');
       const ampm = hours >= 12 ? 'PM' : 'AM';
       hours = hours % 12;
       hours = hours ? hours : 12; // 0 hour should be 12
-      
+
       return `${day} ${month} ${year}, ${hours}:${minutes} ${ampm}`;
     } catch (e) {
       return dateStr;
@@ -97,23 +98,23 @@ document.addEventListener('DOMContentLoaded', () => {
       const now = new Date();
       // Current date at midnight
       const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
-      
+
       const checkInParts = checkInStr.split('-');
       const checkOutParts = checkOutStr.split('-');
-      
+
       // Check-in and out dates at midnight
       const checkIn = new Date(
         parseInt(checkInParts[0], 10),
         parseInt(checkInParts[1], 10) - 1,
         parseInt(checkInParts[2], 10)
       ).getTime();
-      
+
       const checkOut = new Date(
         parseInt(checkOutParts[0], 10),
         parseInt(checkOutParts[1], 10) - 1,
         parseInt(checkOutParts[2], 10)
       ).getTime();
-      
+
       if (today < checkIn) {
         return { label: 'Upcoming', className: 'status-upcoming' };
       } else if (today >= checkIn && today <= checkOut) {
@@ -148,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Attach real-time snapshot listener on the 'bookings' collection
     db.collection("bookings").onSnapshot((snapshot) => {
       allBookings = [];
-      
+
       snapshot.forEach((doc) => {
         const data = doc.data();
         allBookings.push({
@@ -180,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Render bookings to table list
       filterAndRenderBookings();
-      
+
       // Hide loader once the first sync completes
       if (tableLoader) {
         tableLoader.style.display = 'none';
@@ -197,16 +198,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Render & UI Refresh Logic ---
   function updateDashboardStats() {
     const total = allBookings.length;
-    
+
     // Find Today's Check-ins (matches YYYY-MM-DD local format)
     const now = new Date();
     const yyyy = now.getFullYear();
     const mm = String(now.getMonth() + 1).padStart(2, '0');
     const dd = String(now.getDate()).padStart(2, '0');
     const todayStr = `${yyyy}-${mm}-${dd}`;
-    
+
     const todayCheckinsCount = allBookings.filter(b => b.checkIn === todayStr).length;
-    
+
     // Sum total revenue
     const revenue = allBookings.reduce((sum, b) => sum + b.amount, 0);
 
@@ -218,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function filterAndRenderBookings() {
     const query = guestSearchInput.value.trim().toLowerCase();
-    
+
     // Filter bookings based on Search Text (matches guest name or phone number)
     const filtered = allBookings.filter(booking => {
       const matchName = booking.name.toLowerCase().includes(query);
@@ -239,12 +240,12 @@ document.addEventListener('DOMContentLoaded', () => {
       emptyState.style.display = 'none';
       tableContainer.style.display = 'block';
       visibleEntriesLabel.textContent = `Showing ${filtered.length} of ${allBookings.length} entries`;
-      
+
       // Build rows
       bookingsTableBody.innerHTML = '';
       filtered.forEach(booking => {
         const row = document.createElement('tr');
-        
+
         // Calculate status dynamic badge
         const status = calculateBookingStatus(booking.checkIn, booking.checkOut);
 
@@ -273,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Prevent HTML injection from input data
   function escapeHTML(str) {
     if (!str) return '';
-    return str.replace(/[&<>'"]/g, 
+    return str.replace(/[&<>'"]/g,
       tag => ({
         '&': '&amp;',
         '<': '&lt;',
@@ -301,49 +302,454 @@ document.addEventListener('DOMContentLoaded', () => {
     filterAndRenderBookings();
   });
 
-  // --- Basic Security Gate Initialization ---
-  function checkLoginState() {
-    const isLoggedIn = sessionStorage.getItem('resortOwnerLoggedIn') === 'true';
-    if (isLoggedIn) {
-      if (loginGate) loginGate.style.display = 'none';
-      if (dashboardApp) dashboardApp.style.display = 'block';
-      // Load Firestore stream only after successful authentication
-      initFirebaseListener();
-    } else {
-      if (loginGate) loginGate.style.display = 'flex';
-      if (dashboardApp) dashboardApp.style.display = 'none';
+  // --- Firebase Admin Role Authorization Helper ---
+  async function verifyAdminRole(user) {
+    if (!user || !db) return false;
+    try {
+      const adminDoc = await db.collection('admin').doc(user.uid).get();
+      if (adminDoc.exists && adminDoc.data()?.role === 'admin') {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      console.error("Admin role verification error:", e);
+      return false;
     }
   }
 
-  // Handle Login submission
-  if (loginForm) {
-    loginForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const username = usernameInput.value.trim();
-      const password = passwordInput.value;
+  let isFirebaseListenerInitialized = false;
 
-      if (username === 'sagartarang123' && password === 'sagartarang0000') {
-        sessionStorage.setItem('resortOwnerLoggedIn', 'true');
-        if (loginErrorMsg) loginErrorMsg.style.display = 'none';
-        checkLoginState();
+  // --- Auth State Protection Listener ---
+  function initAuthStateListener() {
+    if (typeof auth === 'undefined' || !auth) {
+      console.error("Firebase Auth is not loaded.");
+      return;
+    }
+
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        const isAuthorizedAdmin = await verifyAdminRole(user);
+        if (isAuthorizedAdmin) {
+          if (loginGate) loginGate.style.display = 'none';
+          if (dashboardApp) dashboardApp.style.display = 'block';
+          if (loginErrorMsg) loginErrorMsg.style.display = 'none';
+          if (!isFirebaseListenerInitialized) {
+            initFirebaseListener();
+            isFirebaseListenerInitialized = true;
+          }
+        } else {
+          // Account exists in Auth but UID is not authorized in admins collection
+          await auth.signOut();
+          if (loginGate) loginGate.style.display = 'flex';
+          if (dashboardApp) dashboardApp.style.display = 'none';
+          if (loginErrorMsg) {
+            loginErrorMsg.textContent = "You are not authorized to access the owner portal.";
+            loginErrorMsg.style.display = 'block';
+          }
+        }
       } else {
+        if (loginGate) loginGate.style.display = 'flex';
+        if (dashboardApp) dashboardApp.style.display = 'none';
+      }
+    });
+  }
+
+  // Handle Firebase Email/Password Login submission
+  if (loginForm) {
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = emailInput ? emailInput.value.trim() : '';
+      const password = passwordInput ? passwordInput.value : '';
+
+      if (!email || !password) {
         if (loginErrorMsg) {
+          loginErrorMsg.textContent = "Please enter both email and password.";
           loginErrorMsg.style.display = 'block';
         }
-        passwordInput.value = '';
-        passwordInput.focus();
+        return;
+      }
+
+      if (loginSubmitBtn) {
+        loginSubmitBtn.disabled = true;
+        loginSubmitBtn.textContent = "SIGNING IN...";
+      }
+
+      try {
+        const userCredential = await auth.signInWithEmailAndPassword(email, password);
+        const user = userCredential.user;
+        const isAuthorizedAdmin = await verifyAdminRole(user);
+
+        if (isAuthorizedAdmin) {
+          if (loginErrorMsg) loginErrorMsg.style.display = 'none';
+          if (passwordInput) passwordInput.value = '';
+        } else {
+          await auth.signOut();
+          if (loginErrorMsg) {
+            loginErrorMsg.textContent = "You are not authorized to access the owner portal.";
+            loginErrorMsg.style.display = 'block';
+          }
+          if (passwordInput) passwordInput.value = '';
+        }
+      } catch (err) {
+        console.error("Firebase Login Error:", err);
+        await auth.signOut().catch(() => { });
+        if (loginErrorMsg) {
+          loginErrorMsg.textContent = "Invalid email or password.";
+          loginErrorMsg.style.display = 'block';
+        }
+        if (passwordInput) {
+          passwordInput.value = '';
+          passwordInput.focus();
+        }
+      } finally {
+        if (loginSubmitBtn) {
+          loginSubmitBtn.disabled = false;
+          loginSubmitBtn.textContent = "Sign In";
+        }
       }
     });
   }
 
   // Handle Logout action
   if (logoutBtn) {
-    logoutBtn.addEventListener('click', () => {
-      sessionStorage.removeItem('resortOwnerLoggedIn');
+    logoutBtn.addEventListener('click', async () => {
+      try {
+        if (typeof auth !== 'undefined' && auth) {
+          await auth.signOut();
+        }
+      } catch (e) {
+        console.error("Logout error:", e);
+      }
       window.location.reload();
     });
   }
 
-  // Check login state on initial load
-  checkLoginState();
+  // --- Navigation & View Switching (Bookings vs Pricing) ---
+  const bookingsTabBtn = document.getElementById('bookingsTabBtn');
+  const pricingTabBtn = document.getElementById('pricingTabBtn');
+  const bookingsView = document.getElementById('bookingsView');
+  const pricingView = document.getElementById('pricingView');
+  const pricingToast = document.getElementById('pricingToast');
+
+  function switchTab(targetTab) {
+    if (targetTab === 'pricing') {
+      if (bookingsView) bookingsView.style.display = 'none';
+      if (pricingView) pricingView.style.display = 'block';
+      if (bookingsTabBtn) bookingsTabBtn.classList.remove('active');
+      if (pricingTabBtn) pricingTabBtn.classList.add('active');
+      loadRoomPricing();
+      loadSpecialDates();
+    } else {
+      if (pricingView) pricingView.style.display = 'none';
+      if (bookingsView) bookingsView.style.display = 'block';
+      if (pricingTabBtn) pricingTabBtn.classList.remove('active');
+      if (bookingsTabBtn) bookingsTabBtn.classList.add('active');
+    }
+  }
+
+  if (bookingsTabBtn) {
+    bookingsTabBtn.addEventListener('click', () => switchTab('bookings'));
+  }
+  if (pricingTabBtn) {
+    pricingTabBtn.addEventListener('click', () => switchTab('pricing'));
+  }
+
+  // Check URL hash for direct navigation e.g. admin.html#pricing
+  if (window.location.hash === '#pricing') {
+    switchTab('pricing');
+  }
+
+  // Toast Helper
+  function showPricingToast(message, isError = false) {
+    if (!pricingToast) return;
+    pricingToast.textContent = message;
+    pricingToast.className = `toast-message ${isError ? 'toast-error' : 'toast-success'}`;
+    pricingToast.style.display = 'flex';
+    setTimeout(() => {
+      pricingToast.style.display = 'none';
+    }, 4000);
+  }
+
+  // --- ROOM PRICING ENGINE ---
+  const ROOM_PRICING_CONFIG = {
+    gardenFacing: { roomType: "Garden Facing", defaultWeekdays: 4500, defaultWeekends: 5500 },
+    acDoublebed: { roomType: "AC Double Bed Room", defaultWeekdays: 7500, defaultWeekends: 8500 },
+    seasideDeluxe: { roomType: "Sea Side Deluxe", defaultWeekdays: 6000, defaultWeekends: 7000 },
+    executiveDeluxe: { roomType: "Executive Deluxe", defaultWeekdays: 5500, defaultWeekends: 6500 },
+    superDeluxe: { roomType: "Super Deluxe", defaultWeekdays: 8000, defaultWeekends: 9000 }
+  };
+
+  async function loadRoomPricing() {
+    if (!db) return;
+    try {
+      const snapshot = await db.collection('pricing').get();
+      const pricingMap = {};
+      snapshot.forEach(doc => {
+        pricingMap[doc.id] = doc.data();
+      });
+
+      Object.keys(ROOM_PRICING_CONFIG).forEach(docId => {
+        const config = ROOM_PRICING_CONFIG[docId];
+        const data = pricingMap[docId] || {};
+
+        const weekdaysInput = document.getElementById(`price-${docId}-weekdays`);
+        const weekendsInput = document.getElementById(`price-${docId}-weekends`);
+
+        const weekdaysVal = (typeof data.weekdays === 'number') ? data.weekdays : ((typeof data.weekday === 'number') ? data.weekday : config.defaultWeekdays);
+        const weekendsVal = (typeof data.weekends === 'number') ? data.weekends : ((typeof data.weekend === 'number') ? data.weekend : config.defaultWeekends);
+
+        if (weekdaysInput) {
+          weekdaysInput.value = weekdaysVal;
+        }
+        if (weekendsInput) {
+          weekendsInput.value = weekendsVal;
+        }
+      });
+    } catch (e) {
+      console.error("Error loading room pricing:", e);
+      showPricingToast("Failed to load room prices from Firestore.", true);
+    }
+  }
+
+  // Handle Room Pricing Forms Save
+  const roomPricingForms = document.querySelectorAll('.room-pricing-form');
+  roomPricingForms.forEach(form => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const docId = form.getAttribute('data-doc-id');
+      const roomType = form.getAttribute('data-room-type');
+      const submitBtn = form.querySelector('.save-price-btn');
+
+      const weekdaysInput = document.getElementById(`price-${docId}-weekdays`);
+      const weekendsInput = document.getElementById(`price-${docId}-weekends`);
+
+      const weekdaysVal = parseInt(weekdaysInput.value, 10);
+      const weekendsVal = parseInt(weekendsInput.value, 10);
+
+      if (isNaN(weekdaysVal) || isNaN(weekendsVal) || weekdaysVal < 0 || weekendsVal < 0) {
+        showPricingToast("Please enter valid prices.", true);
+        return;
+      }
+
+      submitBtn.disabled = true;
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = "SAVING...";
+
+      try {
+        const updateData = {
+          roomType: roomType,
+          weekdays: weekdaysVal,
+          weekends: weekendsVal
+        };
+        // Also include singular weekday/weekend for compatibility with existing acDoublebed docs
+        if (docId === 'acDoublebed' || docId === 'acDoubleBed') {
+          updateData.weekday = weekdaysVal;
+          updateData.weekend = weekendsVal;
+        }
+
+        await db.collection('pricing').doc(docId).set(updateData, { merge: true });
+
+        // Re-read saved document to ensure UI reflects database
+        const updatedDoc = await db.collection('pricing').doc(docId).get();
+        if (updatedDoc.exists) {
+          const freshData = updatedDoc.data();
+          const freshWeekdays = (typeof freshData.weekdays === 'number') ? freshData.weekdays : freshData.weekday;
+          const freshWeekends = (typeof freshData.weekends === 'number') ? freshData.weekends : freshData.weekend;
+          if (typeof freshWeekdays === 'number') weekdaysInput.value = freshWeekdays;
+          if (typeof freshWeekends === 'number') weekendsInput.value = freshWeekends;
+        }
+
+        showPricingToast(`${roomType} pricing updated successfully.`);
+      } catch (err) {
+        console.error("Failed to save room pricing:", err);
+        showPricingToast(`Error saving ${roomType} pricing: ${err.message}`, true);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    });
+  });
+
+  // --- SPECIAL DATES MANAGEMENT ---
+  const specialDateModal = document.getElementById('specialDateModal');
+  const specialDateForm = document.getElementById('specialDateForm');
+  const addSpecialDateBtn = document.getElementById('addSpecialDateBtn');
+  const closeSpecialDateModal = document.getElementById('closeSpecialDateModal');
+  const cancelSpecialDateBtn = document.getElementById('cancelSpecialDateBtn');
+  const specialDatesTableBody = document.getElementById('specialDatesTableBody');
+  const noSpecialDatesMsg = document.getElementById('noSpecialDatesMsg');
+  const editingSpecialDateId = document.getElementById('editingSpecialDateId');
+  const specialDateModalTitle = document.getElementById('specialDateModalTitle');
+
+  let allSpecialDates = [];
+
+  function loadSpecialDates() {
+    if (!db) return;
+    db.collection('specialDates').onSnapshot((snapshot) => {
+      allSpecialDates = [];
+      snapshot.forEach(doc => {
+        allSpecialDates.push({
+          id: doc.id,
+          ...doc.data()
+        });
+      });
+
+      // Sort special dates chronologically
+      allSpecialDates.sort((a, b) => (a.date || a.id).localeCompare(b.date || b.id));
+
+      renderSpecialDatesTable();
+    }, (err) => {
+      console.error("Special dates snapshot listener error:", err);
+    });
+  }
+
+  function renderSpecialDatesTable() {
+    if (!specialDatesTableBody) return;
+    specialDatesTableBody.innerHTML = '';
+
+    if (allSpecialDates.length === 0) {
+      if (noSpecialDatesMsg) noSpecialDatesMsg.style.display = 'flex';
+      return;
+    }
+
+    if (noSpecialDatesMsg) noSpecialDatesMsg.style.display = 'none';
+
+    allSpecialDates.forEach(sd => {
+      const tr = document.createElement('tr');
+      const acPrice = sd.acDoublebed ?? sd.acDoubleBed ?? 0;
+      tr.innerHTML = `
+        <td style="font-weight: 600; color: var(--color-dark-taupe);">${formatHumanDate(sd.date || sd.id)}</td>
+        <td class="text-right">${formatCurrency(sd.gardenFacing || 0)}</td>
+        <td class="text-right">${formatCurrency(acPrice)}</td>
+        <td class="text-right">${formatCurrency(sd.seasideDeluxe || 0)}</td>
+        <td class="text-right">${formatCurrency(sd.executiveDeluxe || 0)}</td>
+        <td class="text-right">${formatCurrency(sd.superDeluxe || 0)}</td>
+        <td class="text-center">
+          <button class="btn-icon edit-btn" data-id="${sd.id}">EDIT</button>
+          <button class="btn-icon delete-btn" data-id="${sd.id}" data-date="${sd.date || sd.id}">DELETE</button>
+        </td>
+      `;
+      specialDatesTableBody.appendChild(tr);
+    });
+
+    // Attach Event Listeners to Edit and Delete Buttons
+    specialDatesTableBody.querySelectorAll('.edit-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        openEditSpecialDateModal(id);
+      });
+    });
+
+    specialDatesTableBody.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-id');
+        const dateStr = btn.getAttribute('data-date');
+        deleteSpecialDate(id, dateStr);
+      });
+    });
+  }
+
+  function openAddSpecialDateModal() {
+    if (!specialDateModal) return;
+    specialDateForm.reset();
+    editingSpecialDateId.value = '';
+    const dateInput = document.getElementById('specialDateInput');
+    if (dateInput) dateInput.readOnly = false;
+    specialDateModalTitle.textContent = "Add Special Date";
+    specialDateModal.style.display = 'flex';
+  }
+
+  function openEditSpecialDateModal(id) {
+    const sd = allSpecialDates.find(item => item.id === id);
+    if (!sd || !specialDateModal) return;
+
+    specialDateForm.reset();
+    editingSpecialDateId.value = sd.id;
+    specialDateModalTitle.textContent = "Edit Special Date";
+
+    const dateInput = document.getElementById('specialDateInput');
+    if (dateInput) {
+      dateInput.value = sd.date || sd.id;
+      dateInput.readOnly = true; // Date key is fixed when editing
+    }
+
+    document.getElementById('sd-gardenFacing').value = sd.gardenFacing || '';
+    const acEl = document.getElementById('sd-acDoublebed');
+    if (acEl) acEl.value = sd.acDoublebed ?? sd.acDoubleBed ?? '';
+    document.getElementById('sd-seasideDeluxe').value = sd.seasideDeluxe || '';
+    document.getElementById('sd-executiveDeluxe').value = sd.executiveDeluxe || '';
+    document.getElementById('sd-superDeluxe').value = sd.superDeluxe || '';
+
+    specialDateModal.style.display = 'flex';
+  }
+
+  function closeSpecialDateModalFunc() {
+    if (specialDateModal) specialDateModal.style.display = 'none';
+  }
+
+  if (addSpecialDateBtn) addSpecialDateBtn.addEventListener('click', openAddSpecialDateModal);
+  if (closeSpecialDateModal) closeSpecialDateModal.addEventListener('click', closeSpecialDateModalFunc);
+  if (cancelSpecialDateBtn) cancelSpecialDateBtn.addEventListener('click', closeSpecialDateModalFunc);
+
+  if (specialDateForm) {
+    specialDateForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const dateVal = document.getElementById('specialDateInput').value;
+      const gfVal = parseInt(document.getElementById('sd-gardenFacing').value, 10);
+      const acVal = parseInt(document.getElementById('sd-acDoublebed').value, 10);
+      const ssVal = parseInt(document.getElementById('sd-seasideDeluxe').value, 10);
+      const edVal = parseInt(document.getElementById('sd-executiveDeluxe').value, 10);
+      const sdVal = parseInt(document.getElementById('sd-superDeluxe').value, 10);
+
+      if (!dateVal || isNaN(gfVal) || isNaN(acVal) || isNaN(ssVal) || isNaN(edVal) || isNaN(sdVal)) {
+        showPricingToast("Please fill in valid prices for all 5 room types.", true);
+        return;
+      }
+
+      const saveBtn = document.getElementById('saveSpecialDateBtn');
+      saveBtn.disabled = true;
+      saveBtn.textContent = "SAVING...";
+
+      try {
+        const docId = dateVal; // Use date string YYYY-MM-DD as document ID
+        await db.collection('specialDates').doc(docId).set({
+          date: dateVal,
+          gardenFacing: gfVal,
+          acDoublebed: acVal,
+          acDoubleBed: acVal,
+          seasideDeluxe: ssVal,
+          executiveDeluxe: edVal,
+          superDeluxe: sdVal
+        });
+
+        showPricingToast(`Special date pricing for ${formatHumanDate(dateVal)} saved successfully.`);
+        closeSpecialDateModalFunc();
+      } catch (err) {
+        console.error("Failed to save special date pricing:", err);
+        showPricingToast(`Failed to save special date: ${err.message}`, true);
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = "Save Special Date";
+      }
+    });
+  }
+
+  async function deleteSpecialDate(id, dateStr) {
+    const formatted = formatHumanDate(dateStr);
+    if (!confirm(`Are you sure you want to delete pricing for ${formatted}?`)) {
+      return;
+    }
+
+    try {
+      await db.collection('specialDates').doc(id).delete();
+      showPricingToast(`Special date pricing for ${formatted} deleted successfully.`);
+    } catch (err) {
+      console.error("Failed to delete special date:", err);
+      showPricingToast(`Error deleting special date: ${err.message}`, true);
+    }
+  }
+
+  // Check auth state on initial load
+  initAuthStateListener();
 });
+

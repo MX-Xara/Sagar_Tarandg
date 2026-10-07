@@ -121,7 +121,7 @@
 
 .gallery-main-title {
   font-family: 'DM Serif Display', serif; /* Cormorant Garamond */
-  font-size: 64px;
+  font-size: clamp(28px, 5.5vw, 64px);
   font-weight: 400;
   text-transform: uppercase;
   color: #ffffff; /* White title for high contrast */

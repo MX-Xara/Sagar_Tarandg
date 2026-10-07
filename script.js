@@ -11,28 +11,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Navbar background on scroll
   const handleScroll = () => {
-    if (window.scrollY > 60) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
+    if (navbar) {
+      if (window.scrollY > 40) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
     }
   };
-  window.addEventListener('scroll', handleScroll);
-  handleScroll();
+  if (navbar) {
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+  }
 
-  // Mobile menu toggle
-  navToggle.addEventListener('click', () => {
-    navToggle.classList.toggle('open');
-    navLinks.classList.toggle('open');
-  });
-
-  // Close mobile menu when a link is clicked
-  navLinks.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      navToggle.classList.remove('open');
-      navLinks.classList.remove('open');
+  // Mobile menu toggle (Universal across all pages)
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
     });
-  });
+
+    // Close mobile menu when a link is clicked
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('open');
+        navLinks.classList.remove('open');
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (navToggle.classList.contains('open')) {
+        if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
+          navToggle.classList.remove('open');
+          navLinks.classList.remove('open');
+        }
+      }
+    });
+
+    // Reset menu state if resized to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900) {
+        navToggle.classList.remove('open');
+        navLinks.classList.remove('open');
+      }
+    });
+  }
 
   // Booking Modal Logic
   const bookingModal = document.getElementById('bookingModal');
@@ -257,16 +282,18 @@ mm.add("(min-width: 769px)", () => {
 mm.add("(max-width: 768px)", () => {
   const panels = [".resort-panel", ".pool-panel", ".beach-panel", ".food-panel"];
   panels.forEach((panel) => {
-    gsap.from(panel, {
-      opacity: 0,
-      y: 50,
-      duration: 1,
-      scrollTrigger: {
-        trigger: panel,
-        start: "top 80%",
-        toggleActions: "play none none reverse"
-      }
-    });
+    if (document.querySelector(panel)) {
+      gsap.from(panel, {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        scrollTrigger: {
+          trigger: panel,
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      });
+    }
   });
 });
 
@@ -362,131 +389,4 @@ if (document.querySelector(".attraction-card")) {
 }
 
 
-/*initializing firebase*/
-
-async function getBookedDates() {
-  const bookedDates = [];
-  const snapshot = await db.collection("bookings").get();
-  snapshot.forEach(doc => {
-    const data = doc.data();
-    let current = new Date(data.checkIn);
-    const end = new Date(data.checkOut);
-    while (current < end) {
-      bookedDates.push(current.toISOString().split("T")[0]);
-      current.setDate(current.getDate() + 1);
-    }
-  });
-  return bookedDates;
-}
-
-// Track flatpickr instances so we can destroy & reinit cleanly
-let checkInPicker = null;
-let checkOutPicker = null;
-
-async function initCalendar() {
-  if (checkInPicker) { checkInPicker.destroy(); checkInPicker = null; }
-  if (checkOutPicker) { checkOutPicker.destroy(); checkOutPicker = null; }
-
-  const bookedDates = await getBookedDates();
-
-  checkInPicker = flatpickr("#bookCheckIn", {
-    minDate: "today",
-    disable: bookedDates,
-    dateFormat: "Y-m-d",
-    onChange: function(selectedDates) {
-      if (selectedDates[0]) {
-        checkOutPicker.set("minDate", selectedDates[0]);
-      }
-    }
-  });
-
-  checkOutPicker = flatpickr("#bookCheckOut", {
-    minDate: "today",
-    disable: bookedDates,
-    dateFormat: "Y-m-d"
-  });
-}
-
-
-
-const bookingSubmitBtn = document.getElementById("booking-modal-submit-btn");
-if (bookingSubmitBtn) {
-  bookingSubmitBtn.addEventListener("click", function () {
-
-  // Grab form values up front, before Razorpay opens
-  const name = document.getElementById('bookName').value;
-  const phone = document.getElementById('bookPhone').value;
-  const email = document.getElementById('bookEmail').value;
-  const checkInStr = document.getElementById('bookCheckIn').value;
-  const checkOutStr = document.getElementById('bookCheckOut').value;
-  const adults = document.getElementById('bookAdults').value;
-  const children = document.getElementById('bookChildren').value;
-  const roomType = document.getElementById('bookRoomType').value;
-
-  if (!checkInStr || !checkOutStr) {
-    alert("Please select your check-in and check-out dates first.");
-    return;
-  }
-
-  const checkInDate = new Date(checkInStr);
-  const checkOutDate = new Date(checkOutStr);
-  const nights = Math.round((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
-
-  const roomPrices = {
-    "Super Deluxe Rooms": 1,
-    "Deluxe Sea Side Rooms": 6000,
-    "Executive Deluxe Rooms": 5500,
-    "Deluxe Garden View Rooms": 4500
-  };
-  const pricePerNight = roomPrices[roomType] || 5000;
-  const amount = nights * pricePerNight;
-
-  const options = {
-    key: "rzp_test_T2KlsbDebXkyv9",
-    amount: amount * 100,
-    currency: "INR",
-    name: "Sagar Taranga",
-    description: "Room Booking",
-
-    handler: function (response) {
-      // Payment confirmed — now save the booking
-      db.collection("bookings").add({
-        roomType: roomType,
-        name: name,
-        phone: phone,
-        email: email,
-        checkIn: checkInStr,
-        checkOut: checkOutStr,
-        adults: Number(adults),
-        children: Number(children),
-        nights: nights,
-        amount: amount,
-        paymentId: response.razorpay_payment_id,
-        bookedAt: new Date().toISOString()
-      })
-      .then(() => {
-        alert("Payment successful! Your booking is confirmed.");
-        document.getElementById('bookingModal').classList.remove('active');
-        document.body.style.overflow = '';
-        document.getElementById('bookingForm').reset();
-      })
-      .catch((error) => {
-        console.error("Booking save failed:", error);
-        alert("Payment went through, but we couldn't save your booking automatically. Please save this Payment ID and contact us: " + response.razorpay_payment_id);
-      });
-    },
-
-    prefill: {
-      name: name,
-      email: email,
-      contact: phone
-    },
-    theme: {
-      color: "#8B0000"
-    }
-  };
-
-  const rzp = new Razorpay(options);
-  rzp.open();
-  });
-}
+// Note: Booking submission and availability engine are fully managed in booking.js

@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sagar Taranga | Owner Booking Dashboard</title>
-  
+
   <!-- Google Fonts for Elegant and Simple Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Serif+Display:ital@0;1&family=Jost:wght@300;400;500&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Serif+Display:ital@0;1&family=Jost:wght@300;400;500&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+
   <!-- Dashboard Styling -->
   <link rel="stylesheet" href="admin.css">
 </head>
+
 <body>
 
   <!-- Login Overlay Gate -->
   <div id="loginGate" class="login-overlay" style="display: flex;">
     <div class="login-card">
       <div class="login-logo-area">
-        <img src="assets/ST-LOGO-1.webp" alt="Sagar Taranga Logo" class="login-logo" onerror="this.style.display='none'">
+        <img src="assets/ST-LOGO-1.webp" alt="Sagar Taranga Logo" class="login-logo"
+          onerror="this.style.display='none'">
         <div>
           <h2 class="login-resort-name">Sagar Taranga</h2>
           <p class="login-subtitle">Owner Portal Login</p>
@@ -27,33 +32,37 @@
       </div>
       <form id="loginForm" class="login-form">
         <div class="login-form-group">
-          <label for="usernameInput">Username</label>
-          <input type="text" id="usernameInput" placeholder="Enter owner username" required autocomplete="username">
+          <label for="emailInput">Email</label>
+          <input type="email" id="emailInput" placeholder="Enter owner email" required autocomplete="email">
         </div>
         <div class="login-form-group">
           <label for="passwordInput">Password</label>
-          <input type="password" id="passwordInput" placeholder="Enter owner password" required autocomplete="current-password">
+          <input type="password" id="passwordInput" placeholder="Enter owner password" required
+            autocomplete="current-password">
         </div>
-        <p id="loginErrorMsg" class="login-error-text" style="display: none;">Invalid username or password.</p>
-        <button type="submit" class="action-btn login-submit-btn">Sign In</button>
+        <p id="loginErrorMsg" class="login-error-text" style="display: none;"></p>
+        <button type="submit" class="action-btn login-submit-btn" id="loginSubmitBtn">Sign In</button>
       </form>
     </div>
   </div>
 
   <!-- Main Dashboard App Wrapper -->
   <div id="dashboardApp" style="display: none;">
-    
+
     <!-- Top Navigation Bar -->
     <header class="admin-header" id="dashboardHeader">
       <div class="header-container">
         <div class="logo-area">
-          <img src="assets/ST-LOGO-1.webp" alt="Sagar Taranga Logo" class="admin-logo" onerror="this.style.display='none'">
+          <img src="assets/ST-LOGO-1.webp" alt="Sagar Taranga Logo" class="admin-logo"
+            onerror="this.style.display='none'">
           <div>
             <h1 class="resort-name">Sagar Taranga</h1>
             <p class="dashboard-badge">Owner Booking Dashboard</p>
           </div>
         </div>
         <div class="header-actions">
+          <button id="bookingsTabBtn" class="action-btn outline-btn active">Bookings</button>
+          <button id="pricingTabBtn" class="action-btn outline-btn">Pricing</button>
           <button id="logoutBtn" class="action-btn outline-btn">Logout</button>
           <a href="booking.html" class="action-btn outline-btn" id="viewBookPageBtn">View Rooms Page</a>
           <a href="index.html" class="action-btn outline-btn" id="viewHomeBtn">Resort Home</a>
@@ -61,113 +70,393 @@
       </div>
     </header>
 
-  <!-- Main Content Container -->
-  <main class="dashboard-container">
-    
-    <!-- Real-Time Statistics Row -->
-    <section class="stats-row" aria-label="Quick Statistics">
-      
-      <!-- Total Bookings Card -->
-      <div class="stat-card" id="cardTotalBookings">
-        <div class="stat-icon-wrap" style="background-color: rgba(155, 143, 133, 0.15);">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#6b625b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="stat-icon"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-        </div>
-        <div class="stat-info">
-          <p class="stat-label">Total Bookings</p>
-          <h2 class="stat-value" id="totalBookingsCount">-</h2>
-          <span class="stat-desc">All time bookings stored</span>
-        </div>
+    <!-- Main Content Container -->
+    <main class="dashboard-container">
+
+      <!-- ================= BOOKINGS VIEW ================= -->
+      <div id="bookingsView">
+        <!-- Real-Time Statistics Row -->
+        <section class="stats-row" aria-label="Quick Statistics">
+
+          <!-- Total Bookings Card -->
+          <div class="stat-card" id="cardTotalBookings">
+            <div class="stat-icon-wrap" style="background-color: rgba(155, 143, 133, 0.15);">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#6b625b" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="stat-icon">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                <polyline points="7 3 7 8 15 8"></polyline>
+              </svg>
+            </div>
+            <div class="stat-info">
+              <p class="stat-label">Total Bookings</p>
+              <h2 class="stat-value" id="totalBookingsCount">-</h2>
+              <span class="stat-desc">All time bookings stored</span>
+            </div>
+          </div>
+
+          <!-- Today's Check-ins Card -->
+          <div class="stat-card" id="cardTodayCheckins">
+            <div class="stat-icon-wrap" style="background-color: rgba(78, 110, 88, 0.15);">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#4E6E58" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="stat-icon">
+                <path d="M15 3h6v6"></path>
+                <path d="M10 14 21 3"></path>
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              </svg>
+            </div>
+            <div class="stat-info">
+              <p class="stat-label">Today's Check-Ins</p>
+              <h2 class="stat-value text-success" id="todayCheckinsCount">-</h2>
+              <span class="stat-desc" id="currentDateLabel">Checking check-ins...</span>
+            </div>
+          </div>
+
+          <!-- Total Revenue Card -->
+          <div class="stat-card" id="cardTotalRevenue">
+            <div class="stat-icon-wrap" style="background-color: rgba(201, 168, 118, 0.15);">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#c9a876" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="stat-icon">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <div class="stat-info">
+              <p class="stat-label">Total Revenue Collected</p>
+              <h2 class="stat-value text-gold" id="totalRevenueAmount">-</h2>
+              <span class="stat-desc">From successful bookings</span>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- Interactive Table & Control Section -->
+        <section class="table-section" aria-label="Bookings Ledger">
+
+          <!-- Table Controls Bar -->
+          <div class="table-controls">
+            <div class="search-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#6b625b" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" class="search-icon">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="guestSearchInput" placeholder="Search by Guest Name or Contact Number..."
+                aria-label="Search bookings">
+            </div>
+            <div class="controls-actions">
+              <button id="clearSearchBtn" class="action-btn text-btn" style="display: none;">Clear Search</button>
+              <span class="entries-counter" id="visibleEntriesLabel">Showing - entries</span>
+            </div>
+          </div>
+
+          <!-- Live Loading State -->
+          <div class="loader-container" id="tableLoader">
+            <div class="luxury-spinner"></div>
+            <p class="loader-text">Loading bookings from Firestore...</p>
+          </div>
+
+          <!-- Empty State -->
+          <div class="empty-state-container" id="emptyState" style="display: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#9b8f85" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round" class="empty-icon">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="9" y1="15" x2="15" y2="15"></line>
+            </svg>
+            <h3 class="empty-title">No Bookings Found</h3>
+            <p class="empty-desc">There are no bookings recorded in Firestore that match your search filters.</p>
+          </div>
+
+          <!-- Responsive Table Container -->
+          <div class="table-responsive-container" id="tableContainer" style="display: none;">
+            <table class="bookings-table" id="bookingsTable">
+              <thead>
+                <tr>
+                  <th scope="col">Guest Name</th>
+                  <th scope="col">Contact Number</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Check-In Date</th>
+                  <th scope="col">Check-Out Date</th>
+                  <th scope="col">Room Type</th>
+                  <th scope="col" class="text-center">Adults</th>
+                  <th scope="col" class="text-center">Children</th>
+                  <th scope="col" class="text-center">Nights</th>
+                  <th scope="col" class="text-right">Amount Paid</th>
+                  <th scope="col">Payment ID</th>
+                  <th scope="col">Booking Time</th>
+                  <th scope="col" class="text-center">Status</th>
+                </tr>
+              </thead>
+              <tbody id="bookingsTableBody">
+                <!-- Dynamic rows will be inserted here by admin.js -->
+              </tbody>
+            </table>
+          </div>
+
+        </section>
       </div>
 
-      <!-- Today's Check-ins Card -->
-      <div class="stat-card" id="cardTodayCheckins">
-        <div class="stat-icon-wrap" style="background-color: rgba(78, 110, 88, 0.15);">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#4E6E58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="stat-icon"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
-        </div>
-        <div class="stat-info">
-          <p class="stat-label">Today's Check-Ins</p>
-          <h2 class="stat-value text-success" id="todayCheckinsCount">-</h2>
-          <span class="stat-desc" id="currentDateLabel">Checking check-ins...</span>
-        </div>
+      <!-- ================= PRICING VIEW ================= -->
+      <div id="pricingView" style="display: none;">
+
+        <!-- Toast Notification Container -->
+        <div id="pricingToast" class="toast-message" style="display: none;"></div>
+
+        <!-- SECTION 1 — ROOM PRICING -->
+        <section class="pricing-section">
+          <div class="section-header">
+            <h2>Room Pricing Management</h2>
+            <p class="section-subtitle">Set standard weekday and weekend prices for each room type</p>
+          </div>
+
+          <div class="pricing-cards-grid">
+
+            <!-- Garden Facing Card -->
+            <div class="pricing-card">
+              <div class="pricing-card-header">
+                <h3>Garden Facing</h3>
+                <span class="room-capacity-tag">3 Physical Rooms</span>
+              </div>
+              <form class="room-pricing-form" data-doc-id="gardenFacing" data-room-type="Garden Facing">
+                <div class="price-input-group">
+                  <label for="price-gardenFacing-weekdays">Weekday Price</label>
+                  <div class="currency-input-wrapper">
+                    <span class="currency-symbol">₹</span>
+                    <input type="number" id="price-gardenFacing-weekdays" min="0" step="1" required placeholder="4500">
+                  </div>
+                </div>
+                <div class="price-input-group">
+                  <label for="price-gardenFacing-weekends">Weekend Price</label>
+                  <div class="currency-input-wrapper">
+                    <span class="currency-symbol">₹</span>
+                    <input type="number" id="price-gardenFacing-weekends" min="0" step="1" required placeholder="5500">
+                  </div>
+                </div>
+                <button type="submit" class="action-btn save-price-btn">Save Changes</button>
+              </form>
+            </div>
+
+            <!-- AC Double Bed Card -->
+            <div class="pricing-card">
+              <div class="pricing-card-header">
+                <h3>AC Double Bed</h3>
+                <span class="room-capacity-tag">1 Physical Room</span>
+              </div>
+              <form class="room-pricing-form" data-doc-id="acDoublebed" data-room-type="AC Double Bed Room">
+                <div class="price-input-group">
+                  <label for="price-acDoublebed-weekdays">Weekday Price</label>
+                  <div class="currency-input-wrapper">
+                    <span class="currency-symbol">₹</span>
+                    <input type="number" id="price-acDoublebed-weekdays" min="0" step="1" required placeholder="7500">
+                  </div>
+                </div>
+                <div class="price-input-group">
+                  <label for="price-acDoublebed-weekends">Weekend Price</label>
+                  <div class="currency-input-wrapper">
+                    <span class="currency-symbol">₹</span>
+                    <input type="number" id="price-acDoublebed-weekends" min="0" step="1" required placeholder="8500">
+                  </div>
+                </div>
+                <button type="submit" class="action-btn save-price-btn">Save Changes</button>
+              </form>
+            </div>
+
+            <!-- Sea Side Deluxe Card -->
+            <div class="pricing-card">
+              <div class="pricing-card-header">
+                <h3>Sea Side Deluxe</h3>
+                <span class="room-capacity-tag">2 Physical Rooms</span>
+              </div>
+              <form class="room-pricing-form" data-doc-id="seasideDeluxe" data-room-type="Sea Side Deluxe">
+                <div class="price-input-group">
+                  <label for="price-seasideDeluxe-weekdays">Weekday Price</label>
+                  <div class="currency-input-wrapper">
+                    <span class="currency-symbol">₹</span>
+                    <input type="number" id="price-seasideDeluxe-weekdays" min="0" step="1" required placeholder="6000">
+                  </div>
+                </div>
+                <div class="price-input-group">
+                  <label for="price-seasideDeluxe-weekends">Weekend Price</label>
+                  <div class="currency-input-wrapper">
+                    <span class="currency-symbol">₹</span>
+                    <input type="number" id="price-seasideDeluxe-weekends" min="0" step="1" required placeholder="7000">
+                  </div>
+                </div>
+                <button type="submit" class="action-btn save-price-btn">Save Changes</button>
+              </form>
+            </div>
+
+            <!-- Executive Deluxe Card -->
+            <div class="pricing-card">
+              <div class="pricing-card-header">
+                <h3>Executive Deluxe</h3>
+                <span class="room-capacity-tag">4 Physical Rooms</span>
+              </div>
+              <form class="room-pricing-form" data-doc-id="executiveDeluxe" data-room-type="Executive Deluxe">
+                <div class="price-input-group">
+                  <label for="price-executiveDeluxe-weekdays">Weekday Price</label>
+                  <div class="currency-input-wrapper">
+                    <span class="currency-symbol">₹</span>
+                    <input type="number" id="price-executiveDeluxe-weekdays" min="0" step="1" required
+                      placeholder="5500">
+                  </div>
+                </div>
+                <div class="price-input-group">
+                  <label for="price-executiveDeluxe-weekends">Weekend Price</label>
+                  <div class="currency-input-wrapper">
+                    <span class="currency-symbol">₹</span>
+                    <input type="number" id="price-executiveDeluxe-weekends" min="0" step="1" required
+                      placeholder="6500">
+                  </div>
+                </div>
+                <button type="submit" class="action-btn save-price-btn">Save Changes</button>
+              </form>
+            </div>
+
+            <!-- Super Deluxe Card -->
+            <div class="pricing-card">
+              <div class="pricing-card-header">
+                <h3>Super Deluxe</h3>
+                <span class="room-capacity-tag">2 Physical Rooms</span>
+              </div>
+              <form class="room-pricing-form" data-doc-id="superDeluxe" data-room-type="Super Deluxe">
+                <div class="price-input-group">
+                  <label for="price-superDeluxe-weekdays">Weekday Price</label>
+                  <div class="currency-input-wrapper">
+                    <span class="currency-symbol">₹</span>
+                    <input type="number" id="price-superDeluxe-weekdays" min="0" step="1" required placeholder="8000">
+                  </div>
+                </div>
+                <div class="price-input-group">
+                  <label for="price-superDeluxe-weekends">Weekend Price</label>
+                  <div class="currency-input-wrapper">
+                    <span class="currency-symbol">₹</span>
+                    <input type="number" id="price-superDeluxe-weekends" min="0" step="1" required placeholder="9000">
+                  </div>
+                </div>
+                <button type="submit" class="action-btn save-price-btn">Save Changes</button>
+              </form>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- SECTION 2 — SPECIAL DATES -->
+        <section class="special-dates-section" style="margin-top: 36px;">
+          <div class="section-header-flex">
+            <div>
+              <h2>Special Dates</h2>
+              <p class="section-subtitle">Create date-specific pricing rules that override weekday/weekend rates</p>
+            </div>
+            <button id="addSpecialDateBtn" class="action-btn primary-btn">+ Add Special Date</button>
+          </div>
+
+          <div class="special-dates-card">
+            <div class="table-responsive-container">
+              <table class="bookings-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Date</th>
+                    <th scope="col" class="text-right">Garden Facing</th>
+                    <th scope="col" class="text-right">AC Double Bed</th>
+                    <th scope="col" class="text-right">Sea Side Deluxe</th>
+                    <th scope="col" class="text-right">Executive Deluxe</th>
+                    <th scope="col" class="text-right">Super Deluxe</th>
+                    <th scope="col" class="text-center">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="specialDatesTableBody">
+                  <!-- Special dates populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+            <div id="noSpecialDatesMsg" class="empty-state-container" style="display: none; padding: 40px;">
+              <p class="empty-desc">No special date pricing configured yet. Click "+ Add Special Date" above to create
+                one.</p>
+            </div>
+          </div>
+        </section>
+
       </div>
 
-      <!-- Total Revenue Card -->
-      <div class="stat-card" id="cardTotalRevenue">
-        <div class="stat-icon-wrap" style="background-color: rgba(201, 168, 118, 0.15);">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#c9a876" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="stat-icon"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+    </main>
+
+    <!-- Special Date Add / Edit Modal -->
+    <div id="specialDateModal" class="admin-modal-overlay" style="display: none;">
+      <div class="admin-modal-card">
+        <div class="admin-modal-header">
+          <h3 id="specialDateModalTitle">Add Special Date</h3>
+          <button type="button" class="admin-modal-close" id="closeSpecialDateModal">&times;</button>
         </div>
-        <div class="stat-info">
-          <p class="stat-label">Total Revenue Collected</p>
-          <h2 class="stat-value text-gold" id="totalRevenueAmount">-</h2>
-          <span class="stat-desc">From successful bookings</span>
-        </div>
-      </div>
-      
-    </section>
+        <form id="specialDateForm" class="special-date-form">
+          <input type="hidden" id="editingSpecialDateId" value="">
 
-    <!-- Interactive Table & Control Section -->
-    <section class="table-section" aria-label="Bookings Ledger">
-      
-      <!-- Table Controls Bar -->
-      <div class="table-controls">
-        <div class="search-wrapper">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#6b625b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          <input type="text" id="guestSearchInput" placeholder="Search by Guest Name or Contact Number..." aria-label="Search bookings">
-        </div>
-        <div class="controls-actions">
-          <button id="clearSearchBtn" class="action-btn text-btn" style="display: none;">Clear Search</button>
-          <span class="entries-counter" id="visibleEntriesLabel">Showing - entries</span>
-        </div>
-      </div>
+          <div class="login-form-group">
+            <label for="specialDateInput">Select Date</label>
+            <input type="date" id="specialDateInput" required>
+          </div>
 
-      <!-- Live Loading State -->
-      <div class="loader-container" id="tableLoader">
-        <div class="luxury-spinner"></div>
-        <p class="loader-text">Loading bookings from Firestore...</p>
-      </div>
+          <div style="margin-top: 14px; margin-bottom: 8px;">
+            <span class="room-capacity-tag">Prices for this special date</span>
+          </div>
 
-      <!-- Empty State -->
-      <div class="empty-state-container" id="emptyState" style="display: none;">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#9b8f85" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="empty-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="9" y1="15" x2="15" y2="15"></line></svg>
-        <h3 class="empty-title">No Bookings Found</h3>
-        <p class="empty-desc">There are no bookings recorded in Firestore that match your search filters.</p>
-      </div>
+          <div class="special-date-grid">
+            <div class="price-input-group">
+              <label for="sd-gardenFacing">Garden Facing</label>
+              <div class="currency-input-wrapper">
+                <span class="currency-symbol">₹</span>
+                <input type="number" id="sd-gardenFacing" min="0" step="1" required placeholder="4500">
+              </div>
+            </div>
 
-      <!-- Responsive Table Container -->
-      <div class="table-responsive-container" id="tableContainer" style="display: none;">
-        <table class="bookings-table" id="bookingsTable">
-          <thead>
-            <tr>
-              <th scope="col">Guest Name</th>
-              <th scope="col">Contact Number</th>
-              <th scope="col">Email</th>
-              <th scope="col">Check-In Date</th>
-              <th scope="col">Check-Out Date</th>
-              <th scope="col">Room Type</th>
-              <th scope="col" class="text-center">Adults</th>
-              <th scope="col" class="text-center">Children</th>
-              <th scope="col" class="text-center">Nights</th>
-              <th scope="col" class="text-right">Amount Paid</th>
-              <th scope="col">Payment ID</th>
-              <th scope="col">Booking Time</th>
-              <th scope="col" class="text-center">Status</th>
-            </tr>
-          </thead>
-          <tbody id="bookingsTableBody">
-            <!-- Dynamic rows will be inserted here by admin.js -->
-          </tbody>
-        </table>
-      </div>
-      
-    </section>
+            <div class="price-input-group">
+              <label for="sd-acDoublebed">AC Double Bed</label>
+              <div class="currency-input-wrapper">
+                <span class="currency-symbol">₹</span>
+                <input type="number" id="sd-acDoublebed" min="0" step="1" required placeholder="7500">
+              </div>
+            </div>
 
-  </main>
+            <div class="price-input-group">
+              <label for="sd-seasideDeluxe">Sea Side Deluxe</label>
+              <div class="currency-input-wrapper">
+                <span class="currency-symbol">₹</span>
+                <input type="number" id="sd-seasideDeluxe" min="0" step="1" required placeholder="6000">
+              </div>
+            </div>
+
+            <div class="price-input-group">
+              <label for="sd-executiveDeluxe">Executive Deluxe</label>
+              <div class="currency-input-wrapper">
+                <span class="currency-symbol">₹</span>
+                <input type="number" id="sd-executiveDeluxe" min="0" step="1" required placeholder="5500">
+              </div>
+            </div>
+
+            <div class="price-input-group">
+              <label for="sd-superDeluxe">Super Deluxe</label>
+              <div class="currency-input-wrapper">
+                <span class="currency-symbol">₹</span>
+                <input type="number" id="sd-superDeluxe" min="0" step="1" required placeholder="8000">
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-actions" style="margin-top: 24px; display: flex; gap: 12px; justify-content: flex-end;">
+            <button type="button" class="action-btn outline-btn" id="cancelSpecialDateBtn">Cancel</button>
+            <button type="submit" class="action-btn save-price-btn" id="saveSpecialDateBtn">Save Special Date</button>
+          </div>
+        </form>
+      </div>
+    </div>
 
   </div> <!-- End #dashboardApp -->
 
   <!-- Firebase Compat Scripts -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 
   <!-- ================================================================= -->
   <!-- ==================== FIREBASE CONFIGURATION ===================== -->
@@ -183,12 +472,13 @@
       messagingSenderId: "42559384671",
       appId: "1:42559384671:web:dd676af15913b10b9f7fea"
     };
-    
+
     // Initialize Firebase
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
     const db = firebase.firestore();
+    const auth = firebase.auth();
   </script>
   <!-- ================================================================= -->
   <!-- ================== END FIREBASE CONFIGURATION =================== -->
@@ -197,4 +487,5 @@
   <!-- Dashboard JavaScript Logic -->
   <script src="admin.js"></script>
 </body>
+
 </html>

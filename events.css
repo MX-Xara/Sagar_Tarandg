@@ -95,7 +95,7 @@ body {
 /* SPECIAL S */
 .hero-s {
     font-family: "Monsieur La Doulaise", cursive;
-    font-size: clamp(150px, 18vw, 300px);
+    font-size: clamp(40px, 14vw, 300px);
     font-weight: 400;
     line-height: 0.6;
 
@@ -107,7 +107,7 @@ body {
 /* AGARTARANG */
 .hero-rest {
     font-family: "Baskervville", serif;
-    font-size: clamp(90px, 12vw, 220px);
+    font-size: clamp(24px, 9vw, 220px);
     font-weight: 400;
 
     line-height: 0.8;
@@ -115,7 +115,7 @@ body {
     /* control spacing */
     letter-spacing: -0.055em;
 
-    margin-left: -35px;
+    margin-left: -15px;
 
     /* FORCE THE WORD TO SPAN THE SCREEN */
     transform: scaleX(1.06);
@@ -475,15 +475,12 @@ body {
 
 /* CENTER */
 .info-center {
-    transform: translateX(300px);
     text-align: center;
     white-space: nowrap;
 }
 
 /* RIGHT */
 .info-right {
-    transform: translateX(600px);
-
     text-align: left;
 }
 
@@ -963,6 +960,180 @@ body {
 
 @media (max-width: 768px) {
 
+    .events-hero {
+        position: relative;
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
+        padding: 95px 20px 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        text-align: center;
+    }
+
+    .events-hero-bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+    }
+
+    .events-hero-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Allows children (.info-left, .info-center, .info-right) to be ordered freely in hero flexbox */
+    .hero-info {
+        display: contents;
+    }
+
+    /* 1. Top paragraph above CELEBRATIONS */
+    .info-left {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        order: 1;
+        z-index: 5;
+        text-align: center;
+        margin: 10px 0 20px 0;
+        color: #937b60;
+        font-size: 13px;
+        line-height: 1.45;
+        letter-spacing: 0.04em;
+        width: 100%;
+        max-width: 360px;
+    }
+
+    /* 2. Ticket in center on top of CELEBRATIONS text */
+    .hero-ticket {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: rotate(0deg);
+        order: 2;
+        z-index: 5;
+        margin: 10px auto 25px auto;
+        flex-shrink: 0;
+    }
+
+    /* 3. CELEBRATIONS text in center */
+    .hero-title {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: scaleY(1.1);
+        order: 3;
+        z-index: 5;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 10px 0 25px 0;
+    }
+
+    .hero-s {
+        font-size: clamp(38px, 12vw, 85px);
+    }
+
+    .hero-rest {
+        font-size: clamp(22px, 7.5vw, 55px);
+        margin-left: -8px;
+    }
+
+    /* 4. 2 paragraphs below CELEBRATIONS */
+    .info-center {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        transform: none;
+        order: 4;
+        z-index: 5;
+        text-align: center;
+        font-size: 14px;
+        color: #937b60;
+        margin: 5px 0 10px 0;
+        width: 100%;
+    }
+
+    .info-right {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        transform: none;
+        order: 5;
+        z-index: 5;
+        text-align: center;
+        font-size: 13px;
+        color: #937b60;
+        line-height: 1.45;
+        margin: 0 0 30px 0;
+        width: 100%;
+        max-width: 380px;
+    }
+
+    /* 5. Image below paragraphs */
+    .events-image-reveal {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        order: 6;
+        z-index: 5;
+        width: 100%;
+        max-width: 480px;
+        height: 320px;
+        margin: 10px 0 25px 0;
+        border-radius: 12px;
+        overflow: hidden;
+        opacity: 1;
+    }
+
+    .events-image-reveal img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+
+    /* 6. Paragraph below image */
+    .reveal-text-container {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        order: 7;
+        z-index: 5;
+        width: 100%;
+        max-width: 520px;
+        opacity: 1;
+        padding: 0 10px;
+        margin: 0 0 30px 0;
+        text-align: center;
+    }
+
+    .reveal-heading {
+        font-size: clamp(24px, 5.8vw, 40px);
+        margin-bottom: 14px;
+        text-align: center;
+    }
+
+    .reveal-body {
+        font-size: 14px;
+        text-align: center;
+    }
+
     .events-showcase {
         height: auto;
         overflow: visible;
@@ -975,37 +1146,26 @@ body {
     }
 
     .event-panel {
-
         width: 100%;
         height: auto;
-
         min-height: 100vh;
-
         padding: 60px 25px;
     }
 
     .event-image {
-
         position: relative;
-
         left: auto;
         top: auto;
-
         width: 85vw;
         height: 60vh;
-
         margin: 0 auto 45px;
     }
 
     .event-copy {
-
         position: relative;
-
         left: auto;
         top: auto;
-
         width: 85vw;
-
         margin: 0 auto;
     }
 
@@ -1052,12 +1212,11 @@ body {
 
 .plan-event-content h2 {
     font-family: "DM Serif Display", serif;
-    font-size: clamp(65px, 7vw, 110px);
+    font-size: clamp(32px, 6vw, 110px);
     font-weight: 400;
-    line-height: 0.9;
+    line-height: 1.0;
     color: #243f49;
     margin: 0 0 28px;
-    white-space: nowrap;
 }
 
 

@@ -178,6 +178,10 @@ body.restaurant-active .navbar .nav-toggle span {
     background-color: var(--color-ocean, #102531);
 }
 
+body.restaurant-active .navbar .nav-toggle.open span {
+    background-color: #FAF6EF !important;
+}
+
 /* =========================================================
    NAVBAR LOGO SIZES (SEPARATE SETTINGS FOR BOTH LOGOS)
    ========================================================= */
@@ -297,23 +301,26 @@ body.restaurant-active .navbar .nav-toggle span {
 }
 
 @media (max-width: 768px) {
+    .door-side-text {
+        top: -22%;
+    }
     .door-side-left {
-        left: 14%;
+        left: 24%;
     }
     .door-side-right {
-        left: 86%;
+        left: 76%;
     }
     .side-text-content span {
-        font-size: clamp(9px, 1.8vw, 12px);
-        letter-spacing: 0.12em;
+        font-size: clamp(9px, 2.2vw, 13px);
+        letter-spacing: 0.14em;
     }
     .side-text-line {
-        width: 32px;
-        margin-top: 0.8rem;
+        width: 30px;
+        margin-top: 0.4rem;
     }
     .side-text-waves {
-        width: 24px;
-        margin-top: 0.4rem;
+        width: 22px;
+        margin-top: 0.3rem;
     }
 }
 
@@ -531,12 +538,14 @@ body.restaurant-active .navbar .nav-toggle span {
 .restaurant-intro-title {
     margin: 0 0 2rem 0;
     font-family: "HotelFont", serif;
-    font-size: clamp(55px, 5.8vw, 92px);
+    font-size: clamp(28px, 6vw, 92px);
     font-weight: 400;
-    line-height: 0.95;
+    line-height: 1.05;
     letter-spacing: 0.02em;
     color: #653d35;
     text-transform: uppercase;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .restaurant-intro-explore {
@@ -587,10 +596,17 @@ body.restaurant-active .navbar .nav-toggle span {
 }
 
 @media (max-width: 992px) {
+    .reference-section {
+        height: auto;
+        min-height: 100vh;
+        padding: 3rem 0 6rem 0;
+    }
+
     .reference-container {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 3rem;
+        align-items: center;
+        gap: 2.5rem;
+        transform: none;
     }
 }
 
@@ -610,7 +626,14 @@ body.restaurant-active .navbar .nav-toggle span {
 @media (max-width: 992px) {
     .reference-image-card {
         width: 100%;
-        max-width: 380px;
+        max-width: 320px;
+        height: 360px;
+        aspect-ratio: auto;
+        margin: 0 auto;
+        transform: translateX(0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
 
@@ -632,6 +655,15 @@ body.restaurant-active .navbar .nav-toggle span {
     transform-origin: center center;
     display: block;
     will-change: transform;
+}
+
+@media (max-width: 992px) {
+    .reference-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transform: rotate(-90deg);
+    }
 }
 
 .reference-text-content {

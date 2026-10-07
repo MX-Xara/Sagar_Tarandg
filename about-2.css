@@ -29,28 +29,16 @@ body.about-2-page {
 .about-2-image {
     position: absolute;
 
-    /* -----------------------------------------
-       IMAGE SIZE
-       Change these values later to adjust size
-       ----------------------------------------- */
-    width: 1800px;
+    width: min(1800px, 92vw);
     height: 500px;
+    max-height: 50vh;
+    object-fit: cover;
 
-
-    /* -----------------------------------------
-       IMAGE LOCATION
-       These keep the image exactly centered
-       ----------------------------------------- */
     left: 50%;
     top: 41%;
 
     transform: translate(-50%, 100vh);
 
-
-    /* -----------------------------------------
-       ENTRANCE ANIMATION
-       Image comes from below and stops at center
-       ----------------------------------------- */
     animation: imageComeUp 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
@@ -385,7 +373,7 @@ body.about-2-page {
     flex: 0 0 45%;
     max-width: 580px;
     text-align: left;
-    margin-left: 300px;
+    margin-left: 0;
 }
 
 .about-2-para-4 {
