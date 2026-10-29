@@ -270,6 +270,50 @@ body.events-page .nav-toggle.open span {
   text-align: center;
 }
 
+.hero-book-btn {
+  position: absolute;
+  top: 275px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 36px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: none !important;
+  outline: none;
+  border-radius: 0;
+  color: #ffffff;
+  font-family: var(--font-body, 'Raleway', sans-serif);
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+  z-index: 11;
+}
+
+.hero-book-btn:hover {
+  background: rgba(255, 255, 255, 0.32);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #ffffff;
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 12px 36px 0 rgba(0, 0, 0, 0.32);
+}
+
+.hero-book-btn:active {
+  transform: translateX(-50%) translateY(0);
+  background: rgba(255, 255, 255, 0.24);
+}
+
+
 
 
 .hero-media {
@@ -1865,6 +1909,12 @@ body.events-page .nav-toggle.open span {
     height: 320px;
   }
 
+  .hero-book-btn {
+    top: 195px;
+    padding: 11px 30px;
+    font-size: 13px;
+  }
+
   /* --- Page 2 --- */
   .page-2 {
     height: auto;
@@ -2024,6 +2074,13 @@ body.events-page .nav-toggle.open span {
 
   .hero-text {
     top: 40%;
+  }
+
+  .hero-book-btn {
+    top: 145px;
+    padding: 10px 26px;
+    font-size: 12px;
+    letter-spacing: 0.14em;
   }
 
   /* --- Page 2 --- */
@@ -2454,6 +2511,13 @@ body.events-page .nav-toggle.open span {
 
   .hero-text {
     top: 38%;
+  }
+
+  .hero-book-btn {
+    top: 108px;
+    padding: 9px 22px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
   }
 
   /* --- Page 2 --- */

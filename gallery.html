@@ -4,18 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gallery | Sagar Tarang Beach Resort Alibaug</title>
+  <title>Gallery | Our Visual Diary — Sagar Tarang Beach Resort Alibaug</title>
   <meta name="description"
-    content="Take a virtual tour of Sagar Tarang Beach Resort. Breathtaking views of Nagaon Beach, swimming pool, luxury rooms, and coastal culinary delights.">
+    content="Experience Sagar Tarang Beach Resort through our visual diary. Explore our asymmetric photo stories of culinary delights, pool sanctuary, luxury rooms, and serene coastal amenities.">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Serif+Display:ital@0;1&family=Jost:wght@300;400;500&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Raleway:ital,wght@0,300..900;1,300..900&display=swap"
+    rel="stylesheet">
 
   <!-- CSS Stylesheets -->
-  <link rel="stylesheet" href="style.css?v=1.2">
-  <link rel="stylesheet" href="gallery.css?v=1.2">
+  <link rel="stylesheet" href="style.css?v=1.5">
+  <link rel="stylesheet" href="gallery.css?v=2.2">
 </head>
 
 <body class="gallery-body-page">
@@ -30,7 +32,6 @@
       <nav class="nav-links" id="navLinks">
         <a href="index.html">Home</a>
         <a href="about-2.html">About</a>
-        
         <a href="gallery.html" class="active">Gallery</a>
         <a href="events.html">Events</a>
         <a href="hotel.html?trigger=true">Restaurant</a>
@@ -45,40 +46,273 @@
     </div>
   </header>
 
-  <!-- Gallery Main Section -->
-  <main class="gallery-container">
-    <div class="gallery-split-layout">
-      <!-- Left Panel: Text & Quotes -->
-      <div class="gallery-text-panel">
-        <div class="gallery-text-content">
-          <h1 class="gallery-main-title">Our Gallery</h1>
-          <div class="title-line"></div>
-          <p class="gallery-quote">"A glimpse into the beauty, comfort, and moments that make Sagar Taranga special."
-          </p>
+  <!-- Main Showcase Container -->
+  <main class="gallery-showcase-wrapper" id="showcaseWrapper">
+
+    <!-- Header Section (Upper-side center) -->
+    <header class="showcase-header">
+      <span class="gallery-kicker">GALLERY</span>
+      <h1 class="gallery-title">Our Visual Diary</h1>
+      <p class="gallery-tagline">
+        See the coastal world through our lens: memories, flavors, tranquil spaces, and beachside moments
+      </p>
+
+      <!-- Category Filter Pills (Food, Amenities, Rooms, Pool + View More) -->
+      <nav class="gallery-pill-nav" aria-label="Gallery category filters">
+        <button class="pill-btn active" data-category="food" id="pill-food">Food</button>
+        <button class="pill-btn" data-category="amenities" id="pill-amenities">Amenities</button>
+        <button class="pill-btn" data-category="rooms" id="pill-rooms">Rooms</button>
+        <button class="pill-btn" data-category="pool" id="pill-pool">Pool</button>
+        <button class="pill-btn view-more-pill" id="viewMoreBtn">
+          <span>Explore Collage</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </nav>
+    </header>
+
+    <!-- 3D Rotating Cards Carousel Section -->
+    <section class="carousel-section" id="carouselSection" aria-label="3D Rotating Showcase">
+      <div class="carousel-stage-container">
+        
+        <!-- Navigation Arrow Prev -->
+        <button class="carousel-arrow prev" id="carouselPrevBtn" aria-label="Previous card">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <!-- The 3D Cards Stage -->
+        <div class="carousel-stage" id="carouselStage">
+          <!-- Card 1: Food -->
+          <article class="carousel-card" data-category="food" data-index="0" tabindex="0" role="button" aria-label="View Food Collage">
+            <div class="card-inner">
+              <img class="card-bg-img" src="assets/GALLERY/FOOD/Copy-of-IMG_5780.jpg-1024x683-1-jpeg.webp" alt="Food & Dining">
+              <div class="card-gradient-overlay"></div>
+              <div class="card-content">
+                <span class="card-badge">Collection</span>
+                <h2 class="card-folder-name">FOOD</h2>
+                <p class="card-subtext">15 Coastal Culinary Creations</p>
+                <div class="card-action-hint">
+                  <span>Open Collage</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2: Amenities -->
+          <article class="carousel-card" data-category="amenities" data-index="1" tabindex="0" role="button" aria-label="View Amenities Collage">
+            <div class="card-inner">
+              <img class="card-bg-img" src="assets/GALLERY/FACADE AND AMENITIES/IMG_1943.WEBP" alt="Facade and Amenities">
+              <div class="card-gradient-overlay"></div>
+              <div class="card-content">
+                <span class="card-badge">Collection</span>
+                <h2 class="card-folder-name">AMENITIES</h2>
+                <p class="card-subtext">Architecture & Seaside Spaces</p>
+                <div class="card-action-hint">
+                  <span>Open Collage</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3: Rooms -->
+          <article class="carousel-card" data-category="rooms" data-index="2" tabindex="0" role="button" aria-label="View Rooms Collage">
+            <div class="card-inner">
+              <img class="card-bg-img" src="assets/GALLERY/ROOM IMAGES/Super deluxe/fd516d8c-b05a-47e8-9332-5fec5f778823.jpg" alt="Luxury Rooms">
+              <div class="card-gradient-overlay"></div>
+              <div class="card-content">
+                <span class="card-badge">Collection</span>
+                <h2 class="card-folder-name">ROOMS</h2>
+                <p class="card-subtext">Deluxe Suites & Garden Views</p>
+                <div class="card-action-hint">
+                  <span>Open Collage</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4: Pool -->
+          <article class="carousel-card" data-category="pool" data-index="3" tabindex="0" role="button" aria-label="View Pool Collage">
+            <div class="card-inner">
+              <img class="card-bg-img" src="assets/GALLERY/POOL/pool1.jpg" alt="Swimming Pool">
+              <div class="card-gradient-overlay"></div>
+              <div class="card-content">
+                <span class="card-badge">Collection</span>
+                <h2 class="card-folder-name">POOL</h2>
+                <p class="card-subtext">Azure Oasis & Tropical Calm</p>
+                <div class="card-action-hint">
+                  <span>Open Collage</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </article>
         </div>
+
+        <!-- Navigation Arrow Next -->
+        <button class="carousel-arrow next" id="carouselNextBtn" aria-label="Next card">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+
       </div>
 
-      <!-- Right Panel: Vertical Marquee Columns -->
-      <div class="gallery-grid-panel">
-        <!-- Column 1: Up to Down (scrolling downwards) -->
-        <div class="gallery-col" id="col1">
-          <div class="gallery-track-vertical scroll-up-down">
-            <!-- Populated dynamically by gallery.js -->
-          </div>
+      <!-- Bottom Bar with Indicators & Fullscreen expand icon -->
+      <div class="carousel-bottom-bar">
+        <!-- Pagination Dots -->
+        <div class="carousel-dots" id="carouselDots">
+          <button class="dot active" data-index="0" aria-label="Go to slide 1"></button>
+          <button class="dot" data-index="1" aria-label="Go to slide 2"></button>
+          <button class="dot" data-index="2" aria-label="Go to slide 3"></button>
+          <button class="dot" data-index="3" aria-label="Go to slide 4"></button>
         </div>
-        <!-- Column 2: Down to Up (scrolling upwards) -->
-        <div class="gallery-col" id="col2">
-          <div class="gallery-track-vertical scroll-down-up">
-            <!-- Populated dynamically by gallery.js -->
-          </div>
-        </div>
+
+        <!-- Fullscreen icon in the bottom right corner (like reference image) -->
+        <button class="fullscreen-toggle-btn" id="fullscreenToggleBtn" title="Toggle Fullscreen" aria-label="Toggle Fullscreen">
+          <svg class="icon-expand" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <polyline points="9 21 3 21 3 15"></polyline>
+            <line x1="21" y1="3" x2="14" y2="10"></line>
+            <line x1="3" y1="21" x2="10" y2="14"></line>
+          </svg>
+          <svg class="icon-collapse" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+            <polyline points="4 14 10 14 10 20"></polyline>
+            <polyline points="20 10 14 10 14 4"></polyline>
+            <line x1="14" y1="10" x2="21" y2="3"></line>
+            <line x1="10" y1="14" x2="3" y2="21"></line>
+          </svg>
+        </button>
       </div>
-    </div>
+    </section>
+
   </main>
 
-  <!-- JS Scripts -->
-  <script src="script.js?v=1.3"></script>
-  <script src="gallery.js"></script>
+  <!-- ==========================================================================
+       Asymmetric Collage View Overlay (Pushes upward from bottom with animation)
+       ========================================================================== -->
+  <section class="collage-modal-view" id="collageModalView" aria-hidden="true" role="dialog" aria-label="Photo Collage Gallery">
+    
+    <!-- Top Sticky Bar inside Collage -->
+    <div class="collage-header-bar">
+      <div class="collage-bar-inner">
+        <!-- Back Button -->
+        <button class="collage-back-btn" id="collageBackBtn" aria-label="Back to 3D Carousel">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>Back to Showcase</span>
+        </button>
+
+        <!-- Current Category Heading -->
+        <div class="collage-heading-center">
+          <span class="collage-badge-tag" id="collageBadgeTag">COLLECTION</span>
+          <h2 class="collage-title-text" id="collageTitleText">POOL GALLERY</h2>
+        </div>
+
+        <!-- In-Collage Category Pill Switcher -->
+        <div class="collage-tabs-wrapper">
+          <div class="collage-category-tabs" id="collageCategoryTabs">
+            <button class="tab-btn" data-cat="food">Food</button>
+            <button class="tab-btn" data-cat="amenities">Amenities</button>
+            <button class="tab-btn" data-cat="rooms">Rooms</button>
+            <button class="tab-btn active" data-cat="pool">Pool</button>
+          </div>
+        </div>
+
+        <!-- Close 'X' Button -->
+        <button class="collage-close-x" id="collageCloseX" aria-label="Close Collage">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Scrollable Asymmetric Collage Area -->
+    <div class="collage-scroll-container" id="collageScrollContainer">
+      <div class="collage-intro-meta">
+        <span class="collage-count-badge" id="collageCountBadge">12 Photos</span>
+        <p class="collage-caption-text" id="collageCaptionText">Curated asymmetric visual journey of our tropical pool haven</p>
+      </div>
+
+      <!-- The Dynamic Asymmetric Collage Grid -->
+      <div class="asymmetric-collage-grid" id="asymmetricCollageGrid">
+        <!-- Injected dynamically by gallery.js with staggered upward push-in animation -->
+      </div>
+
+      <!-- Bottom return hint -->
+      <div class="collage-footer-actions">
+        <button class="return-showcase-btn" id="returnShowcaseBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>Return to 3D Rotating Showcase</span>
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ==========================================================================
+       Full-Screen Image Lightbox (Clicking any collage image opens high-res modal)
+       ========================================================================== -->
+  <div class="lightbox-modal" id="lightboxModal" aria-hidden="true" role="dialog" aria-label="Image Zoom Preview">
+    <div class="lightbox-overlay" id="lightboxOverlay"></div>
+    <div class="lightbox-container">
+      <button class="lightbox-btn close" id="lightboxCloseBtn" aria-label="Close Lightbox">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <button class="lightbox-btn prev" id="lightboxPrevBtn" aria-label="Previous Image">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="lightbox-image-box">
+        <img class="lightbox-active-img" id="lightboxActiveImg" src="" alt="Full view image">
+        <div class="lightbox-caption-bar">
+          <span class="lightbox-category-name" id="lightboxCategoryName">POOL</span>
+          <span class="lightbox-counter" id="lightboxCounter">1 / 10</span>
+        </div>
+      </div>
+
+      <button class="lightbox-btn next" id="lightboxNextBtn" aria-label="Next Image">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- JavaScript Files -->
+  <script src="script.js?v=1.5"></script>
+  <script src="gallery.js?v=2.1"></script>
 </body>
 
 </html>
