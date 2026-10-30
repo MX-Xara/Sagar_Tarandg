@@ -44,27 +44,53 @@ document.addEventListener('DOMContentLoaded', () => {
         'assets/GALLERY/FACADE AND AMENITIES/IMG_9507.WEBP'
       ]
     },
-    rooms: {
-      folderName: 'ROOMS',
-      displayName: 'Luxury Rooms & Suites',
-      tagline: 'SANCTUARY OF COMFORT',
-      caption: 'Comfortable living with serene garden vistas, plush beds, and refreshing coastal breezes.',
+    'executive-deluxe': {
+      folderName: 'EXECUTIVE DELUXE',
+      displayName: 'Executive Deluxe Rooms',
+      tagline: 'SPACIOUS COASTAL LUXURY',
+      caption: 'Spacious coastal luxury with elegant woodwork, serene lighting, and premium comfort.',
+      images: [
+        'assets/GALLERY/ROOM IMAGES/Executive Deluxe/1.webp',
+        'assets/GALLERY/ROOM IMAGES/Executive Deluxe/2.webp',
+        'assets/GALLERY/ROOM IMAGES/Executive Deluxe/3.webp',
+        'assets/GALLERY/ROOM IMAGES/Executive Deluxe/4.webp',
+        'assets/GALLERY/ROOM IMAGES/Executive Deluxe/5.webp'
+      ]
+    },
+    'garden-facing': {
+      folderName: 'GARDEN FACING',
+      displayName: 'Garden Facing Rooms',
+      tagline: 'PEACEFUL NATURE RETREAT',
+      caption: 'Serene rooms surrounded by lush tropical greenery, open gardens, and restful calm.',
+      images: [
+        'assets/GALLERY/ROOM IMAGES/Garden Facing/IMG_9490.WEBP',
+        'assets/GALLERY/ROOM IMAGES/Garden Facing/IMG_9491.WEBP',
+        'assets/GALLERY/ROOM IMAGES/Garden Facing/IMG_9492.WEBP'
+      ]
+    },
+    'sea-side-deluxe': {
+      folderName: 'SEA SIDE DELUXE',
+      displayName: 'Sea Side Deluxe Rooms',
+      tagline: 'OCEAN BREEZE & LUXURY',
+      caption: 'Deluxe accommodations with gentle sea breezes and peaceful coastal aesthetics.',
+      images: [
+        'assets/GALLERY/ROOM IMAGES/Sea side Deluxe/1.webp',
+        'assets/GALLERY/ROOM IMAGES/Sea side Deluxe/2.webp',
+        'assets/GALLERY/ROOM IMAGES/Sea side Deluxe/278b48c3-d57e-4019-a305-e78c017e4b6c.jpg'
+      ]
+    },
+    'super-deluxe': {
+      folderName: 'SUPER DELUXE',
+      displayName: 'Super Deluxe Rooms',
+      tagline: 'PREMIUM COMFORT & STYLE',
+      caption: 'Expansive premium bedrooms offering exceptional coastal charm, bespoke furnishings, and luxury.',
       images: [
         'assets/GALLERY/ROOM IMAGES/Super deluxe/fd516d8c-b05a-47e8-9332-5fec5f778823.jpg',
-        'assets/GALLERY/ROOM IMAGES/Executive Deluxe/1.webp',
         'assets/GALLERY/ROOM IMAGES/Super deluxe/95e8672d-913b-47f4-b3be-338cc99d9463.jpg',
-        'assets/GALLERY/ROOM IMAGES/Garden Facing/IMG_9490.WEBP',
         'assets/GALLERY/ROOM IMAGES/Super deluxe/PHOTO-2026-05-18-11-39-56.jpg',
-        'assets/GALLERY/ROOM IMAGES/Executive Deluxe/2.webp',
-        'assets/GALLERY/ROOM IMAGES/Garden Facing/IMG_9491.WEBP',
         'assets/GALLERY/ROOM IMAGES/Super deluxe/IMG_1944.WEBP',
-        'assets/GALLERY/ROOM IMAGES/Executive Deluxe/3.webp',
-        'assets/GALLERY/ROOM IMAGES/Sea side Deluxe/278b48c3-d57e-4019-a305-e78c017e4b6c.jpg',
-        'assets/GALLERY/ROOM IMAGES/Executive Deluxe/4.webp',
-        'assets/GALLERY/ROOM IMAGES/Garden Facing/IMG_9492.WEBP',
         'assets/GALLERY/ROOM IMAGES/Super deluxe/IMG_9488.WEBP',
-        'assets/GALLERY/ROOM IMAGES/Super deluxe/IMG_9487.JPG',
-        'assets/GALLERY/ROOM IMAGES/Executive Deluxe/5.webp'
+        'assets/GALLERY/ROOM IMAGES/Super deluxe/IMG_9487.JPG'
       ]
     },
     pool: {
@@ -86,7 +112,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  const categoryOrder = ['food', 'amenities', 'rooms', 'pool'];
+  const categoryOrder = [
+    'food',
+    'amenities',
+    'executive-deluxe',
+    'garden-facing',
+    'sea-side-deluxe',
+    'super-deluxe',
+    'pool'
+  ];
   let currentCarouselIndex = 0;
   let autoRotateTimer = null;
   const ROTATE_INTERVAL = 4000; // 4 seconds auto-rotation
@@ -172,7 +206,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (diff > Math.floor((total - 1) / 2)) diff -= total;
 
       // Remove existing position classes
-      card.classList.remove('card-active', 'card-next', 'card-prev', 'card-far-right', 'card-far-left');
+      card.classList.remove(
+        'card-active',
+        'card-next',
+        'card-prev',
+        'card-far-right',
+        'card-far-left',
+        'card-hidden-right',
+        'card-hidden-left'
+      );
 
       if (diff === 0) {
         card.classList.add('card-active');
@@ -183,11 +225,17 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (diff === -1) {
         card.classList.add('card-prev');
         card.setAttribute('aria-hidden', 'true');
-      } else if (diff >= 2) {
+      } else if (diff === 2) {
         card.classList.add('card-far-right');
         card.setAttribute('aria-hidden', 'true');
-      } else {
+      } else if (diff === -2) {
         card.classList.add('card-far-left');
+        card.setAttribute('aria-hidden', 'true');
+      } else if (diff > 2) {
+        card.classList.add('card-hidden-right');
+        card.setAttribute('aria-hidden', 'true');
+      } else {
+        card.classList.add('card-hidden-left');
         card.setAttribute('aria-hidden', 'true');
       }
     });
@@ -536,7 +584,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!lightboxCurrentList.length) return;
     const src = lightboxCurrentList[lightboxActiveIndex];
     lightboxActiveImg.src = encodeURI(src);
-    lightboxCategoryName.textContent = activeCollageCategory.toUpperCase();
+    lightboxCategoryName.textContent = galleryData[activeCollageCategory]?.folderName || activeCollageCategory.toUpperCase();
     lightboxCounter.textContent = `${lightboxActiveIndex + 1} / ${lightboxCurrentList.length}`;
   };
 

@@ -339,7 +339,7 @@ html, body {
 
 .card-folder-name {
   font-family: var(--font-display);
-  font-size: 2.2rem;
+  font-size: clamp(1.6rem, 2.3vw, 2.2rem);
   font-weight: 500;
   color: #ffffff;
   margin: 0 0 6px 0;
@@ -419,6 +419,22 @@ html, body {
   z-index: 5 !important;
   opacity: 0.45 !important;
   filter: brightness(0.8) blur(1px) !important;
+}
+
+.carousel-card.card-hidden-right {
+  transform: translate(-50%, -50%) translateX(680px) scale(0.55) translateZ(-240px) rotateY(-20deg) !important;
+  z-index: 1 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  filter: brightness(0.7) blur(2px) !important;
+}
+
+.carousel-card.card-hidden-left {
+  transform: translate(-50%, -50%) translateX(-680px) scale(0.55) translateZ(-240px) rotateY(20deg) !important;
+  z-index: 1 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  filter: brightness(0.7) blur(2px) !important;
 }
 
 /* ==========================================================================
@@ -618,14 +634,23 @@ html, body {
 .collage-tabs-wrapper {
   display: flex;
   align-items: center;
+  max-width: 58%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.collage-tabs-wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 .collage-category-tabs {
   display: flex;
   gap: 8px;
+  flex-wrap: nowrap;
 }
 
 .tab-btn {
+  white-space: nowrap;
   font-family: var(--font-ui);
   font-size: 13px;
   font-weight: 500;
@@ -1016,6 +1041,18 @@ html, body {
   .carousel-card.card-far-left {
     transform: translate(-50%, -50%) translateX(-420px) scale(0.7) translateZ(-160px) rotateY(15deg) !important;
   }
+  .carousel-card.card-hidden-right {
+    transform: translate(-50%, -50%) translateX(550px) scale(0.55) translateZ(-240px) rotateY(-20deg) !important;
+    z-index: 1 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  .carousel-card.card-hidden-left {
+    transform: translate(-50%, -50%) translateX(-550px) scale(0.55) translateZ(-240px) rotateY(20deg) !important;
+    z-index: 1 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
 
   .asymmetric-collage-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -1096,8 +1133,10 @@ html, body {
     transform: translate(-50%, -50%) translateX(-160px) scale(0.85) translateZ(-60px) rotateY(8deg) !important;
   }
   .carousel-card.card-far-right,
-  .carousel-card.card-far-left {
-    display: none !important; /* Hide 4th card off-screen on very narrow devices */
+  .carousel-card.card-far-left,
+  .carousel-card.card-hidden-right,
+  .carousel-card.card-hidden-left {
+    display: none !important; /* Hide off-screen cards on very narrow devices */
   }
 
   .asymmetric-collage-grid {
