@@ -23,7 +23,7 @@ try {
     if (fs.existsSync(rootEnv)) dotenv.config({ path: rootEnv });
     else if (fs.existsSync(msgEnv)) dotenv.config({ path: msgEnv });
   }
-} catch (_) {}
+} catch (_) { }
 
 // In-memory deduplication set
 const processedPayments = new Set();
@@ -76,7 +76,7 @@ async function parseRequestBody(req) {
   if (typeof req.body === 'string') {
     try {
       return JSON.parse(req.body);
-    } catch (_) {}
+    } catch (_) { }
   }
   return new Promise((resolve) => {
     let raw = '';
@@ -443,14 +443,14 @@ async function getGoogleAccessToken() {
       const parsed = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY);
       serviceEmail = serviceEmail || parsed.client_email;
       privateKey = privateKey || parsed.private_key;
-    } catch (_) {}
+    } catch (_) { }
   }
 
   if (serviceEmail && privateKey) {
     // Format private key properly in case newlines were escaped
     const formattedKey = privateKey
-  .replace(/\\n/g, '\n')
-  .trim();
+      .replace(/\\n/g, '\n')
+      .trim();
     const jwt = createGoogleJwt(serviceEmail, formattedKey);
 
     const res = await fetch('https://oauth2.googleapis.com/token', {
