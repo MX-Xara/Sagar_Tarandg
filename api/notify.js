@@ -213,7 +213,7 @@ async function sendGuestEmail({ name, email, roomType, checkIn, checkOut, amount
       let data = await res.json();
 
       // If custom domain is not yet verified in Resend, fallback to onboarding@resend.dev
-      if (!res.ok && data.message && data.message.includes('domain is not verified')) {
+      if (!res.ok && data.message && (data.message.includes('domain is not verified') || data.message.includes('not verified'))) {
         console.warn('[Email:Resend] Custom domain not verified yet. Retrying with onboarding@resend.dev.');
         activeSender = 'Sagar Tarang Beach Resort <onboarding@resend.dev>';
         res = await fetch('https://api.resend.com/emails', {
@@ -228,6 +228,28 @@ async function sendGuestEmail({ name, email, roomType, checkIn, checkOut, amount
             subject: subject,
             text: plainText,
             html: htmlContent
+          })
+        });
+        data = await res.json();
+      }
+
+      // If Resend trial restriction prevents sending to arbitrary guests, deliver test copy to owner
+      if (!res.ok && data.message && data.message.includes('only send testing emails to your own email address')) {
+        const ownerMatch = data.message.match(/\(([^)]+)\)/);
+        const ownerEmail = ownerMatch ? ownerMatch[1] : (process.env.GOOGLE_CALENDAR_ID || 'durgamagar2005@gmail.com');
+        console.warn(`[Email:Resend] Trial restriction: forwarding test email to owner (${ownerEmail}).`);
+        res = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            from: activeSender,
+            to: [ownerEmail],
+            subject: `[Booking Confirmation] ${subject}`,
+            text: `[NOTE: Resend domain verification pending. Forwarding test email to owner (${ownerEmail}) for guest (${email})]\n\n` + plainText,
+            html: `<div style="background:#fff3cd;padding:12px;margin-bottom:16px;border-radius:6px;border:1px solid #ffeeba;color:#856404;font-family:sans-serif;font-size:13px;"><strong>Resend Test Mode Notice:</strong> Domain <em>sagartarangbeachresort.com</em> is pending verification on Resend. Delivering confirmation to resort owner (<strong>${ownerEmail}</strong>) for guest <strong>${name}</strong> (${email}). Once verified on resend.com, emails will deliver directly to all guests.</div>` + htmlContent
           })
         });
         data = await res.json();
@@ -447,10 +469,15 @@ async function getGoogleAccessToken() {
   }
 
   if (serviceEmail && privateKey) {
-    // Format private key properly in case newlines were escaped
-    const formattedKey = privateKey
-      .replace(/\\n/g, '\n')
-      .trim();
+    // Format private key properly: strip wrapping quotes, trailing commas, and unescape newlines
+    let formattedKey = String(privateKey).trim();
+    while (formattedKey.startsWith('"') || formattedKey.startsWith("'")) {
+      formattedKey = formattedKey.slice(1);
+    }
+    while (formattedKey.endsWith('"') || formattedKey.endsWith("'") || formattedKey.endsWith(',')) {
+      formattedKey = formattedKey.slice(0, -1);
+    }
+    formattedKey = formattedKey.replace(/\\n/g, '\n').trim();
     const jwt = createGoogleJwt(serviceEmail, formattedKey);
 
     const res = await fetch('https://oauth2.googleapis.com/token', {
