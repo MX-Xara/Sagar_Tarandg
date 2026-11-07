@@ -190,21 +190,26 @@ async function sendGuestEmail({ name, email, roomType, checkIn, checkOut, amount
     </div>
   `;
 
-  const sender = process.env.EMAIL_FROM || 'Sagar Tarang Beach Resort <bookings@sagartarangbeachresort.com>';
+  const sender = process.env.EMAIL_FROM || 'Sagar Tarang Beach Resort <onboarding@resend.dev>';
+  const resendApiKey = process.env.RESEND_API_KEY;
 
   // Option A: Resend API (Recommended on Vercel)
-  if (process.env.RESEND_API_KEY) {
+  if (resendApiKey) {
     try {
+      const recipientEmail = String(email || '').trim();
+      const adminEmail = (process.env.ADMIN_EMAIL || process.env.GOOGLE_CALENDAR_ID || 'durgamagar2005@gmail.com').trim();
       let activeSender = sender;
+
+      // 1. Send confirmation email to guest
       let res = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+          Authorization: `Bearer ${resendApiKey}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           from: activeSender,
-          to: [email],
+          to: [recipientEmail],
           subject: subject,
           text: plainText,
           html: htmlContent
@@ -219,12 +224,12 @@ async function sendGuestEmail({ name, email, roomType, checkIn, checkOut, amount
         res = await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: {
-            Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+            Authorization: `Bearer ${resendApiKey}`,
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
             from: activeSender,
-            to: [email],
+            to: [recipientEmail],
             subject: subject,
             text: plainText,
             html: htmlContent
@@ -233,23 +238,22 @@ async function sendGuestEmail({ name, email, roomType, checkIn, checkOut, amount
         data = await res.json();
       }
 
-      // If Resend trial restriction prevents sending to arbitrary guests, deliver test copy to owner
+      // If Resend trial restriction prevents sending to external guests, deliver to owner (durgamagar2005@gmail.com)
       if (!res.ok && data.message && data.message.includes('only send testing emails to your own email address')) {
-        const ownerMatch = data.message.match(/\(([^)]+)\)/);
-        const ownerEmail = ownerMatch ? ownerMatch[1] : (process.env.GOOGLE_CALENDAR_ID || 'durgamagar2005@gmail.com');
-        console.warn(`[Email:Resend] Trial restriction: forwarding test email to owner (${ownerEmail}).`);
+        console.warn(`[Email:Resend] Trial restriction: forwarding test email to owner (${adminEmail}).`);
+        activeSender = 'Sagar Tarang Beach Resort <onboarding@resend.dev>';
         res = await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: {
-            Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+            Authorization: `Bearer ${resendApiKey}`,
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
             from: activeSender,
-            to: [ownerEmail],
+            to: [adminEmail],
             subject: `[Booking Confirmation] ${subject}`,
-            text: `[NOTE: Resend domain verification pending. Forwarding test email to owner (${ownerEmail}) for guest (${email})]\n\n` + plainText,
-            html: `<div style="background:#fff3cd;padding:12px;margin-bottom:16px;border-radius:6px;border:1px solid #ffeeba;color:#856404;font-family:sans-serif;font-size:13px;"><strong>Resend Test Mode Notice:</strong> Domain <em>sagartarangbeachresort.com</em> is pending verification on Resend. Delivering confirmation to resort owner (<strong>${ownerEmail}</strong>) for guest <strong>${name}</strong> (${email}). Once verified on resend.com, emails will deliver directly to all guests.</div>` + htmlContent
+            text: `[NOTE: Resend is in test mode. Forwarding booking confirmation to owner ${adminEmail} for guest ${name} (${recipientEmail})]\n\n` + plainText,
+            html: `<div style="background:#fff3cd;padding:12px;margin-bottom:16px;border-radius:6px;border:1px solid #ffeeba;color:#856404;font-family:sans-serif;font-size:13px;"><strong>Resend Test Mode Notice:</strong> Domain <em>sagartarangbeachresort.com</em> is pending verification on Resend. Delivering confirmation to resort owner (<strong>${adminEmail}</strong>) for guest <strong>${name}</strong> (${recipientEmail}). Once verified on resend.com, emails will deliver directly to all guests.</div>` + htmlContent
           })
         });
         data = await res.json();
