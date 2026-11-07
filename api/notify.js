@@ -448,7 +448,9 @@ async function getGoogleAccessToken() {
 
   if (serviceEmail && privateKey) {
     // Format private key properly in case newlines were escaped
-    const formattedKey = privateKey.replace(/\\n/g, '\n').trim();
+    const formattedKey = privateKey
+  .replace(/\\n/g, '\n')
+  .trim();
     const jwt = createGoogleJwt(serviceEmail, formattedKey);
 
     const res = await fetch('https://oauth2.googleapis.com/token', {
