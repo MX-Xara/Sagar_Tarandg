@@ -1222,6 +1222,11 @@ body.events-page .nav-toggle.open span {
     opacity: 0;
 }
 
+.title-word {
+    display: inline-block;
+    white-space: nowrap;
+}
+
 
 
 
@@ -2299,9 +2304,11 @@ body.events-page .nav-toggle.open span {
   }
 
   .title-amenities {
-    font-size: 2.2rem;
+    font-size: clamp(1.6rem, 5.5vw, 2.2rem);
+    line-height: 1.2;
     margin-bottom: 40px;
-    padding: 12px 8px;
+    padding: 12px 14px;
+    word-break: normal;
   }
 
   .amenities-container {
@@ -2576,8 +2583,10 @@ body.events-page .nav-toggle.open span {
 
   /* --- Page 4 --- */
   .title-amenities {
-    font-size: 1.6rem;
+    font-size: clamp(1.35rem, 5vw, 1.65rem);
+    line-height: 1.25;
     margin-bottom: 28px;
+    padding: 10px 12px;
   }
 
   .amenity-card span {

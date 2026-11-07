@@ -49,7 +49,7 @@ html, body {
   transition: all 0.4s ease;
   border-bottom: none !important;
   box-shadow: none !important;
-  z-index: 100;
+  z-index: 1000 !important;
   position: fixed;
   top: 0;
   left: 0;
@@ -82,8 +82,18 @@ html, body {
   border-bottom: 2px solid var(--color-yellow) !important;
 }
 
+.gallery-body-page .nav-toggle {
+  z-index: 1001 !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
 .gallery-body-page .nav-toggle span {
   background-color: var(--color-nav-dark) !important;
+}
+
+.gallery-body-page .nav-toggle.open span {
+  background-color: var(--color-cream, #FAF6EF) !important;
 }
 
 @media (max-width: 991px) {

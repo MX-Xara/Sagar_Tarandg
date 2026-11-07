@@ -102,16 +102,34 @@ body.about-2-page {
 .about-2-title {
     font-family: 'DM Serif Display', serif;
 
-    font-size: clamp(2.5rem, 4vw, 4.5rem);
+    font-size: clamp(2rem, 3.8vw, 4.5rem);
     font-weight: 400;
-    line-height: 1.05;
+    line-height: 1.15;
 
     color: #1582b0;
 
     margin: 0 auto 28px;
 
     letter-spacing: 0.01em;
+    word-break: normal;
+    overflow-wrap: normal;
+}
+
+.word-wrap {
+    display: inline-block;
     white-space: nowrap;
+}
+
+.pillar-word {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.pillar-sep {
+    display: inline-block;
+    color: #1582b0;
+    margin: 0 10px;
+    opacity: 0.7;
 }
 
 
@@ -704,18 +722,151 @@ body.about-2-page {
     transform: translateY(-2px);
 }
 
-/* Responsive banner layout */
+/* Responsive banner layout for Boat Card */
 @media (max-width: 992px) {
+    .about-2-card-section-6 {
+        padding: 24px 4vw 70px;
+    }
+
     .about-2-card-container-6 {
         height: auto;
-        min-height: 440px;
+        min-height: 480px;
         max-height: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 30px 16px;
+    }
+
+    .about-2-card-content-6 {
+        width: 92%;
+        max-width: 520px;
+        margin: 0 auto;
+        padding: 32px 20px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
     }
 
-    .about-2-card-content-6 {
-        padding: 40px 6vw;
+    .about-2-card-title-6 {
+        font-size: clamp(1.25rem, 5vw, 1.85rem);
+        white-space: normal;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 14px;
+        line-height: 1.25;
+        color: #000000;
+    }
+
+    .about-2-card-text-6 {
+        font-size: clamp(0.82rem, 3.2vw, 0.95rem);
+        text-align: center;
+        width: 100%;
+        max-width: 440px;
+        margin: 0 auto 20px auto;
+        line-height: 1.6;
+        color: #ffffff;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .about-2-card-btn-wrapper-6 {
+        text-align: center;
+        width: 100%;
+        margin-top: 8px;
+    }
+}
+
+/* Mobile Responsiveness for Sections 1, 2, and 3 */
+@media (max-width: 768px) {
+    /* Section 1 */
+    .about-2-blank {
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 85px;
+        padding-bottom: 50px;
+    }
+
+    .about-2-image {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        animation: none;
+        opacity: 1;
+        width: 92vw;
+        height: 260px;
+        max-height: 38vh;
+        margin: 0 auto 24px auto;
+        border-radius: 12px;
+    }
+
+    .section-1-text-content {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        width: 92%;
         max-width: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .about-2-title {
+        font-size: clamp(1.75rem, 6vw, 2.3rem);
+        line-height: 1.2;
+        margin-bottom: 18px;
+        white-space: normal;
+    }
+
+    .about-2-subtitle {
+        font-size: clamp(0.85rem, 3.5vw, 1.05rem);
+        line-height: 1.6;
+        max-width: 92%;
+        margin: 0 auto;
+    }
+
+    /* Section 2: 4 Words Vertical Stacked on Mobile with Equal Spacing */
+    .about-2-text-section {
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
+        padding: 90px 20px 60px 20px;
+    }
+
+    #about2Title2 {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 20px !important;
+        margin: 0 auto 30px auto !important;
+        white-space: normal !important;
+    }
+
+    #about2Title2 .pillar-word {
+        display: block !important;
+        font-size: clamp(2.2rem, 7.5vw, 2.8rem) !important;
+        line-height: 1.1 !important;
+        text-align: center !important;
+        margin: 0 !important;
+    }
+
+    #about2Title2 .pillar-sep {
+        display: none !important;
+    }
+
+    /* Section 3 text wrap safety */
+    .about-2-asymmetric-title {
+        word-break: normal;
+        overflow-wrap: normal;
+        font-size: clamp(1.6rem, 5.5vw, 2.2rem);
+        line-height: 1.25;
     }
 }

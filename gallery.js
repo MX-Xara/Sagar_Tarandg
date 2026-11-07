@@ -1,3 +1,20 @@
+/* =========================================
+   SMOOTH MOMENTUM SCROLL (Lenis)
+   ========================================= */
+const lenis = new Lenis({
+  duration: 1.2,
+  smoothWheel: true,
+  wheelMultiplier: 0.9,
+  touchMultiplier: 1.5
+});
+
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+
+requestAnimationFrame(raf);
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // ==========================================================================
@@ -170,14 +187,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let lightboxActiveIndex = 0;
 
   // ==========================================================================
-  // Navbar Mobile Toggle & Scroll Behavior
+  // Navbar Mobile Toggle & Scroll Behavior (Handled cleanly by script.js)
   // ==========================================================================
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-  }
 
   const handleScroll = () => {
     if (window.scrollY > 40) {
@@ -487,6 +498,7 @@ document.addEventListener('DOMContentLoaded', () => {
     collageModalView.classList.add('open');
     collageModalView.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden'; // Lock background scroll
+    if (typeof lenis !== 'undefined') lenis.stop();
     collageScrollContainer.scrollTop = 0;
   };
 
@@ -547,6 +559,7 @@ document.addEventListener('DOMContentLoaded', () => {
     collageModalView.classList.remove('open');
     collageModalView.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    if (typeof lenis !== 'undefined') lenis.start();
     startAutoRotate();
   };
 

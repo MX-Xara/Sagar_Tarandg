@@ -1,0 +1,13 @@
+node_modules/
+.env
+.env*
+*.env
+messages.env
+.env.local
+.notifications_cache.json
+npm-debug.log*
+.DS_Store
+config_key.txt
+login id pass.txt
+log in id pass.txt
+

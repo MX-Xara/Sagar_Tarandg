@@ -1,3 +1,7 @@
+try {
+  require('dotenv').config();
+} catch (_) {}
+
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
@@ -23,6 +27,12 @@ const MIME_TYPES = {
 };
 
 const server = http.createServer((req, res) => {
+  // Route API endpoints
+  if (req.url.startsWith('/api/notify')) {
+    const notifyHandler = require('./api/notify');
+    return notifyHandler(req, res);
+  }
+
   // Decode URL to handle spaces/special characters
   let filePath = path.join(PUBLIC_DIR, decodeURIComponent(req.url.split('?')[0]));
   if (filePath === PUBLIC_DIR || req.url.endsWith('/')) {

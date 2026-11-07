@@ -45,24 +45,55 @@ document.addEventListener("DOMContentLoaded", () => {
        ========================================= */
 
     function splitIntoLetters(element) {
-
         if (!element) return;
 
+        // Special handling for the 4 pillars heading to enable vertical mobile stacking
+        if (element.id === "about2Title2") {
+            const pillarWords = ["Privacy", "Nature", "Serenity", "Connection"];
+            element.innerHTML = "";
+            pillarWords.forEach((word, idx) => {
+                const pillarSpan = document.createElement("span");
+                pillarSpan.classList.add("pillar-word", "word-wrap");
+                [...word].forEach((char) => {
+                    const letter = document.createElement("span");
+                    letter.classList.add("letter");
+                    letter.textContent = char;
+                    pillarSpan.appendChild(letter);
+                });
+                element.appendChild(pillarSpan);
+
+                if (idx < pillarWords.length - 1) {
+                    const sep = document.createElement("span");
+                    sep.classList.add("pillar-sep");
+                    sep.textContent = " · ";
+                    element.appendChild(sep);
+                }
+            });
+            return;
+        }
+
         const text = element.textContent.trim();
+        element.innerHTML = "";
 
-        element.textContent = "";
+        // Split text by words so words never break in half across lines
+        const words = text.split(/\s+/);
+        words.forEach((word, wordIndex) => {
+            const wordSpan = document.createElement("span");
+            wordSpan.classList.add("word-wrap");
 
-        [...text].forEach((character) => {
+            [...word].forEach((character) => {
+                const span = document.createElement("span");
+                span.classList.add("letter");
+                span.textContent = character;
+                wordSpan.appendChild(span);
+            });
 
-            const span = document.createElement("span");
+            element.appendChild(wordSpan);
 
-            span.classList.add("letter");
-
-            span.textContent =
-                character === " " ? "\u00A0" : character;
-
-            element.appendChild(span);
-
+            // Add standard breakable space between words
+            if (wordIndex < words.length - 1) {
+                element.appendChild(document.createTextNode(" "));
+            }
         });
     }
 

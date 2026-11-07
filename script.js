@@ -318,16 +318,17 @@ mm.add("(max-width: 768px)", () => {
 const title = document.querySelector(".title-amenities");
 
 if (title) {
-  const text = title.textContent;
+  const text = title.textContent.trim();
 
   title.innerHTML = text
-    .split("")
-    .map(letter =>
-      letter === " "
-        ? " "
-        : `<span>${letter}</span>`
+    .split(/\s+/)
+    .map(word =>
+      `<span class="title-word" style="display:inline-block; white-space:nowrap;">${word
+        .split("")
+        .map(letter => `<span>${letter}</span>`)
+        .join("")}</span>`
     )
-    .join("");
+    .join(" ");
 
   gsap.to(".title-amenities span", {
     y: 0,
@@ -352,16 +353,17 @@ if (title) {
 const attractionTitle = document.querySelector(".title-popular-attractions");
 
 if (attractionTitle) {
-  const attractionText = attractionTitle.textContent;
+  const attractionText = attractionTitle.textContent.trim();
 
   attractionTitle.innerHTML = attractionText
-    .split("")
-    .map(letter =>
-      letter === " "
-        ? " "
-        : `<span>${letter}</span>`
+    .split(/\s+/)
+    .map(word =>
+      `<span class="title-word" style="display:inline-block; white-space:nowrap;">${word
+        .split("")
+        .map(letter => `<span>${letter}</span>`)
+        .join("")}</span>`
     )
-    .join("");
+    .join(" ");
 
   gsap.to(".title-popular-attractions span", {
     y: 0,

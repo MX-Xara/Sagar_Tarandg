@@ -22,6 +22,30 @@
 // Instead, we check which physical rooms are occupied.
 // ============================================================================
 
+/* =========================================
+   SMOOTH MOMENTUM SCROLL (Lenis)
+   ========================================= */
+const lenis = new Lenis({
+    duration: 1.2,
+    smoothWheel: true,
+    wheelMultiplier: 0.9,
+    touchMultiplier: 1.5
+});
+
+if (typeof ScrollTrigger !== 'undefined' && typeof gsap !== 'undefined') {
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+} else {
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // ========================================================================
@@ -740,6 +764,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.body.style.overflow =
             'hidden';
+        if (typeof lenis !== 'undefined') lenis.stop();
 
 
         // Create the date pickers.
@@ -760,6 +785,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.body.style.overflow =
             '';
+        if (typeof lenis !== 'undefined') lenis.start();
 
 
         stopAutoSlide();
@@ -2095,7 +2121,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     return;
                                 }
 
-                                await db
+                                const bookingDocRef = await db
                                     .collection(
                                         'bookings'
                                     )
@@ -2163,6 +2189,35 @@ document.addEventListener('DOMContentLoaded', () => {
                                             new Date().toISOString()
 
                                     });
+
+                                // Automatically trigger guest email, WhatsApp and Google Calendar notifications
+                                try {
+                                    fetch('/api/notify', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify({
+                                            bookingId: bookingDocRef ? bookingDocRef.id : null,
+                                            paymentId: response.razorpay_payment_id,
+                                            name: name,
+                                            phone: phone,
+                                            email: email,
+                                            roomType: roomType,
+                                            checkIn: checkInStr,
+                                            checkOut: checkOutStr,
+                                            amount: amount
+                                        })
+                                    }).then(function (res) {
+                                        return res.json();
+                                    }).then(function (notifyData) {
+                                        console.log('[Notification Dispatch]', notifyData);
+                                    }).catch(function (notifyErr) {
+                                        console.error('[Notification Dispatch Error]', notifyErr);
+                                    });
+                                } catch (dispatchErr) {
+                                    console.error('[Notification Trigger Error]', dispatchErr);
+                                }
 
 
 
