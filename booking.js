@@ -49,52 +49,8 @@ if (typeof ScrollTrigger !== 'undefined' && typeof gsap !== 'undefined') {
 document.addEventListener('DOMContentLoaded', () => {
 
     // ========================================================================
-    // 1. NAVBAR
+    // 1. NAVBAR (Managed universally by script.js)
     // ========================================================================
-
-    const navbar = document.getElementById('navbar');
-    const navToggle = document.getElementById('navToggle');
-    const navLinks = document.getElementById('navLinks');
-
-    if (navbar) {
-
-        const handleScroll = () => {
-
-            if (window.scrollY > 60) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-
-        };
-
-        window.addEventListener('scroll', handleScroll);
-
-        handleScroll();
-    }
-
-    if (navToggle && navLinks) {
-
-        navToggle.addEventListener('click', () => {
-
-            navToggle.classList.toggle('open');
-            navLinks.classList.toggle('open');
-
-        });
-
-        navLinks.querySelectorAll('a').forEach((link) => {
-
-            link.addEventListener('click', () => {
-
-                navToggle.classList.remove('open');
-                navLinks.classList.remove('open');
-
-            });
-
-        });
-
-    }
-
 
     // ========================================================================
     // 2. ROOM IMAGE DATA
