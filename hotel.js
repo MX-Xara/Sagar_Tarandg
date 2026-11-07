@@ -497,6 +497,119 @@ document.addEventListener("DOMContentLoaded", () => {
         ease: "power2.out"
       }, 0.15);
     }
+
+    // 5. The Table / Restaurant Menu Section Animations
+    const menuSection = document.getElementById("restaurantMenuSection");
+    if (menuSection) {
+      const menuEyebrow = document.getElementById("menuEyebrow");
+      const menuHeadline = document.getElementById("menuHeadline");
+
+      const menuLines = [
+        document.getElementById("menuLine1"),
+        document.getElementById("menuLine2"),
+        document.getElementById("menuLine3"),
+        document.getElementById("menuLine4"),
+        document.getElementById("menuLine5")
+      ].filter(Boolean);
+
+      const menuRows = [
+        document.getElementById("menuRow1"),
+        document.getElementById("menuRow2"),
+        document.getElementById("menuRow3"),
+        document.getElementById("menuRow4")
+      ].filter(Boolean);
+
+      const menuFooterAction = document.getElementById("menuFooterAction");
+
+      // Set initial transform and opacity states
+      menuLines.forEach((line) => {
+        gsap.set(line, {
+          scaleX: 0,
+          transformOrigin: "left center"
+        });
+      });
+
+      menuRows.forEach((row) => {
+        gsap.set(row, {
+          opacity: 0.2,
+          y: 8
+        });
+      });
+
+      if (menuFooterAction) {
+        gsap.set(menuFooterAction, {
+          opacity: 0,
+          y: 12
+        });
+      }
+
+      // Split header text for letter blur-drop animation
+      if (menuEyebrow) splitTextIntoChars(menuEyebrow);
+      if (menuHeadline) splitTextIntoChars(menuHeadline);
+
+      const menuHeaderChars = menuSection.querySelectorAll(".menu-header .char");
+      if (menuHeaderChars.length > 0) {
+        gsap.set(menuHeaderChars, {
+          opacity: 0,
+          filter: "blur(12px)",
+          y: -22
+        });
+
+        gsap.to(menuHeaderChars, {
+          opacity: 1,
+          filter: "blur(0px)",
+          y: 0,
+          duration: 0.7,
+          stagger: 0.012,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: menuSection,
+            start: "top 82%",
+            toggleActions: "play none none reverse"
+          }
+        });
+      }
+
+      // Scrubbed ScrollTrigger Timeline:
+      // Cascading line draw: each line starts just after the previous one starts!
+      const menuScrollTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: menuSection,
+          start: "top top",
+          end: "+=95%",
+          pin: true,
+          scrub: 0.8,
+          anticipatePin: 1
+        }
+      });
+
+      // Lines draw with a cascading stagger so line 2 starts right after line 1 starts:
+      menuScrollTl.to(menuLines, {
+        scaleX: 1,
+        ease: "power1.out",
+        duration: 0.85,
+        stagger: 0.2
+      }, 0);
+
+      // Rows illuminate in sync with the cascading lines:
+      menuScrollTl.to(menuRows, {
+        opacity: 1,
+        y: 0,
+        ease: "power1.out",
+        duration: 0.55,
+        stagger: 0.2
+      }, 0.12);
+
+      // View Full Menu link reveals as the final line sweeps in:
+      if (menuFooterAction) {
+        menuScrollTl.to(menuFooterAction, {
+          opacity: 1,
+          y: 0,
+          ease: "power1.out",
+          duration: 0.5
+        }, 1.05);
+      }
+    }
   }
 
   function runRestaurantTransition() {
@@ -576,6 +689,42 @@ document.addEventListener("DOMContentLoaded", () => {
       }, "-=0.3");
     }
   }
+
+  // Full Menu Popup Modal Handlers
+  const menuViewLink = document.getElementById("menuViewLink");
+  const menuModalOverlay = document.getElementById("menuModalOverlay");
+  const menuModalClose = document.getElementById("menuModalClose");
+  const menuModalBackdrop = document.getElementById("menuModalBackdrop");
+
+  function openMenuModal(e) {
+    if (e) e.preventDefault();
+    if (!menuModalOverlay) return;
+    menuModalOverlay.classList.add("is-open");
+    menuModalOverlay.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeMenuModal() {
+    if (!menuModalOverlay) return;
+    menuModalOverlay.classList.remove("is-open");
+    menuModalOverlay.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "auto";
+  }
+
+  if (menuViewLink) {
+    menuViewLink.addEventListener("click", openMenuModal);
+  }
+  if (menuModalClose) {
+    menuModalClose.addEventListener("click", closeMenuModal);
+  }
+  if (menuModalBackdrop) {
+    menuModalBackdrop.addEventListener("click", closeMenuModal);
+  }
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && menuModalOverlay && menuModalOverlay.classList.contains("is-open")) {
+      closeMenuModal();
+    }
+  });
 
   // Trigger animation when user clicks the "Restaurant" navbar button
   restaurantNavBtn.addEventListener("click", (e) => {

@@ -14,7 +14,7 @@
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="style.css?v=1.5">
-  <link rel="stylesheet" href="hotel.css?v=1.0">
+  <link rel="stylesheet" href="hotel.css?v=1.4">
 </head>
 
 <body class="hotel-page-body" id="hotelBody">
@@ -232,6 +232,261 @@
 
   </section>
 
+  <!-- =========================================
+       RESTAURANT MENU SECTION (THE TABLE)
+       ========================================= -->
+  <section class="restaurant-menu-section" id="restaurantMenuSection">
+    <div class="menu-stage">
+      <div class="menu-container">
+        
+        <!-- Section Header -->
+        <div class="menu-header">
+          <div class="menu-eyebrow" id="menuEyebrow">THE TABLE</div>
+          <h2 class="menu-headline" id="menuHeadline">SIMPLE INGREDIENTS.<br>MEMORABLE MEALS.</h2>
+        </div>
+
+        <!-- Menu Table List with Left-to-Right Draw Lines -->
+        <div class="menu-table-wrapper" id="menuTableWrapper">
+          
+          <!-- Line 1 (Above Small Plates) -->
+          <div class="menu-draw-line" id="menuLine1" data-line-index="1"></div>
+
+          <!-- Row 1: SMALL PLATES -->
+          <div class="menu-table-row" id="menuRow1">
+            <span class="menu-category-name">SMALL PLATES</span>
+            <span class="menu-category-desc">From the sea &amp; nearby farms</span>
+          </div>
+
+          <!-- Line 2 (Between Small Plates & Mains) -->
+          <div class="menu-draw-line" id="menuLine2" data-line-index="2"></div>
+
+          <!-- Row 2: MAINS -->
+          <div class="menu-table-row" id="menuRow2">
+            <span class="menu-category-name">MAINS</span>
+            <span class="menu-category-desc">Fire, salt &amp; the day’s catch</span>
+          </div>
+
+          <!-- Line 3 (Between Mains & Desserts) -->
+          <div class="menu-draw-line" id="menuLine3" data-line-index="3"></div>
+
+          <!-- Row 3: DESSERTS -->
+          <div class="menu-table-row" id="menuRow3">
+            <span class="menu-category-name">DESSERTS</span>
+            <span class="menu-category-desc">A lingering sweet note</span>
+          </div>
+
+          <!-- Line 4 (Between Desserts & Drinks) -->
+          <div class="menu-draw-line" id="menuLine4" data-line-index="4"></div>
+
+          <!-- Row 4: DRINKS -->
+          <div class="menu-table-row" id="menuRow4">
+            <span class="menu-category-name">DRINKS</span>
+            <span class="menu-category-desc">Bright pours &amp; cooler evenings</span>
+          </div>
+
+          <!-- Line 5 (Below Drinks) -->
+          <div class="menu-draw-line" id="menuLine5" data-line-index="5"></div>
+
+        </div>
+
+        <!-- Action / View Full Menu Link -->
+        <div class="menu-footer-action" id="menuFooterAction">
+          <a href="#fullMenuModal" class="menu-view-link" id="menuViewLink">
+            <span>VIEW FULL MENU</span>
+            <span class="menu-arrow">&rarr;</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       FULL MENU POPUP MODAL
+       ========================================= -->
+  <div class="menu-modal-overlay" id="menuModalOverlay" aria-hidden="true">
+    <div class="menu-modal-backdrop" id="menuModalBackdrop"></div>
+    <div class="menu-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="menuModalTitle">
+      <button class="menu-modal-close" id="menuModalClose" aria-label="Close menu">&times;</button>
+      
+      <div class="menu-modal-header">
+        <span class="menu-modal-subtitle">THE SÓLT PROJECT</span>
+        <h3 class="menu-modal-title" id="menuModalTitle">A LA CARTE DINING</h3>
+        <p class="menu-modal-intro">Crafted with coastal catches, seasonal harvests, and coastal heritage.</p>
+      </div>
+
+      <div class="menu-modal-body">
+        
+        <!-- Category: Small Plates -->
+        <div class="menu-modal-category">
+          <h4 class="menu-cat-title">Small Plates</h4>
+          <div class="menu-cat-items">
+            <div class="menu-cat-item">
+              <div class="cat-item-top">
+                <span class="cat-item-name">Dynamite Shrimp</span>
+                <span class="cat-item-line"></span>
+                <span class="cat-item-price">₹480</span>
+              </div>
+              <p class="cat-item-desc">Crispy golden shrimp tossed in a creamy, spicy sauce with a bold kick.</p>
+            </div>
+            <div class="menu-cat-item">
+              <div class="cat-item-top">
+                <span class="cat-item-name">Honey Prawns</span>
+                <span class="cat-item-line"></span>
+                <span class="cat-item-price">₹490</span>
+              </div>
+              <p class="cat-item-desc">Glazed coastal prawns with wildflower honey, bird's eye chili &amp; sesame.</p>
+            </div>
+            <div class="menu-cat-item">
+              <div class="cat-item-top">
+                <span class="cat-item-name">Tambda Rassa Taco</span>
+                <span class="cat-item-line"></span>
+                <span class="cat-item-price">₹390</span>
+              </div>
+              <p class="cat-item-desc">A bold Konkani-inspired taco filled with spicy, flavorful Tambda Rassa.</p>
+            </div>
+            <div class="menu-cat-item">
+              <div class="cat-item-top">
+                <span class="cat-item-name">Ghee Roast Crostini</span>
+                <span class="cat-item-line"></span>
+                <span class="cat-item-price">₹360</span>
+              </div>
+              <p class="cat-item-desc">Slow-roasted coastal spice blend and clarified butter on crusty bread.</p>
+            </div>
+            <div class="menu-cat-item">
+              <div class="cat-item-top">
+                <span class="cat-item-name">Kothambir Wadi</span>
+                <span class="cat-item-line"></span>
+                <span class="cat-item-price">₹280</span>
+              </div>
+              <p class="cat-item-desc">Crisp cilantro &amp; gram flour fritters with fresh coconut-mint chutney.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category: Mains -->
+        <div class="menu-modal-category">
+          <h4 class="menu-cat-title">Mains</h4>
+          <div class="menu-cat-items">
+            <div class="menu-cat-item">
+              <div class="cat-item-top">
+                <span class="cat-item-name">Seafood Chowder</span>
+                <span class="cat-item-line"></span>
+                <span class="cat-item-price">₹520</span>
+              </div>
+              <p class="cat-item-desc">Creamy coastal chowder with fresh tender catch in every spoonful.</p>
+            </div>
+            <div class="menu-cat-item">
+              <div class="cat-item-top">
+                <span class="cat-item-name">Konkani Fish Curry</span>
+                <span class="cat-item-line"></span>
+                <span class="cat-item-price">₹560</span>
+              </div>
+              <p class="cat-item-desc">Traditional coconut, kokum &amp; fresh catch curry with steamed rice.</p>
+            </div>
+            <div class="menu-cat-item">
+              <div class="cat-item-top">
+                <span class="cat-item-name">Dan Dan Noodles</span>
+                <span class="cat-item-line"></span>
+                <span class="cat-item-price">₹440</span>
+              </div>
+              <p class="cat-item-desc">Handcrafted noodles in spicy sesame sauce with wok-tossed greens.</p>
+            </div>
+            <div class="menu-cat-item">
+              <div class="cat-item-top">
+                <span class="cat-item-name">Chicken Afghani</span>
+                <span class="cat-item-line"></span>
+                <span class="cat-item-price">₹490</span>
+              </div>
+              <p class="cat-item-desc">Char-grilled boneless chicken in rich mild cream &amp; crushed spices.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category: Desserts -->
+        <div class="menu-modal-category">
+          <h4 class="menu-cat-title">Desserts</h4>
+          <div class="menu-cat-items">
+            <div class="menu-cat-item">
+              <div class="cat-item-top">
+                <span class="cat-item-name">Kokan’s Tandalache Modak</span>
+                <span class="cat-item-line"></span>
+                <span class="cat-item-price">₹260</span>
+              </div>
+              <p class="cat-item-desc">Steamed rice-flour delicacy with fresh coconut, jaggery &amp; warm ghee.</p>
+            </div>
+            <div class="menu-cat-item">
+              <div class="cat-item-top">
+                <span class="cat-item-name">Modak Panna Cotta</span>
+                <span class="cat-item-line"></span>
+                <span class="cat-item-price">₹320</span>
+              </div>
+              <p class="cat-item-desc">Silky cardamom-scented coconut panna cotta with jaggery syrup.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Category: Drinks -->
+        <div class="menu-modal-category">
+          <h4 class="menu-cat-title">Drinks &amp; Coolers</h4>
+          <div class="menu-cat-items">
+            <div class="menu-cat-item">
+              <div class="cat-item-top">
+                <span class="cat-item-name">Solkadhi Fizz</span>
+                <span class="cat-item-line"></span>
+                <span class="cat-item-price">₹220</span>
+              </div>
+              <p class="cat-item-desc">Refreshing wild kokum extract, coconut milk, cumin &amp; sparkling soda.</p>
+            </div>
+            <div class="menu-cat-item">
+              <div class="cat-item-top">
+                <span class="cat-item-name">Coastal Sunset Punch</span>
+                <span class="cat-item-line"></span>
+                <span class="cat-item-price">₹240</span>
+              </div>
+              <p class="cat-item-desc">Spiced pink guava, lime spritz, and smoked sea salt rim.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="menu-modal-footer">
+        <a href="booking.html" target="_blank" class="menu-modal-book-btn">Reserve a Dining Table</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <section class="page-6" id="page-6">
+    <div>
+      <img class="end-img" src="assets/end.webp" alt="Coastal view footer image" loading="lazy">
+    </div>
+    <img class="end" src="assets/name.png" alt="Sagartarang logo text">
+
+    <div class="end-contact">
+      <p>
+        Near Nagaon Beach<br>
+        Alibag, Maharashtra<br>
+        India
+      </p>
+      <p>
+        ph +91 90110 87295
+      </p>
+      <p>
+        sagartarangbeachresort.com
+      </p>
+    </div>
+    <p class="copyright">
+      &copy; Designed &amp; Developed by Durga | All Rights Reserved
+    </p>
+
+    <a href="booking.html" target="_blank" class="book-btn">
+      Book Now
+    </a>
+  </section>
+
   <!-- GSAP Animation Library & ScrollTrigger Plugin -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
@@ -243,7 +498,7 @@
   <script src="script.js?v=1.3"></script>
 
   <!-- Restaurant Animation Script -->
-  <script src="hotel.js?v=1.1"></script>
+  <script src="hotel.js?v=1.4"></script>
 </body>
 
 </html>
