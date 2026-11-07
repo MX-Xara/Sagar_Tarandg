@@ -102,12 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
       tagline: 'PREMIUM COMFORT & STYLE',
       caption: 'Expansive premium bedrooms offering exceptional coastal charm, bespoke furnishings, and luxury.',
       images: [
-        'assets/GALLERY/ROOM IMAGES/Super deluxe/fd516d8c-b05a-47e8-9332-5fec5f778823.jpg',
-        'assets/GALLERY/ROOM IMAGES/Super deluxe/95e8672d-913b-47f4-b3be-338cc99d9463.jpg',
-        'assets/GALLERY/ROOM IMAGES/Super deluxe/PHOTO-2026-05-18-11-39-56.jpg',
-        'assets/GALLERY/ROOM IMAGES/Super deluxe/IMG_1944.WEBP',
-        'assets/GALLERY/ROOM IMAGES/Super deluxe/IMG_9488.WEBP',
-        'assets/GALLERY/ROOM IMAGES/Super deluxe/IMG_9487.JPG'
+        'assets/GALLERY/ROOM IMAGES/Super deluxe website/1.webp',
+        'assets/GALLERY/ROOM IMAGES/Super deluxe website/2.webp',
+        'assets/GALLERY/ROOM IMAGES/Super deluxe website/3.webp',
+        'assets/GALLERY/ROOM IMAGES/Super deluxe website/4.webp',
+        'assets/GALLERY/ROOM IMAGES/Super deluxe website/5.webp'
       ]
     },
     pool: {
