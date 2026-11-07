@@ -1579,7 +1579,7 @@ body.events-page .nav-toggle.open span {
     position: fixed;
     right: 24px;
     bottom: 24px;
-    z-index: 9999;
+    z-index: 9990;
     display: flex;
     flex-direction: column;
     gap: 12px;
