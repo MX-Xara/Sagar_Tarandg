@@ -726,6 +726,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Handle menu category navigation pills inside the modal
+  const menuNavPills = document.querySelectorAll(".menu-nav-pill");
+  const menuModalBodyEl = document.querySelector(".menu-modal-body");
+  if (menuNavPills.length > 0 && menuModalBodyEl) {
+    menuNavPills.forEach((pill) => {
+      pill.addEventListener("click", (e) => {
+        e.preventDefault();
+        const targetId = pill.getAttribute("href")?.substring(1);
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          const topOffset = targetEl.offsetTop - menuModalBodyEl.offsetTop;
+          menuModalBodyEl.scrollTo({
+            top: topOffset,
+            behavior: "smooth"
+          });
+        }
+      });
+    });
+  }
+
   // Trigger animation when user clicks the "Restaurant" navbar button
   restaurantNavBtn.addEventListener("click", (e) => {
     e.preventDefault();

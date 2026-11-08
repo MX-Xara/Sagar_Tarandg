@@ -1344,7 +1344,7 @@ body.restaurant-active .navbar .nav-toggle.open span {
 }
 
 .menu-modal-header {
-  padding: 36px 36px 20px 36px;
+  padding: 32px 36px 16px 36px;
   border-bottom: 1px solid #EAE0D2;
   text-align: center;
 }
@@ -1361,7 +1361,7 @@ body.restaurant-active .navbar .nav-toggle.open span {
 }
 
 .menu-modal-title {
-  margin: 0 0 8px 0;
+  margin: 0 0 6px 0;
   font-family: "HotelFont", "DM Serif Display", serif;
   font-size: clamp(24px, 3vw, 36px);
   color: #5A3928;
@@ -1372,9 +1372,53 @@ body.restaurant-active .navbar .nav-toggle.open span {
 .menu-modal-intro {
   margin: 0;
   font-family: 'Jost', 'Raleway', sans-serif;
-  font-size: 14px;
+  font-size: 13.5px;
   color: #7A5F50;
   font-style: italic;
+}
+
+.menu-modal-nav {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 16px 2px 4px 2px;
+  margin-top: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #E2D4BF transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+.menu-modal-nav::-webkit-scrollbar {
+  height: 4px;
+}
+
+.menu-modal-nav::-webkit-scrollbar-thumb {
+  background: #E2D4BF;
+  border-radius: 4px;
+}
+
+.menu-nav-pill {
+  flex-shrink: 0;
+  display: inline-block;
+  padding: 6px 13px;
+  font-family: 'Jost', 'Raleway', sans-serif;
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #5A3928;
+  background-color: #EFE6D8;
+  border: 1px solid #E2D4BF;
+  border-radius: 20px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.22s ease;
+}
+
+.menu-nav-pill:hover,
+.menu-nav-pill:focus {
+  background-color: #953A2F;
+  color: #FFFFFF;
+  border-color: #953A2F;
 }
 
 .menu-modal-body {
@@ -1399,6 +1443,31 @@ body.restaurant-active .navbar .nav-toggle.open span {
   margin: 0 0 16px 0;
   border-bottom: 1px solid #E4D5BF;
   padding-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.menu-cat-badge {
+  font-family: 'Jost', 'Raleway', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7A5F50;
+  background-color: #ECE0CE;
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+.menu-cat-note {
+  margin: 14px 0 0 0;
+  font-family: 'Jost', 'Raleway', sans-serif;
+  font-size: 12.5px;
+  font-style: italic;
+  color: #8C6F5E;
 }
 
 .menu-cat-items {
@@ -1440,6 +1509,7 @@ body.restaurant-active .navbar .nav-toggle.open span {
   font-size: 14.5px;
   font-weight: 600;
   color: #953A2F;
+  white-space: nowrap;
 }
 
 .cat-item-desc {
@@ -1475,4 +1545,35 @@ body.restaurant-active .navbar .nav-toggle.open span {
 .menu-modal-book-btn:hover {
   background-color: #79251B;
   transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+  .menu-modal-dialog {
+    max-height: 92vh;
+    border-radius: 10px;
+  }
+  .menu-modal-header {
+    padding: 24px 18px 12px 18px;
+  }
+  .menu-modal-body {
+    padding: 16px 18px;
+    gap: 24px;
+  }
+  .menu-modal-footer {
+    padding: 14px 18px;
+  }
+  .menu-modal-close {
+    top: 12px;
+    right: 14px;
+    font-size: 28px;
+  }
+  .cat-item-name {
+    font-size: 14px;
+  }
+  .cat-item-price {
+    font-size: 13.5px;
+  }
+  .cat-item-desc {
+    font-size: 12.5px;
+  }
 }
